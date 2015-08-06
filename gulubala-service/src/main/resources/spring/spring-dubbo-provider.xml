@@ -18,7 +18,7 @@
 	<dubbo:protocol name="dubbo" port="20880"/>
 	<!-- 以rest协议暴露一份服务用来给外部系统(通过http协议)调用 -->
 	<!-- 采用外部应用服务器的servlet容器来做rest server,注意端口号一定要与外部应用的端口号一致 -->
-    <dubbo:protocol name="rest" port="${dubbo.protocol.port}" server="servlet" contextpath="gulubala-service/services"
+    <dubbo:protocol name="rest" port="${dubbo.protocol.port}" server="servlet" contextpath="${dubbo.protocol.contextpath}"
     				extension="com.penglecode.gulubala.common.dubbo.filter.RestRpcAuthInterceptor,
     						   com.penglecode.gulubala.common.dubbo.filter.RestRpcResultWrappHandler,
     						   com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"/>
