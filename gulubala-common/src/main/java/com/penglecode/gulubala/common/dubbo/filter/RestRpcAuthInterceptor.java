@@ -2,11 +2,14 @@ package com.penglecode.gulubala.common.dubbo.filter;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
@@ -30,9 +33,9 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 
 	private static final Logger logger = LoggerFactory.getLogger(RestRpcAuthInterceptor.class);
 	
-	public static final String HEADER_AUTH_TOKEN = "auth_token";
+	public static final String HEADER_AUTH_TOKEN = "auth-token";
 	
-	public static final String HEADER_CLIENT_ID = "client_id";
+	public static final String HEADER_CLIENT_ID = "client-id";
 	
 	public static final String DEFAULT_CONTEXT_PATH = "/services/";
 	
@@ -82,6 +85,11 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 	}
 	
 	public void filter(ContainerRequestContext requestContext) throws IOException {
+		MultivaluedMap<String,String> headers = requestContext.getHeaders();
+		for(Map.Entry<String,List<String>> entry : headers.entrySet()){
+			logger.debug(">>> " + entry.getKey() + " = " + entry.getValue());
+		}
+		
 		String path = requestContext.getUriInfo().getPath();
 		path = path.replace(getContextPath(), "");
 		logger.info("Do rest rpc auth validation for current request : {}", path);
