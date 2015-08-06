@@ -100,7 +100,7 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 				if(!path.startsWith(noAuthUrl)){
 					String authToken = requestContext.getHeaderString(HEADER_AUTH_TOKEN);
 					String clientId = requestContext.getHeaderString(HEADER_CLIENT_ID);
-					BusinessAssert.isTrue(isAuthTokenValid(clientId, authToken), String.valueOf(Response.Status.UNAUTHORIZED.getStatusCode()), "不合法的auth_token!");
+					BusinessAssert.isTrue(isAuthTokenValid(clientId, authToken), String.valueOf(Response.Status.UNAUTHORIZED.getStatusCode()), "不合法的auth-token!");
 				}
 			}
 		}
@@ -111,8 +111,8 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 	}
 	
 	protected boolean isAuthTokenValid(String clientId, String authToken) {
-		BusinessAssert.notEmpty(clientId, "请求头中未发现client_id参数!");
-		BusinessAssert.notEmpty(authToken, "请求头中未发现auth_token参数!");
+		BusinessAssert.notEmpty(clientId, "请求头中未发现" + HEADER_CLIENT_ID + "参数!");
+		BusinessAssert.notEmpty(authToken, "请求头中未发现" + HEADER_AUTH_TOKEN + "参数!");
 		String realAuthToken = getAuthTokenCacheManager().getCache(clientId);
 		if(authToken.equals(realAuthToken)){
 			return true;
