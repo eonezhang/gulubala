@@ -9,7 +9,7 @@ import java.util.Locale;
  * @date 	 2015年4月18日 下午5:50:07
  * @version 1.0
  */
-public class CommonConstants extends AbstractConstants {
+public class GlobalConstants extends AbstractConstants {
 
 	/**
 	 * 系统默认字符编码
@@ -42,7 +42,7 @@ public class CommonConstants extends AbstractConstants {
 	public static final String DEFAULT_NO_FALSE_FLAG = valueOf("0");
 	
 	/**
-	 * 默认的用户密码加密次数
+	 * 默认的用户密码递归加密次数
 	 */
 	public static final int DEFAULT_PASSWORD_HASH_ITERATIONS = valueOf(1);
 	

@@ -1,6 +1,6 @@
 package com.penglecode.gulubala.common.exception;
 
-import com.penglecode.gulubala.common.consts.CommonConstants;
+import com.penglecode.gulubala.common.consts.GlobalConstants;
 
 /**
  * 系统异常基类
@@ -13,7 +13,7 @@ public abstract class SystemException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	private String code = CommonConstants.RESULT_CODE_FAILURE;
+	private String code = GlobalConstants.RESULT_CODE_FAILURE;
 	
 	public SystemException(String message) {
 		super(message);

@@ -12,6 +12,9 @@ public class AuthRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	/** 旧的客户端id(该参数客户端可选) */
+	private String clientId;
+	
 	/** 分配给客户端应用程序的秘钥 */
 	private String appKey;
 	
@@ -24,8 +27,16 @@ public class AuthRequest implements Serializable {
 	/** 认证授权时间 */
 	private String authTime;
 
-	/** 认证授权码,由客户端算出,计算公式：MD5(appId + appType + appKey + authTime) */
+	/** 认证授权码,由客户端算出,计算公式：MD5(appId + appType + appKey + authTime) 注意顺序 */
 	private String authCode;
+
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
 
 	public String getAppKey() {
 		return appKey;

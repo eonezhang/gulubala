@@ -1,6 +1,6 @@
 package com.penglecode.gulubala.common.support;
 
-import com.penglecode.gulubala.common.consts.CommonConstants;
+import com.penglecode.gulubala.common.consts.GlobalConstants;
 
 /**
  * 通用返回结果类
@@ -48,7 +48,7 @@ public class Result<T> {
 		super();
 		this.success = success;
 		if(code == null){
-			this.code = success ? CommonConstants.RESULT_CODE_SUCCESS : CommonConstants.RESULT_CODE_FAILURE;
+			this.code = success ? GlobalConstants.RESULT_CODE_SUCCESS : GlobalConstants.RESULT_CODE_FAILURE;
 		}else{
 			this.code = code;
 		}

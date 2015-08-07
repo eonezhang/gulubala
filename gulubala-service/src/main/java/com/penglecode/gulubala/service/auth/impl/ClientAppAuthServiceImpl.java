@@ -60,6 +60,10 @@ public class ClientAppAuthServiceImpl implements ClientAppAuthService {
 		authResponse.setClientId(ClientAppAuthUtils.generateClientId());
 		authResponse.setAuthToken(ClientAppAuthUtils.generateAuthToken());
 		authTokenCacheManager.setCache(authResponse.getClientId(), authResponse.getAuthToken());
+		String oldClientId = authRequest.getClientId();
+		if(!StringUtils.isEmpty(oldClientId)){
+			authTokenCacheManager.removeCache(oldClientId);
+		}
 		return authResponse;
 	}
 

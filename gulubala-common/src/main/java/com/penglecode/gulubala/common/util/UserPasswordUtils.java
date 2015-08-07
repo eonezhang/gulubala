@@ -1,6 +1,6 @@
 package com.penglecode.gulubala.common.util;
 
-import com.penglecode.gulubala.common.consts.CommonConstants;
+import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.model.User;
 import com.penglecode.gulubala.common.support.SimpleHash;
 import com.penglecode.gulubala.common.support.ValidationAssert;
@@ -21,7 +21,7 @@ public class UserPasswordUtils {
 	
 	public static String encryptPassword(String password, String salt) {
 		ValidationAssert.notEmpty(password, "参数password不能为空!");
-		SimpleHash hash = new SimpleHash("md5", password, salt, CommonConstants.DEFAULT_PASSWORD_HASH_ITERATIONS);
+		SimpleHash hash = new SimpleHash("md5", password, salt, GlobalConstants.DEFAULT_PASSWORD_HASH_ITERATIONS);
 		String encodedPassword = hash.toHex();
 		return encodedPassword;
 	}

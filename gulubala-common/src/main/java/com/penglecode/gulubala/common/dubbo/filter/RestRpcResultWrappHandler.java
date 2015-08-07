@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
-import com.penglecode.gulubala.common.consts.CommonConstants;
+import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.exception.SystemException;
 import com.penglecode.gulubala.common.support.Result;
 import com.penglecode.gulubala.common.util.ExceptionUtils;
@@ -44,7 +44,7 @@ public class RestRpcResultWrappHandler implements ContainerResponseFilter, Excep
 		if(!(responseEntity instanceof Result)){ //当调用的服务方法返回结果集不是Result类型时,使用Result进行包裹
 			Result<Object> result = new Result<Object>();
 			result.setSuccess(true);
-			result.setCode(CommonConstants.RESULT_CODE_SUCCESS);
+			result.setCode(GlobalConstants.RESULT_CODE_SUCCESS);
 			result.setMessage("OK");
 			result.setData(responseEntity);
 			
@@ -66,7 +66,7 @@ public class RestRpcResultWrappHandler implements ContainerResponseFilter, Excep
         logger.error("Rest rpc exception mapper got an Exception: " + e.getMessage(), e);
         Result<Object> result = new Result<Object>();
         Throwable rootException = ExceptionUtils.getRootCause(e);
-		String code = CommonConstants.RESULT_CODE_FAILURE;
+		String code = GlobalConstants.RESULT_CODE_FAILURE;
 		String message = rootException.getMessage();
 		if(rootException instanceof SystemException){
 			SystemException ex = (SystemException)rootException;
@@ -93,7 +93,7 @@ public class RestRpcResultWrappHandler implements ContainerResponseFilter, Excep
         }
         Result<Object> result = new Result<Object>();
         result.setSuccess(false);
-        result.setCode(CommonConstants.RESULT_CODE_FAILURE);
+        result.setCode(GlobalConstants.RESULT_CODE_FAILURE);
         result.setMessage(sb.toString());
         result.setData(null);
         return Response.status(Response.Status.OK).entity(result).type(ContentType.APPLICATION_JSON_UTF_8).build();
