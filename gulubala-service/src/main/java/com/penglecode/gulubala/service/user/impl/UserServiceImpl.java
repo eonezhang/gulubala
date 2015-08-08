@@ -38,9 +38,11 @@ public class UserServiceImpl implements UserService {
 		if(UserRegisterTypeEnum.USER_REG_TYPE_MOBILE.equals(registerType)){ //通过手机号码注册
 			ValidationAssert.notEmpty(user.getMobilePhone(), "注册手机号码不能为空!");
 			ValidationAssert.isTrue(CommonValidateUtils.isMobilePhone(user.getMobilePhone()), "注册手机号码不合法!");
+			user.setEmail(null);
 		}else if(UserRegisterTypeEnum.USER_REG_TYPE_EMAIL.equals(registerType)){ //通过邮箱注册
 			ValidationAssert.notEmpty(user.getEmail(), "注册邮箱不能为空!");
 			ValidationAssert.isTrue(CommonValidateUtils.isEmail(user.getEmail()), "注册邮箱不合法!");
+			user.setMobilePhone(null);
 		}
 		ValidationAssert.notEmpty(user.getPassword(), "登录密码不能为空!");
 		
