@@ -25,7 +25,7 @@
     						   com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"/>
    	
 	<!-- 服务配置 -->
-	<dubbo:service interface="com.penglecode.gulubala.service.common.SmsService" ref="smsService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.common.MessageSendService" ref="messageSendService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.auth.AppAuthService" ref="appAuthService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.user.UserService" ref="userService" protocol="dubbo,rest"/>
 </beans>

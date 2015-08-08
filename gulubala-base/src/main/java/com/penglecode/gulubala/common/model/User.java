@@ -62,9 +62,7 @@ public class User implements Serializable {
 	
 	//以下属于辅助字段
 	
-	private String smsCode;
-	
-	private String repassword;
+	private String validateCode;
 	
 	private String encryptedPassword;
 
@@ -198,20 +196,12 @@ public class User implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getSmsCode() {
-		return smsCode;
+	public String getValidateCode() {
+		return validateCode;
 	}
 
-	public void setSmsCode(String smsCode) {
-		this.smsCode = smsCode;
-	}
-
-	public String getRepassword() {
-		return repassword;
-	}
-
-	public void setRepassword(String repassword) {
-		this.repassword = repassword;
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
 	}
 
 	public String getEncryptedPassword() {

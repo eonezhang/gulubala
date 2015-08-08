@@ -15,7 +15,7 @@ public interface CacheDefinitions {
 	/** 全局认证鉴权authToken缓存 */
 	CacheDefinition CACHE_GLOBAL_AUTH_TOKEN = valueOf("global_auth_token_%s", "全局认证鉴权authToken缓存Key", 60 * 60 * 24 * 7);
 	
-	/** 全局短信验证码缓存 */
-	CacheDefinition CACHE_GLOBAL_SMS_CODE = valueOf("global_sms_code_%s", "全局短信验证码缓存", 10 * 60);
+	/** 全局验证码缓存 */
+	CacheDefinition CACHE_GLOBAL_VALIDATE_CODE = valueOf("global_validate_code_%s", "全局验证码缓存", 15 * 60);
 	
 }

@@ -36,7 +36,7 @@
 		<property name="redisTemplate" ref="bizRedisTemplate"/>
 	</bean>
 	
-	<bean id="smsCodeCacheManager" class="com.penglecode.gulubala.common.cache.SmsCodeCacheManager">
+	<bean id="validateCodeCacheManager" class="com.penglecode.gulubala.common.cache.ValidateCodeCacheManager">
 		<property name="redisTemplate" ref="bizRedisTemplate"/>
 	</bean>
 	

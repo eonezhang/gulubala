@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.penglecode.gulubala.common.cache.SmsCodeCacheManager;
+import com.penglecode.gulubala.common.cache.ValidateCodeCacheManager;
 import com.penglecode.gulubala.common.consts.em.UserRegisterTypeEnum;
 import com.penglecode.gulubala.common.consts.em.UserStatusEnum;
 import com.penglecode.gulubala.common.model.User;
@@ -23,8 +23,8 @@ import com.penglecode.gulubala.service.user.UserService;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-	@Resource(name="smsCodeCacheManager")
-	private SmsCodeCacheManager smsCodeCacheManager;
+	@Resource(name="validateCodeCacheManager")
+	private ValidateCodeCacheManager validateCodeCacheManager;
 	
 	@Resource(name="userDAO")
 	private UserDAO userDAO;
@@ -35,21 +35,23 @@ public class UserServiceImpl implements UserService {
 		ValidationAssert.notNull(user.getRegisterType(), "注册方式[registerType]不能为空!");
 		UserRegisterTypeEnum registerType = UserRegisterTypeEnum.getRegisterType(user.getRegisterType());
 		ValidationAssert.notNull(registerType, "注册方式[registerType]无法识别!");
+		String recipient = null;
 		if(UserRegisterTypeEnum.USER_REG_TYPE_MOBILE.equals(registerType)){ //通过手机号码注册
 			ValidationAssert.notEmpty(user.getMobilePhone(), "注册手机号码不能为空!");
 			ValidationAssert.isTrue(CommonValidateUtils.isMobilePhone(user.getMobilePhone()), "注册手机号码不合法!");
 			user.setEmail(null);
+			recipient = user.getMobilePhone();
 		}else if(UserRegisterTypeEnum.USER_REG_TYPE_EMAIL.equals(registerType)){ //通过邮箱注册
 			ValidationAssert.notEmpty(user.getEmail(), "注册邮箱不能为空!");
 			ValidationAssert.isTrue(CommonValidateUtils.isEmail(user.getEmail()), "注册邮箱不合法!");
 			user.setMobilePhone(null);
+			recipient = user.getEmail();
 		}
 		ValidationAssert.notEmpty(user.getPassword(), "登录密码不能为空!");
-		
-		/*ValidationAssert.notEmpty(user.getSmsCode(), "验证码不能为空!");
-		String smsCode = smsCodeCacheManager.getCache(user.getMobilePhone());
-		ValidationAssert.notEmpty(smsCode, "验证码已过期!");
-		ValidationAssert.isTrue(user.getSmsCode().equals(smsCode), "验证码不正确!");*/
+		ValidationAssert.notEmpty(user.getValidateCode(), "验证码不能为空!");
+		String validateCode = validateCodeCacheManager.getCache(recipient);
+		ValidationAssert.notEmpty(validateCode, "验证码已过期!");
+		ValidationAssert.isTrue(user.getValidateCode().equals(validateCode), "验证码不正确!");
 		
 		String nowTime = DateTimeUtils.formatNow();
 		user.setCreateTime(nowTime);
