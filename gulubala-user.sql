@@ -4,7 +4,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS appauths;
 DROP TABLE IF EXISTS userlogs;
-DROP TABLE IF EXISTS U_USER;
+DROP TABLE IF EXISTS users;
 
 
 
@@ -58,47 +58,54 @@ CREATE TABLE userlogs
 );
 
 
-CREATE TABLE U_USER
+CREATE TABLE users
 (
 	-- 用户ID
-	USER_ID bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-	-- 用户名
-	USER_NAME varchar(32) COMMENT '用户名',
-	-- 手机号码
-	MOBILE_PHONE varchar(20) COMMENT '手机号码',
+	id int NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+	-- 昵称
+	nickname varchar(32) COMMENT '昵称',
 	-- 邮箱
-	EMAIL varchar(100) COMMENT '邮箱',
+	email varchar(100) COMMENT '邮箱',
+	-- 手机号码
+	phone varchar(20) COMMENT '手机号码',
 	-- 用户密码
-	PASSWORD varchar(50) NOT NULL COMMENT '用户密码',
+	password varchar(50) NOT NULL COMMENT '用户密码',
 	-- 注册类型:1-使用手机号码注册2-使用邮箱注册
-	REGISTER_TYPE tinyint NOT NULL COMMENT '注册类型:1-使用手机号码注册2-使用邮箱注册',
-	-- 用户等级:Lv1,Lv2,Lv3等等
-	USER_GRADE varchar(50) DEFAULT 'Lv1' NOT NULL COMMENT '用户等级:Lv1,Lv2,Lv3等等',
-	-- 是否已认证:0-否1-是
-	AUTHENTICATED tinyint DEFAULT 0 NOT NULL COMMENT '是否已认证:0-否1-是',
-	-- 硬币数量
-	PRICE_NUM int DEFAULT 0 NOT NULL COMMENT '硬币数量',
-	-- 积分数量
-	INTEGRAL_NUM int DEFAULT 0 NOT NULL COMMENT '积分数量',
-	-- 登录次数
-	LOGIN_TIMES int DEFAULT 0 NOT NULL COMMENT '登录次数',
-	-- 个性签名
-	REMARK varchar(200) COMMENT '个性签名',
-	-- QQ号码
-	QQ_NUMBER varchar(20) COMMENT 'QQ号码',
-	-- 用户头像
-	USER_ICON varchar(256) COMMENT '用户头像',
-	-- 性别:0-女,1-男
-	SEX tinyint COMMENT '性别:0-女,1-男',
-	-- 用户状态:0-冻结1-正常
-	STATUS tinyint DEFAULT 1 NOT NULL COMMENT '用户状态:0-冻结1-正常',
-	LAST_LOGIN_TIME datetime NOT NULL,
+	registerType tinyint NOT NULL COMMENT '注册类型:1-使用手机号码注册2-使用邮箱注册',
+	-- 0-女1-男
+	sex int COMMENT '0-女1-男',
+	-- 生日
+	birthday date COMMENT '生日',
+	-- 住址
+	address varchar(255) COMMENT '住址',
+	-- 是否是vip会员:1-是0-否
+	vip tinyint DEFAULT 0 NOT NULL COMMENT '是否是vip会员:1-是0-否',
+	-- 收货地址
+	shdz varchar(255) COMMENT '收货地址',
+	-- 消息设置
+	xxsz varchar(255) COMMENT '消息设置',
+	-- 权限设置
+	qxsz varchar(255) COMMENT '权限设置',
+	-- GU认真:1-已认证0-未认证
+	gurz tinyint DEFAULT 0 NOT NULL COMMENT 'GU认真:1-已认证0-未认证',
+	-- 积分
+	score int DEFAULT 0 NOT NULL COMMENT '积分',
 	-- 注册时间
-	CREATE_TIME datetime NOT NULL COMMENT '注册时间',
-	PRIMARY KEY (USER_ID),
-	UNIQUE (USER_NAME),
-	UNIQUE (MOBILE_PHONE),
-	UNIQUE (EMAIL)
+	createdAt datetime NOT NULL COMMENT '注册时间',
+	-- 更新时间
+	updatedAt datetime COMMENT '更新时间',
+	-- 登录次数
+	loginTimes int DEFAULT 0 NOT NULL COMMENT '登录次数',
+	-- 用户状态:0-冻结1-正常
+	status tinyint DEFAULT 1 NOT NULL COMMENT '用户状态:0-冻结1-正常',
+	lastLoginAt datetime NOT NULL,
+	-- 个性签名
+	remark varchar(255) COMMENT '个性签名',
+	-- 用户头像地址
+	iconUrl varchar(255) COMMENT '用户头像地址',
+	PRIMARY KEY (id),
+	CONSTRAINT uk_users_phone UNIQUE (phone),
+	CONSTRAINT uk_users_email UNIQUE (email)
 );
 
 

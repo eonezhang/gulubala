@@ -8,9 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.penglecode.gulubala.common.consts.ContentType;
-import com.penglecode.gulubala.common.consts.em.UserLogType;
 import com.penglecode.gulubala.common.model.User;
-import com.penglecode.gulubala.common.support.UserLogging;
 import com.penglecode.gulubala.service.url.UserServiceURL;
 
 /**
@@ -42,7 +40,6 @@ public interface UserService {
 	@Path(UserServiceURL.URL_USER_LOGIN_APP)
 	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	@UserLogging(title="用户登录", logType=UserLogType.READ)
 	public User userLogin4App(User user);
 	
 	/**
@@ -64,5 +61,15 @@ public interface UserService {
 	@Path(UserServiceURL.URL_USER_DETAIL_ACCOUNTNAME)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public User getUserByAccountName(@PathParam("accountName") String accountName);
+	
+	/**
+	 * 判断手机号或邮箱是否已存在
+	 * @param accountName
+	 * @return
+	 */
+	@GET
+	@Path(UserServiceURL.URL_USER_ACCOUNTNAME_EXISTS)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Boolean isAccountNameExists(@PathParam("accountName") String accountName);
 	
 }

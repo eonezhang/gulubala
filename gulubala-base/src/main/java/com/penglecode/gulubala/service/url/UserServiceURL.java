@@ -18,6 +18,9 @@ public interface UserServiceURL {
 	String URL_USER_DETAIL_USERID = "user/detail/userid/{userId}";
 	
 	/** 根据手机号或邮箱获取用户详情信息 */
-	String URL_USER_DETAIL_ACCOUNTNAME = "user/detail/accountName/{accountName}";
+	String URL_USER_DETAIL_ACCOUNTNAME = "user/detail/accountname/{accountName}";
+	
+	/** 判断手机号或邮箱是否已存在 */
+	String URL_USER_ACCOUNTNAME_EXISTS = "user/accountname/exists/{accountName}";
 	
 }

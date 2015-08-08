@@ -3,110 +3,124 @@
 <mapper namespace="com.penglecode.gulubala.common.model.UserMapper">
 	
 	<insert id="insertUser" parameterType="User" statementType="PREPARED" useGeneratedKeys="true" keyProperty="userId">
-		INSERT INTO U_USER(
-			USER_ID,
-			MOBILE_PHONE,
-			EMAIL,
-			PASSWORD,
-			REGISTER_TYPE,
-			USER_GRADE,
-			STATUS,
-			LAST_LOGIN_TIME,
-			CREATE_TIME
+		INSERT INTO users(
+			id,
+			phone,
+			email,
+			password,
+			registerType,
+			status,
+			lastLoginAt,
+			createdAt
 		) VALUES (
 			#{userId, jdbcType=BIGINT},
 			#{mobilePhone, jdbcType=VARCHAR},
 			#{email, jdbcType=VARCHAR},
 			#{encryptedPassword, jdbcType=VARCHAR},
 			#{registerType, jdbcType=INTEGER},
-			#{userGrade, jdbcType=VARCHAR},
 			#{status, jdbcType=INTEGER},
 			#{lastLoginTime, jdbcType=VARCHAR},
 			#{createTime, jdbcType=VARCHAR}
 		)
 	</insert>
 	
+	<update id="updateUser4Login" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.lastLoginAt 	= #{loginTime, jdbcType=VARCHAR},
+		   	   a.loginTimes		= a.loginTimes + 1
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
 	<select id="getUserById" parameterType="java.lang.Long" statementType="PREPARED" resultType="User">
-		SELECT a.USER_ID			userId,
-			   a.USER_NAME			userName,
-			   a.MOBILE_PHONE		mobilePhone,
-			   a.EMAIL				email,
-			   a.PASSWORD			encryptedPassword,
-			   a.REGISTER_TYPE		registerType,
-			   a.USER_GRADE			userGrade,
-			   a.AUTHENTICATED		authenticated,
-			   a.PRICE_NUM			priceNum,
-			   a.INTEGRAL_NUM		integralNum,
-			   a.LOGIN_TIMES		loginTimes,
-			   a.REMARK				remark,
-			   a.QQ_NUMBER			qqNumber,
-			   a.USER_ICON			userIcon,
-			   a.SEX				sex,
-			   a.STATUS				status,
-			   DATE_FORMAT(a.LAST_LOGIN_TIME, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.CREATE_TIME, '%Y-%m-%d %T')	createTime
-		  FROM U_USER a
-		 WHERE a.USER_ID = #{userId, jdbcType=BIGINT}
+		SELECT a.id					userId,
+			   a.nickname			userName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.registerType		registerType,
+			   a.vip				vip,
+			   a.gurz				authenticated,
+			   a.score				score,
+			   a.loginTimes			loginTimes,
+			   a.remark				remark,
+			   a.iconUrl			iconUrl,
+			   a.sex				sex,
+			   a.birthday			birthday,
+			   a.status				status,
+			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+		  FROM users a
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</select>
 	
 	<select id="getThinUserById" parameterType="java.lang.Long" statementType="PREPARED" resultType="User">
-		SELECT a.USER_ID			userId,
-			   a.USER_NAME			userName,
-			   a.MOBILE_PHONE		mobilePhone,
-			   a.EMAIL				email,
-			   a.PASSWORD			encryptedPassword,
-			   a.REGISTER_TYPE		registerType,
-			   a.AUTHENTICATED		authenticated,
-			   a.STATUS				status,
-			   DATE_FORMAT(a.CREATE_TIME, '%Y-%m-%d %T')	createTime
-		  FROM U_USER a
-		 WHERE a.USER_ID = #{userId, jdbcType=BIGINT}
+		SELECT a.id					userId,
+			   a.nickname			userName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.registerType		registerType,
+			   a.gurz				authenticated,
+			   a.status				status,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM users a
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</select>
 	
 	<select id="getUserByEmail" parameterType="java.lang.String" statementType="PREPARED" resultType="User">
-		SELECT a.USER_ID			userId,
-			   a.USER_NAME			userName,
-			   a.MOBILE_PHONE		mobilePhone,
-			   a.EMAIL				email,
-			   a.PASSWORD			encryptedPassword,
-			   a.REGISTER_TYPE		registerType,
-			   a.USER_GRADE			userGrade,
-			   a.AUTHENTICATED		authenticated,
-			   a.PRICE_NUM			priceNum,
-			   a.INTEGRAL_NUM		integralNum,
-			   a.LOGIN_TIMES		loginTimes,
-			   a.REMARK				remark,
-			   a.QQ_NUMBER			qqNumber,
-			   a.USER_ICON			userIcon,
-			   a.SEX				sex,
-			   a.STATUS				status,
-			   DATE_FORMAT(a.LAST_LOGIN_TIME, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.CREATE_TIME, '%Y-%m-%d %T')	createTime
-		  FROM U_USER a
-		 WHERE a.EMAIL = #{email, jdbcType=VARCHAR}
+		SELECT a.id					userId,
+			   a.nickname			userName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.registerType		registerType,
+			   a.vip				vip,
+			   a.gurz				authenticated,
+			   a.score				score,
+			   a.loginTimes			loginTimes,
+			   a.remark				remark,
+			   a.iconUrl			iconUrl,
+			   a.sex				sex,
+			   a.birthday			birthday,
+			   a.status				status,
+			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+		  FROM users a
+		 WHERE a.email = #{email, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="getUserByMobile" parameterType="java.lang.String" statementType="PREPARED" resultType="User">
-		SELECT a.USER_ID			userId,
-			   a.USER_NAME			userName,
-			   a.MOBILE_PHONE		mobilePhone,
-			   a.EMAIL				email,
-			   a.PASSWORD			encryptedPassword,
-			   a.REGISTER_TYPE		registerType,
-			   a.USER_GRADE			userGrade,
-			   a.AUTHENTICATED		authenticated,
-			   a.PRICE_NUM			priceNum,
-			   a.INTEGRAL_NUM		integralNum,
-			   a.LOGIN_TIMES		loginTimes,
-			   a.REMARK				remark,
-			   a.QQ_NUMBER			qqNumber,
-			   a.USER_ICON			userIcon,
-			   a.SEX				sex,
-			   a.STATUS				status,
-			   DATE_FORMAT(a.LAST_LOGIN_TIME, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.CREATE_TIME, '%Y-%m-%d %T')	createTime
-		  FROM U_USER a
-		 WHERE a.MOBILE_PHONE = #{mobilePhone, jdbcType=VARCHAR}
+		SELECT a.id					userId,
+			   a.nickname			userName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.registerType		registerType,
+			   a.vip				vip,
+			   a.gurz				authenticated,
+			   a.score				score,
+			   a.loginTimes			loginTimes,
+			   a.remark				remark,
+			   a.iconUrl			iconUrl,
+			   a.sex				sex,
+			   a.birthday			birthday,
+			   a.status				status,
+			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+		  FROM users a
+		 WHERE a.phone = #{mobilePhone, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="isMobilePhoneExists" parameterType="java.lang.String" statementType="PREPARED" resultType="java.lang.Boolean">
+		SELECT COUNT(1)
+		  FROM users a
+		 WHERE a.phone = #{mobilePhone, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="isEmailExists" parameterType="java.lang.String" statementType="PREPARED" resultType="java.lang.Boolean">
+		SELECT COUNT(1)
+		  FROM users a
+		 WHERE a.email = #{email, jdbcType=VARCHAR}
 	</select>
 	
 </mapper>

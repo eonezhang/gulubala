@@ -29,11 +29,7 @@ public class UserPasswordUtils {
 	public static String generateSalt(User user) {
 		ValidationAssert.notNull(user, "参数user不能为空!");
 		ValidationAssert.notEmpty(user.getCreateTime(), "参数user[createTime]不能为空!");
-		return user.getUserName() + user.getCreateTime();
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(UserPasswordUtils.encryptPassword("123456", "xadmin" + "2012-12-12 12:12:12"));
+		return user.getCreateTime();
 	}
 	
 }

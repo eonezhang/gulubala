@@ -2,15 +2,16 @@ package com.penglecode.gulubala.service.user.impl;
 
 import javax.annotation.Resource;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.penglecode.gulubala.common.cache.SmsCodeCacheManager;
-import com.penglecode.gulubala.common.consts.em.UserGradeEnum;
 import com.penglecode.gulubala.common.consts.em.UserRegisterTypeEnum;
 import com.penglecode.gulubala.common.consts.em.UserStatusEnum;
 import com.penglecode.gulubala.common.model.User;
+import com.penglecode.gulubala.common.support.BusinessAssert;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.CommonValidateUtils;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
@@ -51,10 +52,16 @@ public class UserServiceImpl implements UserService {
 		String nowTime = DateTimeUtils.formatNow();
 		user.setCreateTime(nowTime);
 		user.setEncryptedPassword(UserPasswordUtils.encryptPassword(user));
-		user.setUserGrade(UserGradeEnum.USER_GRADE_LV1.getGradeCode());
+		user.setVip(Boolean.FALSE);
 		user.setStatus(UserStatusEnum.USER_STATUS_ENABLED.getStatusCode());
 		user.setLastLoginTime(nowTime);
-		userDAO.insertUser(user);
+		try {
+			userDAO.insertUser(user);
+		} catch (DuplicateKeyException e) {
+			BusinessAssert.isTrue(!e.getCause().getMessage().toLowerCase().contains("uk_users_phone"), "对不起,该手机号码已注册过了!");
+			BusinessAssert.isTrue(!e.getCause().getMessage().toLowerCase().contains("uk_users_email"), "对不起,该邮箱已注册过了!");
+			throw e;
+		}
 		return user.getUserId();
 	}
 
@@ -91,4 +98,14 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	public Boolean isAccountNameExists(String accountName) {
+		ValidationAssert.notEmpty(accountName, "手机号码或邮箱不能为空!");
+		if(CommonValidateUtils.isMobilePhone(accountName)){
+			return userDAO.isMobilePhoneExists(accountName);
+		}else if(CommonValidateUtils.isEmail(accountName)){
+			return userDAO.isEmailExists(accountName);
+		}
+		return Boolean.FALSE;
+	}
+	
 }

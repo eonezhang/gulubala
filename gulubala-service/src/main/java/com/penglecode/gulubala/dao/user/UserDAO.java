@@ -17,6 +17,13 @@ public interface UserDAO {
 	public void insertUser(User user);
 	
 	/**
+	 * 更新用户登录信息
+	 * @param userId
+	 * @param loginTime
+	 */
+	public void updateUser4Login(Long userId, String loginTime);
+	
+	/**
 	 * 根据userId获取用户信息(全字段)
 	 * @param userId
 	 * @return
@@ -43,5 +50,19 @@ public interface UserDAO {
 	 * @return
 	 */
 	public User getUserByEmail(String email);
+	
+	/**
+	 * 判断手机号是否存在
+	 * @param mobilePhone
+	 * @return
+	 */
+	public boolean isMobilePhoneExists(String mobilePhone);
+	
+	/**
+	 * 判断email号是否存在
+	 * @param email
+	 * @return
+	 */
+	public boolean isEmailExists(String email);
 	
 }

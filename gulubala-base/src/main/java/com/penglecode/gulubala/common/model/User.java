@@ -15,8 +15,8 @@ public class User implements Serializable {
 	/** 用户ID */
 	private Long userId;
 	
-	/** 用户名 */
-	private String userName;
+	/** 昵称 */
+	private String nickName;
 	
 	/** 密码 */
 	private String password;
@@ -30,35 +30,29 @@ public class User implements Serializable {
 	/** 注册方式 @{link #UserRegisterTypeEnum} */
 	private Integer registerType;
 	
-	/** 用户等级 */
-	private String userGrade;
+	/** 是否是vip */
+	private boolean vip;
 	
 	/** 是否已认证 */
 	private boolean authenticated;
 	
-	/** 硬币数量 */
-	private Integer priceNum;
-	
 	/** 积分数量 */
-	private Integer integralNum;
-	
-	/** 登录次数 */
-	private Integer loginTimes;
+	private Integer score;
 	
 	/** 个性签名 */
 	private String remark;
 	
-	/** QQ号码 */
-	private String qqNumber;
-	
-	/** 用户头像 */
-	private String userIcon;
+	/** 用户头像地址 */
+	private String iconUrl;
 	
 	/** 性别:1-男0-女 */
 	private Integer sex;
 	
 	/** 用户状态@{link #UserStatusEnum} */
 	private Integer status;
+
+	/** 登录次数 */
+	private Integer loginTimes;
 	
 	/** 最近登录时间 */
 	private String lastLoginTime;
@@ -84,12 +78,12 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getPassword() {
@@ -124,12 +118,12 @@ public class User implements Serializable {
 		this.registerType = registerType;
 	}
 
-	public String getUserGrade() {
-		return userGrade;
+	public boolean isVip() {
+		return vip;
 	}
 
-	public void setUserGrade(String userGrade) {
-		this.userGrade = userGrade;
+	public void setVip(boolean vip) {
+		this.vip = vip;
 	}
 
 	public boolean isAuthenticated() {
@@ -140,28 +134,12 @@ public class User implements Serializable {
 		this.authenticated = authenticated;
 	}
 
-	public Integer getPriceNum() {
-		return priceNum;
+	public Integer getScore() {
+		return score;
 	}
 
-	public void setPriceNum(Integer priceNum) {
-		this.priceNum = priceNum;
-	}
-
-	public Integer getIntegralNum() {
-		return integralNum;
-	}
-
-	public void setIntegralNum(Integer integralNum) {
-		this.integralNum = integralNum;
-	}
-
-	public Integer getLoginTimes() {
-		return loginTimes;
-	}
-
-	public void setLoginTimes(Integer loginTimes) {
-		this.loginTimes = loginTimes;
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 	public String getRemark() {
@@ -172,20 +150,12 @@ public class User implements Serializable {
 		this.remark = remark;
 	}
 
-	public String getQqNumber() {
-		return qqNumber;
+	public String getIconUrl() {
+		return iconUrl;
 	}
 
-	public void setQqNumber(String qqNumber) {
-		this.qqNumber = qqNumber;
-	}
-
-	public String getUserIcon() {
-		return userIcon;
-	}
-
-	public void setUserIcon(String userIcon) {
-		this.userIcon = userIcon;
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
 	}
 
 	public Integer getSex() {
@@ -202,6 +172,14 @@ public class User implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getLoginTimes() {
+		return loginTimes;
+	}
+
+	public void setLoginTimes(Integer loginTimes) {
+		this.loginTimes = loginTimes;
 	}
 
 	public String getLastLoginTime() {
@@ -251,5 +229,5 @@ public class User implements Serializable {
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
 	}
-	
+
 }

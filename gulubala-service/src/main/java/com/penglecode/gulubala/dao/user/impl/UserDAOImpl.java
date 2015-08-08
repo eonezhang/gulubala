@@ -1,5 +1,8 @@
 package com.penglecode.gulubala.dao.user.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.penglecode.gulubala.common.model.User;
@@ -11,6 +14,13 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 
 	public void insertUser(User user) {
 		getSqlSessionTemplate().insert(getMapperKey("insertUser"), user);
+	}
+
+	public void updateUser4Login(Long userId, String loginTime) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", userId);
+		paramMap.put("loginTime", loginTime);
+		getSqlSessionTemplate().update(getMapperKey("updateUser4Login"), paramMap);
 	}
 
 	public User getUserById(Long userId) {
@@ -27,6 +37,14 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 	
 	public User getUserByEmail(String email) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getUserByEmail"), email);
+	}
+
+	public boolean isMobilePhoneExists(String mobilePhone) {
+		return getSqlSessionTemplate().selectOne(getMapperKey("isMobilePhoneExists"), mobilePhone);
+	}
+
+	public boolean isEmailExists(String email) {
+		return getSqlSessionTemplate().selectOne(getMapperKey("isEmailExists"), email);
 	}
 
 	protected Class<?> getBoundModelClass() {

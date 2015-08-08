@@ -1,6 +1,6 @@
 package com.penglecode.gulubala.common.consts.em;
 /**
- * 用户状态
+ * 用户等级
  * 
  * @author  pengpeng
  * @date 	 2015年8月5日 下午5:09:01
