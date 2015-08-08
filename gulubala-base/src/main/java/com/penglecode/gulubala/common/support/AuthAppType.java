@@ -6,15 +6,15 @@ package com.penglecode.gulubala.common.support;
  * @date 	 2015年8月4日 上午9:41:03
  * @version 1.0
  */
-public enum AuthClientAppType {
+public enum AuthAppType {
 
-	CLIENT_APP_TYPE_ANDROID("android", "android"), CLIENT_APP_TYPE_IOS("ios", "ios");
+	APP_TYPE_ANDROID("android", "android"), APP_TYPE_IOS("ios", "ios");
 	
 	private String typeCode;
 	
 	private String typeName;
 
-	private AuthClientAppType(String typeCode, String typeName) {
+	private AuthAppType(String typeCode, String typeName) {
 		this.typeCode = typeCode;
 		this.typeName = typeName;
 	}
@@ -35,8 +35,8 @@ public enum AuthClientAppType {
 		this.typeName = typeName;
 	}
 
-	public static AuthClientAppType getAuthClientType(String typeCode) {
-		for(AuthClientAppType em : values()){
+	public static AuthAppType getAuthType(String typeCode) {
+		for(AuthAppType em : values()){
 			if(em.getTypeCode().equals(typeCode)){
 				return em;
 			}

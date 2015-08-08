@@ -8,8 +8,8 @@ import javax.ws.rs.Produces;
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.support.AuthRequest;
 import com.penglecode.gulubala.common.support.AuthResponse;
-import com.penglecode.gulubala.common.support.ClientAppAuthConfig;
-import com.penglecode.gulubala.service.url.ClientAuthServiceURL;
+import com.penglecode.gulubala.common.support.AppAuth;
+import com.penglecode.gulubala.service.url.AppAuthServiceURL;
 
 /**
  * 客户端应用程序认证授权服务
@@ -19,22 +19,22 @@ import com.penglecode.gulubala.service.url.ClientAuthServiceURL;
  * @version 1.0
  */
 @Path("")
-public interface ClientAppAuthService {
+public interface AppAuthService {
 
 	/**
 	 * 创建客户端认证授权配置
 	 * @param config
 	 */
-	public void createClientAppAuthConfig(ClientAppAuthConfig config);
+	public void createAppAuth(AppAuth appAuth);
 	
 	/**
 	 * 客户端应用程序认证授权服务
 	 * @param user
 	 */
 	@POST
-	@Path(ClientAuthServiceURL.URL_CLIENT_AUTH)
+	@Path(AppAuthServiceURL.URL_CLIENT_AUTH)
 	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public AuthResponse authClientApp(AuthRequest authRequest);
+	public AuthResponse authApp(AuthRequest authRequest);
 	
 }

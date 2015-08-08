@@ -21,10 +21,11 @@
     <dubbo:protocol name="rest" port="${dubbo.protocol.port}" server="servlet" contextpath="${dubbo.protocol.contextpath}"
     				extension="com.penglecode.gulubala.common.dubbo.filter.RestRpcAuthInterceptor,
     						   com.penglecode.gulubala.common.dubbo.filter.RestRpcResultWrappHandler,
+    						   com.penglecode.gulubala.common.dubbo.filter.RestRpcUserLoggingInterceptor,
     						   com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"/>
    	
 	<!-- 服务配置 -->
 	<dubbo:service interface="com.penglecode.gulubala.service.common.SmsService" ref="smsService" protocol="dubbo,rest"/>
-	<dubbo:service interface="com.penglecode.gulubala.service.auth.ClientAppAuthService" ref="clientAppAuthService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.auth.AppAuthService" ref="appAuthService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.user.UserService" ref="userService" protocol="dubbo,rest"/>
 </beans>

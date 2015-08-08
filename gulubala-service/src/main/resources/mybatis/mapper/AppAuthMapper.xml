@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.support.AppAuthMapper">
+	
+	<insert id="insertAppAuth" parameterType="AppAuth" statementType="PREPARED">
+		INSERT INTO appauths(
+			appId,
+			appName,
+			appKey,
+			appType,
+			status,
+			createdAt
+		) VALUES (
+			#{appId, jdbcType=VARCHAR},
+			#{appName, jdbcType=VARCHAR},
+			#{appKey, jdbcType=VARCHAR},
+			#{appType, jdbcType=VARCHAR},
+			#{status, jdbcType=INTEGER},
+			#{createTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getAppAuthById" parameterType="java.lang.String" statementType="PREPARED" resultType="AppAuth">
+		SELECT a.appId		appId,
+			   a.appName	appName,
+			   a.appKey		appKey,
+			   a.appType	appType,
+			   a.status		status,
+			   DATE_FORMAT(a.createAt, '%Y-%m-%d %T')	createTime
+		  FROM appauths a
+		 WHERE a.app_id = #{appId, jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

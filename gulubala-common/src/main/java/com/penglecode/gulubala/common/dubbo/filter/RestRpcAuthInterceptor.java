@@ -1,15 +1,14 @@
 package com.penglecode.gulubala.common.dubbo.filter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import com.penglecode.gulubala.common.cache.AuthTokenCacheManager;
 import com.penglecode.gulubala.common.support.BusinessAssert;
 import com.penglecode.gulubala.common.util.CollectionUtils;
 import com.penglecode.gulubala.common.util.SpringUtils;
-import com.penglecode.gulubala.service.url.ClientAuthServiceURL;
+import com.penglecode.gulubala.service.url.AppAuthServiceURL;
 /**
  * 外部客户端通过rest方式调用服务时,对其请求进行认证
  * 
@@ -32,6 +31,10 @@ import com.penglecode.gulubala.service.url.ClientAuthServiceURL;
 public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 
 	private static final Logger logger = LoggerFactory.getLogger(RestRpcAuthInterceptor.class);
+	
+	public static final List<String> ALLOWED_HTTP_METHODS = Arrays.asList("GET", "POST");
+	
+	public static final String HEADER_USER_ID = "user-id";
 	
 	public static final String HEADER_AUTH_TOKEN = "auth-token";
 	
@@ -51,7 +54,7 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 	public RestRpcAuthInterceptor() {
 		super();
 		noAuthUrls = new HashSet<String>();
-		noAuthUrls.add(ClientAuthServiceURL.URL_CLIENT_AUTH);
+		noAuthUrls.add(AppAuthServiceURL.URL_CLIENT_AUTH);
 	}
 
 	public String getContextPath() {
@@ -85,15 +88,10 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 	}
 	
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		MultivaluedMap<String,String> headers = requestContext.getHeaders();
-		for(Map.Entry<String,List<String>> entry : headers.entrySet()){
-			logger.debug(">>> " + entry.getKey() + " = " + entry.getValue());
-		}
-		
 		String path = requestContext.getUriInfo().getPath();
 		path = path.replace(getContextPath(), "");
 		logger.info("Do rest rpc auth validation for current request : {}", path);
-		BusinessAssert.isTrue(!requestContext.getRequest().getMethod().equals("OPTIONS"), String.valueOf(Response.Status.METHOD_NOT_ALLOWED), "不允许的请求方法!");
+		BusinessAssert.isTrue(ALLOWED_HTTP_METHODS.contains(requestContext.getMethod()), String.valueOf(Response.Status.METHOD_NOT_ALLOWED), "不允许的请求方法(" + requestContext.getMethod() + ")!");
 		
 		if(!CollectionUtils.isEmpty(noAuthUrls)){
 			for(String noAuthUrl : noAuthUrls){

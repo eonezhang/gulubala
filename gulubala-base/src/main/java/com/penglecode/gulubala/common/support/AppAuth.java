@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @date 	 2015年8月4日 上午9:58:36
  * @version 1.0
  */
-public class ClientAppAuthConfig implements Serializable {
+public class AppAuth implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

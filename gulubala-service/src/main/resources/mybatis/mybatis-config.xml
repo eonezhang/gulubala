@@ -14,16 +14,18 @@
         <setting name="defaultStatementTimeout" value="25000"/>
     </settings>
     <typeAliases>
-    	<typeAlias alias="ClientAppAuthConfig" type="com.penglecode.gulubala.common.support.ClientAppAuthConfig"/>
+    	<typeAlias alias="AppAuth" type="com.penglecode.gulubala.common.support.AppAuth"/>
     	
         <typeAlias alias="User" type="com.penglecode.gulubala.common.model.User"/>
+        <typeAlias alias="UserLog" type="com.penglecode.gulubala.common.model.UserLog"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.penglecode.gulubala.common.mybatis.PaginationInterceptor"/>
     </plugins>
     <mappers>
-    	<mapper resource="mybatis/mapper/ClientAppAuthConfigMapper.xml"/>
+    	<mapper resource="mybatis/mapper/AppAuthMapper.xml"/>
     
     	<mapper resource="mybatis/mapper/UserMapper.xml"/>
+    	<mapper resource="mybatis/mapper/UserLogMapper.xml"/>
     </mappers>
 </configuration>

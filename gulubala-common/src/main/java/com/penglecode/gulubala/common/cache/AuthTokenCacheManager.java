@@ -53,9 +53,7 @@ public class AuthTokenCacheManager extends AbstractCacheManager {
 
 	@PostConstruct
 	protected void init() {
-		setKeyPattern("global_auth_token_%s");
-		setExpire(60 * 60 * 24 * 7);
-		setKeyDescription("全局认证鉴权authToken缓存Key");
+		setCacheDefinition(CacheDefinitions.CACHE_GLOBAL_AUTH_TOKEN);
 		getAuthTokenNativeCacheClearScheduler().scheduleWithFixedDelay(new Runnable(){
 			public void run() {
 				authTokenNativeCache.clear();
@@ -74,7 +72,7 @@ public class AuthTokenCacheManager extends AbstractCacheManager {
 		getRedisTemplate().execute(new SessionCallback<Object>() {
 			public Object execute(RedisOperations operations) throws DataAccessException {
 				operations.opsForValue().set(realKey, authToken);
-				operations.expire(realKey, getExpire(), getExpireTimeUnit());
+				operations.expire(realKey, getExpireTime(), getTimeUnit());
 				return null;
 			}
 		});
@@ -111,7 +109,7 @@ public class AuthTokenCacheManager extends AbstractCacheManager {
 	 * @return
 	 */
 	public String key(final String clientId) {
-		return String.format(getKeyPattern(), clientId);
+		return String.format(getCacheKey(), clientId);
 	}
 	
 }

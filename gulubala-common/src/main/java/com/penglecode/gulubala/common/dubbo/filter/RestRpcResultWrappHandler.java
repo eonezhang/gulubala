@@ -63,7 +63,7 @@ public class RestRpcResultWrappHandler implements ContainerResponseFilter, Excep
         if (cause instanceof ConstraintViolationException) {
             return handleConstraintViolationException((ConstraintViolationException) cause);
         }
-        logger.error("Rest rpc exception mapper got an Exception: " + e.getMessage(), e);
+        logger.error("Rest rpc exception mapper got an Exception: " + e.getMessage());
         Result<Object> result = new Result<Object>();
         Throwable rootException = ExceptionUtils.getRootCause(e);
 		String code = GlobalConstants.RESULT_CODE_FAILURE;

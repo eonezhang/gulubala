@@ -8,7 +8,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.penglecode.gulubala.common.consts.ContentType;
+import com.penglecode.gulubala.common.consts.em.UserLogType;
 import com.penglecode.gulubala.common.model.User;
+import com.penglecode.gulubala.common.support.UserLogging;
 import com.penglecode.gulubala.service.url.UserServiceURL;
 
 /**
@@ -40,6 +42,7 @@ public interface UserService {
 	@Path(UserServiceURL.URL_USER_LOGIN_APP)
 	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	@UserLogging(title="用户登录", logType=UserLogType.READ)
 	public User userLogin4App(User user);
 	
 	/**

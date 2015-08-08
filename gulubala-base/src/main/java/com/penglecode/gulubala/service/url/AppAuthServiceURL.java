@@ -6,7 +6,7 @@ package com.penglecode.gulubala.service.url;
  * @date 	 2015年8月4日 上午9:16:32
  * @version 1.0
  */
-public interface ClientAuthServiceURL {
+public interface AppAuthServiceURL {
 
 	/** 客户端认证授权URL */
 	String URL_CLIENT_AUTH = "client/auth";

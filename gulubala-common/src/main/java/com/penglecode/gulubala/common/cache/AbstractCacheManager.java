@@ -3,6 +3,8 @@ package com.penglecode.gulubala.common.cache;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.RedisTemplate;
+
+import com.penglecode.gulubala.common.support.CacheDefinition;
 /**
  * 通用redis缓存管理器
  * 
@@ -12,46 +14,16 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public abstract class AbstractCacheManager {
 
-	private String keyPattern;
-	
-	private long expire = 0;
-	
-	private TimeUnit expireTimeUnit = TimeUnit.SECONDS;
-	
-	private String keyDescription;
+	private CacheDefinition cacheDefinition;
 	
 	private RedisTemplate<String,Object> redisTemplate;
 
-	public String getKeyPattern() {
-		return keyPattern;
+	public CacheDefinition getCacheDefinition() {
+		return cacheDefinition;
 	}
 
-	protected void setKeyPattern(String keyPattern) {
-		this.keyPattern = keyPattern;
-	}
-
-	public long getExpire() {
-		return expire;
-	}
-
-	protected void setExpire(long expire) {
-		this.expire = expire;
-	}
-
-	public TimeUnit getExpireTimeUnit() {
-		return expireTimeUnit;
-	}
-
-	protected void setExpireTimeUnit(TimeUnit expireTimeUnit) {
-		this.expireTimeUnit = expireTimeUnit;
-	}
-
-	public String getKeyDescription() {
-		return keyDescription;
-	}
-
-	protected void setKeyDescription(String keyDescription) {
-		this.keyDescription = keyDescription;
+	public void setCacheDefinition(CacheDefinition cacheDefinition) {
+		this.cacheDefinition = cacheDefinition;
 	}
 
 	public RedisTemplate<String, Object> getRedisTemplate() {
@@ -62,4 +34,20 @@ public abstract class AbstractCacheManager {
 		this.redisTemplate = redisTemplate;
 	}
 
+	public String getCacheKey() {
+		return cacheDefinition.getCacheKey();
+	}
+	
+	public String getDescription() {
+		return cacheDefinition.getDescription();
+	}
+	
+	public long getExpireTime() {
+		return cacheDefinition.getExpireTime();
+	}
+	
+	public TimeUnit getTimeUnit() {
+		return cacheDefinition.getTimeUnit();
+	}
+	
 }

@@ -18,9 +18,7 @@ public class SmsCodeCacheManager extends AbstractCacheManager {
 
 	@PostConstruct
 	protected void init() {
-		setKeyPattern("global_sms_code_%s");
-		setExpire(10 * 60);
-		setKeyDescription("全局短信验证码缓存Key");
+		setCacheDefinition(CacheDefinitions.CACHE_GLOBAL_AUTH_TOKEN);
 	}
 	
 	/**
@@ -33,7 +31,7 @@ public class SmsCodeCacheManager extends AbstractCacheManager {
 		getRedisTemplate().execute(new SessionCallback<Object>() {
 			public Object execute(RedisOperations operations) throws DataAccessException {
 				operations.opsForValue().set(realKey, smsCode);
-				operations.expire(realKey, getExpire(), getExpireTimeUnit());
+				operations.expire(realKey, getExpireTime(), getTimeUnit());
 				return null;
 			}
 		});
@@ -62,7 +60,7 @@ public class SmsCodeCacheManager extends AbstractCacheManager {
 	 * @return
 	 */
 	public String key(final String mobilePhone) {
-		return String.format(getKeyPattern(), mobilePhone);
+		return String.format(getCacheKey(), mobilePhone);
 	}
 	
 }

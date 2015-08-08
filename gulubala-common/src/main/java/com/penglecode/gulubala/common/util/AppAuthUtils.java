@@ -2,7 +2,7 @@ package com.penglecode.gulubala.common.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.penglecode.gulubala.common.support.AuthClientAppType;
+import com.penglecode.gulubala.common.support.AuthAppType;
 import com.penglecode.gulubala.common.support.AuthRequest;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 
@@ -13,7 +13,7 @@ import com.penglecode.gulubala.common.support.ValidationAssert;
  * @date 	 2015年8月4日 上午11:07:01
  * @version 1.0
  */
-public class ClientAppAuthUtils {
+public class AppAuthUtils {
 
 	/**
 	 * 生成授权码
@@ -67,7 +67,7 @@ public class ClientAppAuthUtils {
 	public static void main(String[] args) {
 		AuthRequest authRequest = new AuthRequest();
 		authRequest.setAppId("gulubala_app_android");
-		authRequest.setAppType(AuthClientAppType.CLIENT_APP_TYPE_ANDROID.getTypeCode());
+		authRequest.setAppType(AuthAppType.APP_TYPE_ANDROID.getTypeCode());
 		authRequest.setAppKey("90e98f4e2c6d49b4a1b7e70588898517");
 		authRequest.setAuthTime(String.valueOf(System.currentTimeMillis()));
 		authRequest.setAuthCode(buildAuthCode(authRequest));
