@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService {
 		user.setCreateTime(puser.getCreateTime());
 		String inputEncryptedPassword = UserPasswordUtils.encryptPassword(user);
 		ValidationAssert.isTrue(inputEncryptedPassword.equals(puser.getEncryptedPassword()), "登录密码不正确!");
+		userDAO.updateUser4Login(puser.getUserId(), DateTimeUtils.formatNow());
 		return puser;
 	}
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MediaCategoryMapper">
+	
+	<insert id="insertCategory" parameterType="MediaCategory" statementType="PREPARED" useGeneratedKeys="true" keyProperty="categoryId">
+		INSERT INTO mediacategory(
+			categoryId,
+			categoryName,
+			parentCategoryId,
+			siblingsOrder,
+			createdBy,
+			createdAt
+		) VALUES (
+			#{categoryId, jdbcType=INTEGER},
+			#{categoryName, jdbcType=VARCHAR},
+			#{parentCategoryId, jdbcType=INTEGER},
+			#{siblingsOrder, jdbcType=INTEGER},
+			#{createBy, jdbcType=BIGINT},
+			#{createTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getCategoryList" parameterType="java.util.Map" statementType="PREPARED" resultType="MediaCategory">
+		SELECT a.categoryId 		categoryId,
+			   a.categoryName		categoryName,
+			   a.parentCategoryId	parentCategoryId,
+			   a.siblingsOrder		siblingsOrder,
+			   a.createdBy			createBy,
+			   a.createdAt			createTime
+		  FROM mediacategory a
+		 WHERE 1=1
+		<if test="parentCategoryId != null">
+		   AND a.parentCategoryId = #{parentCategoryId, jdbcType=INTEGER}
+		  ORDER BY a.siblingsOrder ASC
+		</if>
+	</select>
+	
+</mapper>

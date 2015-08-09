@@ -3,6 +3,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS appauths;
+DROP TABLE IF EXISTS mediacategory;
 DROP TABLE IF EXISTS userlogs;
 DROP TABLE IF EXISTS users;
 
@@ -28,6 +29,26 @@ CREATE TABLE appauths
 	createdAt datetime NOT NULL COMMENT '创建时间',
 	PRIMARY KEY (appid)
 ) COMMENT = '客户端应用认证配置表';
+
+
+-- 媒体分类表
+CREATE TABLE mediacategory
+(
+	-- 分类ID
+	categoryId int NOT NULL AUTO_INCREMENT COMMENT '分类ID',
+	-- 分类名称
+	categoryName varchar(32) NOT NULL COMMENT '分类名称',
+	-- 父分类ID
+	parentCategoryId int NOT NULL COMMENT '父分类ID',
+	-- 兄弟节点间的排序值
+	siblingsOrder int NOT NULL COMMENT '兄弟节点间的排序值',
+	-- 创建者ID
+	createdBy int NOT NULL COMMENT '创建者ID',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (categoryId),
+	CONSTRAINT uk_mediacategory_name UNIQUE (categoryName, parentCategoryId)
+) COMMENT = '媒体分类表';
 
 
 -- 用户操作日志表

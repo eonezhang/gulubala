@@ -25,9 +25,9 @@ public class AuthServiceTest {
 	@Test
 	public void testCreateAppAuth(){
 		AppAuth config = new AppAuth();
-		config.setAppId("gulubala_app_android1");
-		config.setAppType(AuthAppType.APP_TYPE_ANDROID.getTypeCode());
-		config.setAppName("gulubala安卓客户端!");
+		config.setAppId("gulubala_app_ios");
+		config.setAppType(AuthAppType.APP_TYPE_IOS.getTypeCode());
+		config.setAppName("gulubalaIOS客户端!");
 		appAuthService.createAppAuth(config);
 	}
 	

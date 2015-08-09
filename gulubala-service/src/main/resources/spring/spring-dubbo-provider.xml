@@ -28,4 +28,5 @@
 	<dubbo:service interface="com.penglecode.gulubala.service.common.MessageSendService" ref="messageSendService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.auth.AppAuthService" ref="appAuthService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.user.UserService" ref="userService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.category.MediaCategoryService" ref="mediaCategoryService" protocol="dubbo,rest"/>
 </beans>

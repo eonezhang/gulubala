@@ -26,9 +26,9 @@
 			   a.appKey		appKey,
 			   a.appType	appType,
 			   a.status		status,
-			   DATE_FORMAT(a.createAt, '%Y-%m-%d %T')	createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM appauths a
-		 WHERE a.app_id = #{appId, jdbcType=VARCHAR}
+		 WHERE a.appId = #{appId, jdbcType=VARCHAR}
 	</select>
 	
 </mapper>

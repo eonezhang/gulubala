@@ -22,7 +22,7 @@ public class MediaCategory implements Serializable {
 	private Integer parentCategoryId;
 	
 	/** 兄弟分类节点间的排序值,ASC */
-	private Integer siblingsIndex; 
+	private Integer siblingsOrder;
 	
 	/** 创建者ID */
 	private Long createBy;
@@ -54,12 +54,12 @@ public class MediaCategory implements Serializable {
 		this.parentCategoryId = parentCategoryId;
 	}
 
-	public Integer getSiblingsIndex() {
-		return siblingsIndex;
+	public Integer getSiblingsOrder() {
+		return siblingsOrder;
 	}
 
-	public void setSiblingsIndex(Integer siblingsIndex) {
-		this.siblingsIndex = siblingsIndex;
+	public void setSiblingsOrder(Integer siblingsOrder) {
+		this.siblingsOrder = siblingsOrder;
 	}
 
 	public Long getCreateBy() {

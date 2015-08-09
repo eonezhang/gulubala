@@ -18,6 +18,8 @@
     	
         <typeAlias alias="User" type="com.penglecode.gulubala.common.model.User"/>
         <typeAlias alias="UserLog" type="com.penglecode.gulubala.common.model.UserLog"/>
+        
+        <typeAlias alias="MediaCategory" type="com.penglecode.gulubala.common.model.MediaCategory"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.penglecode.gulubala.common.mybatis.PaginationInterceptor"/>
@@ -27,5 +29,7 @@
     
     	<mapper resource="mybatis/mapper/UserMapper.xml"/>
     	<mapper resource="mybatis/mapper/UserLogMapper.xml"/>
+    	
+    	<mapper resource="mybatis/mapper/MediaCategoryMapper.xml"/>
     </mappers>
 </configuration>
