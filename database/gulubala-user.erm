@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2015-08-05 11:10:08</creation_date>
-			<updated_date>2015-08-09 13:58:16</updated_date>
+			<updated_date>2015-08-10 22:00:39</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -2281,7 +2281,7 @@
 			<description>媒体分类表</description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
-			<option></option>
+			<option>AUTO_INCREMENT = 100</option>
 			<columns>
 				<normal_column>
 					<word_id>6</word_id>

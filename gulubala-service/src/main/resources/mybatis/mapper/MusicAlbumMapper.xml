@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MusicAlbumMapper">
+	
+	<insert id="insertMusicAlbum" parameterType="MusicAlbum" statementType="PREPARED" useGeneratedKeys="true" keyProperty="albumId">
+		INSERT INTO albums(
+			id,
+			name,
+			publisher,
+			picUrl,
+			playCount,
+			singerId,
+			remark,
+			createdAt
+		) VALUES (
+			#{albumId, jdbcType=BIGINT},
+			#{albumName, jdbcType=VARCHAR},
+			#{publisher, jdbcType=VARCHAR},
+			#{albumPictureUrl, jdbcType=VARCHAR},
+			#{plays, jdbcType=INTEGER},
+			#{singerId, jdbcType=BIGINT},
+			#{remark, jdbcType=VARCHAR},
+			#{createTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getMusicAlbumById" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicAlbum">
+		SELECT a.id 				albumId,
+			   a.name				albumName,
+			   a.publisher			publisher,
+			   a.picUrl				albumPictureUrl,
+			   a.playCount			plays,
+			   a.singerId			singerId,
+			   a.remark				remark,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
+		  FROM albums a
+		 WHERE a.id = #{albumId, jdbcType=BIGINT}
+	</select>
+	
+</mapper>

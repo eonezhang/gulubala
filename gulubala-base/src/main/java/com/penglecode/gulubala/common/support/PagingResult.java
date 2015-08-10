@@ -7,7 +7,7 @@ package com.penglecode.gulubala.common.support;
  * @date 	 2015年5月7日 上午9:53:27
  * @version 1.0
  */
-public class PageResult<T> extends Result<T> {
+public class PagingResult<T> extends Result<T> {
 
 	/** 当前页码 */
 	private Integer currentPage;
@@ -21,32 +21,32 @@ public class PageResult<T> extends Result<T> {
     /** 当存在分页查询时此值为总记录数 */
 	private Integer totalRowCount;
 
-	public PageResult() {
+	public PagingResult() {
 		super();
 	}
 
-	public PageResult(boolean success, String code, String message, T data) {
+	public PagingResult(boolean success, String code, String message, T data) {
 		super(success, code, message, data);
 	}
 
-	public PageResult(boolean success, String code, String message) {
+	public PagingResult(boolean success, String code, String message) {
 		super(success, code, message);
 	}
 
-	public PageResult(boolean success, String message) {
+	public PagingResult(boolean success, String message) {
 		super(success, message);
 	}
 
-	public PageResult(boolean success, T data) {
+	public PagingResult(boolean success, T data) {
 		super(success, data);
 	}
 
-	public PageResult(boolean success, T data, Pager pager) {
+	public PagingResult(boolean success, T data, Pager pager) {
 		super(success, data);
 		setPager(pager);
 	}
 	
-	public PageResult(boolean success) {
+	public PagingResult(boolean success) {
 		super(success);
 	}
 

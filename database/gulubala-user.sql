@@ -48,7 +48,8 @@ CREATE TABLE mediacategory
 	createdAt datetime NOT NULL COMMENT '创建时间',
 	PRIMARY KEY (categoryId),
 	CONSTRAINT uk_mediacategory_name UNIQUE (categoryName, parentCategoryId)
-) COMMENT = '媒体分类表';
+) COMMENT = '媒体分类表'
+AUTO_INCREMENT = 100;
 
 
 -- 用户操作日志表

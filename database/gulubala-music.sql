@@ -24,12 +24,14 @@ CREATE TABLE albums
 	createdAt datetime NOT NULL COMMENT '创建时间',
 	-- 更新时间
 	updatedAt datetime COMMENT '更新时间',
+	-- 所属歌手ID
+	singerId int NOT NULL COMMENT '所属歌手ID',
 	-- 专辑封面URL
 	picUrl varchar(255) NOT NULL COMMENT '专辑封面URL',
 	-- 播放次数
 	playCount int DEFAULT 0 NOT NULL COMMENT '播放次数',
 	-- 专辑简介
-	intro varchar(500) COMMENT '专辑简介',
+	remark varchar(500) COMMENT '专辑简介',
 	PRIMARY KEY (id)
 ) COMMENT = '歌曲专辑表';
 

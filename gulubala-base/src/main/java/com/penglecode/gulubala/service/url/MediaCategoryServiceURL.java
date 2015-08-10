@@ -14,4 +14,7 @@ public interface MediaCategoryServiceURL {
 	/** 根据条件查询媒体通用分类 */
 	String URL_MEDIA_CATEGORY_LIST = "mcategory/list";
 	
+	/** 查询媒体通用分类(首页接口) */
+	String URL_MEDIA_CATEGORY_LIST_INDEX = "mcategory/list/index";
+	
 }

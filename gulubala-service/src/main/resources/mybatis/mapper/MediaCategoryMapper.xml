@@ -26,7 +26,7 @@
 			   a.parentCategoryId	parentCategoryId,
 			   a.siblingsOrder		siblingsOrder,
 			   a.createdBy			createBy,
-			   a.createdAt			createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM mediacategory a
 		 WHERE 1=1
 		<if test="parentCategoryId != null">

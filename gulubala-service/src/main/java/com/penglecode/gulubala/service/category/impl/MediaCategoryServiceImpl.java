@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.penglecode.gulubala.common.consts.em.MediaCategoryEnum;
 import com.penglecode.gulubala.common.model.MediaCategory;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.CollectionUtils;
@@ -60,4 +61,8 @@ public class MediaCategoryServiceImpl implements MediaCategoryService {
 		}
 	}
 
+	public List<MediaCategory> getCategoryList4index() {
+		return getCategoryList(MediaCategoryEnum.MEDIA_CATEGORY_MUSIC.getTypeCode(), false);
+	}
+	
 }

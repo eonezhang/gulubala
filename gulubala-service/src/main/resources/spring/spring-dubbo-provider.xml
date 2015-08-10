@@ -29,4 +29,7 @@
 	<dubbo:service interface="com.penglecode.gulubala.service.auth.AppAuthService" ref="appAuthService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.user.UserService" ref="userService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.category.MediaCategoryService" ref="mediaCategoryService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.singer.SingerService" ref="singerService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicService" ref="musicService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicAlbumService" ref="musicAlbumService" protocol="dubbo,rest"/>
 </beans>

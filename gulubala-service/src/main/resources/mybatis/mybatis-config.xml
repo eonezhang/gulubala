@@ -20,6 +20,11 @@
         <typeAlias alias="UserLog" type="com.penglecode.gulubala.common.model.UserLog"/>
         
         <typeAlias alias="MediaCategory" type="com.penglecode.gulubala.common.model.MediaCategory"/>
+        <typeAlias alias="Singer" type="com.penglecode.gulubala.common.model.Singer"/>
+        <typeAlias alias="MusicAlbum" type="com.penglecode.gulubala.common.model.MusicAlbum"/>
+        <typeAlias alias="MusicAlbumItem" type="com.penglecode.gulubala.common.model.MusicAlbumItem"/>
+        <typeAlias alias="Music" type="com.penglecode.gulubala.common.model.Music"/>
+        
     </typeAliases>
     <plugins>
         <plugin interceptor="com.penglecode.gulubala.common.mybatis.PaginationInterceptor"/>
@@ -31,5 +36,8 @@
     	<mapper resource="mybatis/mapper/UserLogMapper.xml"/>
     	
     	<mapper resource="mybatis/mapper/MediaCategoryMapper.xml"/>
+    	<mapper resource="mybatis/mapper/SingerMapper.xml"/>
+    	<mapper resource="mybatis/mapper/MusicMapper.xml"/>
+    	<mapper resource="mybatis/mapper/MusicAlbumMapper.xml"/>
     </mappers>
 </configuration>

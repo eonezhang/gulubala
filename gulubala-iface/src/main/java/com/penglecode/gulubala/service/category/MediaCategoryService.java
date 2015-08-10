@@ -45,4 +45,13 @@ public interface MediaCategoryService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public List<MediaCategory> getCategoryList(@QueryParam("parentCategoryId") Integer parentCategoryId, @QueryParam("loadAll") boolean loadAll);
 	
+	/**
+	 * 获取媒体通用分类列表(首页接口)
+	 * @return
+	 */
+	@GET
+	@Path(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_LIST_INDEX)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public List<MediaCategory> getCategoryList4index();
+	
 }

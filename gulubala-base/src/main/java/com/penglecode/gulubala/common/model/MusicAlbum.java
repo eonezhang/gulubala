@@ -2,7 +2,7 @@ package com.penglecode.gulubala.common.model;
 
 import java.io.Serializable;
 /**
- * 音乐歌单模型
+ * 音乐专辑模型
  * 
  * @author  pengpeng
  * @date 	 2015年8月7日 下午12:56:45
@@ -12,30 +12,37 @@ public class MusicAlbum implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/** 歌单ID */
+	/** 专辑ID */
 	private Long albumId;
 	
-	/** 歌单名称 */
+	/** 专辑名称 */
 	private String albumName;
 	
-	/** 歌单封面图片地址 */
+	/** 专辑封面图片地址 */
 	private String albumPictureUrl;
 	
-	/** 歌单播放次数 */
-	private Integer playTimes;
+	/** 专辑播放次数 */
+	private Integer plays;
 	
-	/** 创建人ID */
-	private Long createBy;
+	/** 发行单位 */
+	private String publisher;
+	
+	/** 所属歌手ID */
+	private Long singerId;
+	
+	/** 专辑简介 */
+	private String remark;
 	
 	/** 创建时间 */
 	private String createTime;
 	
-	/** 是否分享 */
-	private boolean shared;
-	
-	/** 歌单简介 */
-	private String remark;
+	/** 更新时间 */
+	private String updateTime;
 
+	//以下属于辅助字段
+	
+	private String fullAlbumPictureUrl;
+	
 	public Long getAlbumId() {
 		return albumId;
 	}
@@ -60,20 +67,36 @@ public class MusicAlbum implements Serializable {
 		this.albumPictureUrl = albumPictureUrl;
 	}
 
-	public Integer getPlayTimes() {
-		return playTimes;
+	public Integer getPlays() {
+		return plays;
 	}
 
-	public void setPlayTimes(Integer playTimes) {
-		this.playTimes = playTimes;
+	public void setPlays(Integer plays) {
+		this.plays = plays;
 	}
 
-	public Long getCreateBy() {
-		return createBy;
+	public String getPublisher() {
+		return publisher;
 	}
 
-	public void setCreateBy(Long createBy) {
-		this.createBy = createBy;
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public Long getSingerId() {
+		return singerId;
+	}
+
+	public void setSingerId(Long singerId) {
+		this.singerId = singerId;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getCreateTime() {
@@ -84,20 +107,20 @@ public class MusicAlbum implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public boolean isShared() {
-		return shared;
+	public String getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setShared(boolean shared) {
-		this.shared = shared;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
-	public String getRemark() {
-		return remark;
+	public String getFullAlbumPictureUrl() {
+		return fullAlbumPictureUrl;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setFullAlbumPictureUrl(String fullAlbumPictureUrl) {
+		this.fullAlbumPictureUrl = fullAlbumPictureUrl;
 	}
 	
 }

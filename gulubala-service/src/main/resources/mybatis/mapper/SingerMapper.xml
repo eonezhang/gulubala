@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.SingerMapper">
+	
+	<insert id="insertSinger" parameterType="Singer" statementType="PREPARED" useGeneratedKeys="true" keyProperty="singerId">
+		INSERT INTO singers(
+			id,
+			name,
+			profile,
+			sex,
+			birthday,
+			country,
+			xingzuo,
+			xuexing,
+			shengao,
+			tizhong,
+			zhiye,
+			createdAt
+		) VALUES (
+			#{singerId, jdbcType=BIGINT},
+			#{singerName, jdbcType=VARCHAR},
+			#{singerProfile, jdbcType=VARCHAR},
+			#{sex, jdbcType=INTEGER},
+			#{birthday, jdbcType=VARCHAR},
+			#{country, jdbcType=VARCHAR},
+			#{xingzuo, jdbcType=VARCHAR},
+			#{xuexing, jdbcType=VARCHAR},
+			#{shengao, jdbcType=VARCHAR},
+			#{tizhong, jdbcType=VARCHAR},
+			#{zhiye, jdbcType=VARCHAR},
+			#{createTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getSingerById" parameterType="java.lang.Long" statementType="PREPARED" resultType="Singer">
+		SELECT a.id 				singerId,
+			   a.name				singerName,
+			   a.profile			singerProfile,
+			   a.sex				sex,
+			   a.birthday			birthday,
+			   a.country			country,
+			   a.xingzuo			xingzuo,
+			   a.xuexing			xuexing,
+			   a.shengao			shengao,
+			   a.tizhong			tizhong,
+			   a.zhiye				zhiye,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM singers a
+		 WHERE a.id = #{singerId, jdbcType=BIGINT}
+	</select>
+	
+</mapper>

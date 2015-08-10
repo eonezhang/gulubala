@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MusicMapper">
+	
+	<insert id="insertMusic" parameterType="Music" statementType="PREPARED" useGeneratedKeys="true" keyProperty="musicId">
+		INSERT INTO songs(
+			id,
+			name,
+			zuoqu,
+			zuoci,
+			bianqu,
+			singerId,
+			albumId,
+			yuanchuang,
+			fangchang,
+			mv,
+			publisher,
+			publishAt,
+			hot,
+			playCount,
+			zan,
+			shoucang,
+			createdAt,
+			categoryId,
+			lrcUrl,
+			smallPicUrl,
+			picUrl,
+			songUrl
+		) VALUES (
+			#{musicId, jdbcType=BIGINT},
+			#{musicName, jdbcType=VARCHAR},
+			#{zuoqu, jdbcType=VARCHAR},
+			#{zuoci, jdbcType=VARCHAR},
+			#{bianqu, jdbcType=VARCHAR},
+			#{singerId, jdbcType=BIGINT},
+			#{albumId, jdbcType=BIGINT},
+			#{originalSong, jdbcType=BOOLEAN},
+			#{overrideSong, jdbcType=BOOLEAN},
+			#{mv, jdbcType=BOOLEAN},
+			#{publisher, jdbcType=VARCHAR},
+			#{publishTime, jdbcType=VARCHAR},
+			#{hots, jdbcType=INTEGER},
+			#{plays, jdbcType=INTEGER},
+			#{praises, jdbcType=INTEGER},
+			#{collects, jdbcType=INTEGER},
+			#{createTime, jdbcType=VARCHAR},
+			#{categoryId, jdbcType=INTEGER},
+			#{lrcUrl, jdbcType=VARCHAR},
+			#{smallPictureUrl, jdbcType=VARCHAR},
+			#{pictureUrl, jdbcType=VARCHAR},
+			#{musicUrl, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getMusicById" parameterType="java.lang.Long" statementType="PREPARED" resultType="Music">
+		SELECT a.id 				musicId,
+			   a.name				musicName,
+			   a.zuoqu				zuoqu,
+			   a.zuoci				zuoci,
+			   a.bianqu				bianqu,
+			   a.singerId			singerId,
+			   a.albumId			albumId,
+			   a.yuanchuang			originalSong,
+			   a.fangchang			overrideSong,
+			   a.mv					mv,
+			   a.publisher			publisher,
+			   DATE_FORMAT(a.publishAt, '%Y-%m-%d %T')	publishTime,
+			   a.hot				hots,
+			   a.playCount			plays,
+			   a.zan				praises,
+			   a.shoucang			collects,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
+			   a.categoryId			categoryId,
+			   a.lrcUrl				lrcUrl,
+			   a.smallPicUrl		smallPictureUrl,
+			   a.picUrl				pictureUrl,
+			   a.songUrl			musicUrl
+		  FROM songs a
+		 WHERE a.id = #{musicId, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getMusicList4index" parameterType="java.util.Map" statementType="PREPARED" resultType="Music">
+		SELECT a.id 				musicId,
+			   a.name				musicName,
+			   a.singerId			singerId,
+			   a.albumId			albumId,
+			   a.mv					mv,
+			   a.hot				hots,
+			   a.playCount			plays,
+			   a.zan				praises,
+			   a.shoucang			collects,
+			   a.categoryId			categoryId,
+			   a.smallPicUrl		smallPictureUrl,
+			   a.songUrl			musicUrl,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM songs a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
+		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
+		</if>
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(orderby)">
+		   ORDER BY ${orderby} ${order}
+		</if>
+	</select>
+	
+	<select id="getMusicList4index_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		  FROM songs a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
+		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+</mapper>

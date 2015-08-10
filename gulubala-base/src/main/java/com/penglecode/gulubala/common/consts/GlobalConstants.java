@@ -2,6 +2,8 @@ package com.penglecode.gulubala.common.consts;
 
 import java.util.Locale;
 
+import com.penglecode.gulubala.common.support.ConstValue;
+
 /**
  * 全局常量
  * 
@@ -45,5 +47,25 @@ public class GlobalConstants extends AbstractConstants {
 	 * 默认的用户密码递归加密次数
 	 */
 	public static final int DEFAULT_PASSWORD_HASH_ITERATIONS = valueOf(1);
+	
+	/**
+	 * 全局图片服务域名
+	 * 注：各个应用的global.properties中需要加入global.imgserver.domain=xxxx
+	 */
+	@ConstValue("${global.imgserver.domain}")
+	public static final String GLOBAL_IMGSERVER_DOMAIN = valueOf("http://www.gulubala.nat123.net");
+	
+	/**
+	 * 全局媒体文件服务域名
+	 * 注：各个应用的global.properties中需要加入global.fileserver.domain=xxxx
+	 */
+	@ConstValue("${global.fileserver.domain}")
+	public static final String GLOBAL_FILESERVER_DOMAIN = valueOf("http://www.gulubala.nat123.net");
+	
+	/**
+	 * 默认的用户头像
+	 */
+	@ConstValue("${global.usericon.default}")
+	public static final String DEFAULT_USER_ICON = valueOf("/img/user/default_user_icon.png");
 	
 }

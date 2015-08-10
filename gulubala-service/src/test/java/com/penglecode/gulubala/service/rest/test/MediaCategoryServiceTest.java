@@ -64,9 +64,15 @@ public class MediaCategoryServiceTest {
 		}
 	}
 	
+	public static void testGetCategoryListIndex() {
+		Result<List<MediaCategory>> result = RestServiceUtils.get(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_LIST, null, new GenericType<Result<List<MediaCategory>>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) {
 		//testCreateCategory();
-		testGetCategoryList();
+		//testGetCategoryList();
+		testGetCategoryListIndex();
 	}
 
 }
