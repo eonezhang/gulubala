@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.penglecode.gulubala.common.consts.em.MediaTypeEnum;
 import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.support.PagingList;
@@ -42,9 +43,13 @@ public class MusicServiceImpl implements MusicService {
 		return musicDAO.getMusicById(musicId);
 	}
 
-	public PagingList<Music> getMusicList4index(Integer categoryId,
-			Integer currentPage, Integer pageSize, String orderby, String order) {
+	public PagingList<Music> getMusicList4index(Integer mediaType,
+			Integer categoryId, Integer currentPage, Integer pageSize,
+			String orderby, String order) {
+		MediaTypeEnum em = MediaTypeEnum.getMediaType(mediaType);
+		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
 		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("mediaType", em.getTypeCode());
 		paramMap.put("categoryId", categoryId);
 		paramMap.put("orderby", orderby);
 		paramMap.put("order", order);

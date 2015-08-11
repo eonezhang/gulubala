@@ -268,7 +268,8 @@ public class MusicServiceTest {
 	
 	public static void testGetMusicList4index() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("categoryId", 2);
+		paramMap.put("categoryId", 200);
+		paramMap.put("mediaType", 1);
 		Result<PagingList<Music>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_INDEX, paramMap, new GenericType<Result<PagingList<Music>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}

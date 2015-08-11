@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
@@ -47,11 +48,12 @@ public interface MediaCategoryService {
 	
 	/**
 	 * 获取媒体通用分类列表(首页接口)
+	 * @param category {@link #MediaCategoryEnum}
 	 * @return
 	 */
 	@GET
 	@Path(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_LIST_INDEX)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public List<MediaCategory> getCategoryList4index();
+	public List<MediaCategory> getCategoryList4index(@PathParam("category") Integer category);
 	
 }

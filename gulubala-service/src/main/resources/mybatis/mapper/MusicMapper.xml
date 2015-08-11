@@ -94,7 +94,7 @@
 			   a.songUrl			musicUrl,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM songs a
-		 WHERE 1=1
+		 WHERE a.mv = #{mediaType, jdbcType=INTEGER}
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
 		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
 		</if>

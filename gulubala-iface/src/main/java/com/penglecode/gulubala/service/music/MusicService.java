@@ -47,6 +47,7 @@ public interface MusicService {
 	
 	/**
 	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]
+	 * @param mediaType		{@link #MediaTypeEnum}
 	 * @param categoryId
 	 * @param currentPage
 	 * @param pageSize
@@ -58,6 +59,7 @@ public interface MusicService {
 	@Path(MusicServiceURL.URL_MUSIC_LIST_INDEX)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public PagingList<Music> getMusicList4index(
+			@PathParam("mediaType") Integer mediaType,
 			@QueryParam("categoryId") Integer categoryId,
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize,

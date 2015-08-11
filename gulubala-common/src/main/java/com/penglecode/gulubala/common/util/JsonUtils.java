@@ -2,6 +2,7 @@ package com.penglecode.gulubala.common.util;
 
 import java.text.SimpleDateFormat;
 
+import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -24,7 +25,7 @@ public class JsonUtils {
 		defaultObjectMapper.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_FORMAT));
 		defaultObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		//单引号处理,允许单引号
-		defaultObjectMapper.configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+		defaultObjectMapper.configure(Feature.ALLOW_SINGLE_QUOTES, true);
 	}
 	
 	/**

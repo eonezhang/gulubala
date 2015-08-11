@@ -61,8 +61,10 @@ public class MediaCategoryServiceImpl implements MediaCategoryService {
 		}
 	}
 
-	public List<MediaCategory> getCategoryList4index() {
-		return getCategoryList(MediaCategoryEnum.MEDIA_CATEGORY_MUSIC.getTypeCode(), false);
+	public List<MediaCategory> getCategoryList4index(Integer category) {
+		MediaCategoryEnum em = MediaCategoryEnum.getCategory(category);
+		ValidationAssert.notNull(em, "无法识别的category类型!");
+		return getCategoryList(em.getTypeCode(), false);
 	}
 	
 }

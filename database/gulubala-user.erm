@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2015-08-05 11:10:08</creation_date>
-			<updated_date>2015-08-10 22:00:39</updated_date>
+			<updated_date>2015-08-11 09:02:09</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -2278,7 +2278,7 @@
 			</connections>
 			<physical_name>mediacategory</physical_name>
 			<logical_name>媒体分类表</logical_name>
-			<description>媒体分类表</description>
+			<description>媒体分类表,ID[1-99]区间的都是固定死的</description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
 			<option>AUTO_INCREMENT = 100</option>
