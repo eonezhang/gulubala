@@ -29,7 +29,7 @@
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM mediacategory a
 		 WHERE 1=1
-		<if test="parentCategoryId != null">
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(parentCategoryId)">
 		   AND a.parentCategoryId = #{parentCategoryId, jdbcType=INTEGER}
 		  ORDER BY a.siblingsOrder ASC
 		</if>

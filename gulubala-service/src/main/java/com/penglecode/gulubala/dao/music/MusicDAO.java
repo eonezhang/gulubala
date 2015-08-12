@@ -29,6 +29,13 @@ public interface MusicDAO {
 	public Music getMusicById(Long musicId);
 	
 	/**
+	 * 根据多个音乐Id查询音乐列表
+	 * @param musicIdList
+	 * @return
+	 */
+	public List<Music> getMusicListByIds(List<Long> musicIdList);
+	
+	/**
 	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]
 	 * @param categoryId
 	 * @param pager

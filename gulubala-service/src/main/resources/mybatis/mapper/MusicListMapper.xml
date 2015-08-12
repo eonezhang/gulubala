@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MusicListMapper">
+	
+	<insert id="insertMusicList" parameterType="MusicList" statementType="PREPARED" useGeneratedKeys="true" keyProperty="listId">
+		INSERT INTO songlists(
+			id,
+			name,
+			userId,
+			songIds,
+			remark,
+			createdAt
+		) VALUES (
+			#{listId, jdbcType=BIGINT},
+			#{listName, jdbcType=VARCHAR},
+			#{userId, jdbcType=BIGINT},
+			#{musicIds, jdbcType=VARCHAR},
+			#{remark, jdbcType=VARCHAR},
+			#{createTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getMusicListById" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicList">
+		SELECT a.id 				listId,
+			   a.name				listName,
+			   a.userId				userId,
+			   a.songIds			musicIds,
+			   a.remark				remark,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
+		  FROM songlists a
+		 WHERE a.id = #{listId, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getMusicLists" parameterType="java.util.Map" statementType="PREPARED" resultType="MusicList">
+		SELECT a.id 				listId,
+			   a.name				listName,
+			   a.userId				userId,
+			   a.songIds			musicIds,
+			   a.remark				remark,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
+		  FROM songlists a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(userId)">
+		   AND a.userId = #{userId, jdbcType=BIGINT}
+		</if>
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(orderby)">
+		   ORDER BY ${orderby} ${order}
+		</if>
+	</select>
+	
+	<select id="getMusicLists_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		  FROM songlists a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(userId)">
+		   AND a.userId = #{userId, jdbcType=BIGINT}
+		</if>
+	</select>
+	
+</mapper>

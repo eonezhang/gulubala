@@ -33,4 +33,5 @@
 	<dubbo:service interface="com.penglecode.gulubala.service.singer.SingerService" ref="singerService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicService" ref="musicService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicAlbumService" ref="musicAlbumService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicListService" ref="musicListService" protocol="dubbo,rest"/>
 </beans>

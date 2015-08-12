@@ -4,6 +4,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS albums;
 DROP TABLE IF EXISTS singers;
+DROP TABLE IF EXISTS songlists;
 DROP TABLE IF EXISTS songs;
 
 
@@ -67,6 +68,27 @@ CREATE TABLE singers
 	zhiye varchar(50) COMMENT '职业',
 	PRIMARY KEY (id)
 ) COMMENT = '歌手表';
+
+
+-- 歌单表
+CREATE TABLE songlists
+(
+	-- 歌单Id
+	id int NOT NULL AUTO_INCREMENT COMMENT '歌单Id',
+	-- 用户Id
+	userId int COMMENT '用户Id',
+	-- 歌曲Id集合","分割
+	songIds varchar(500) NOT NULL COMMENT '歌曲Id集合","分割',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	-- 更新时间
+	updatedAt datetime COMMENT '更新时间',
+	-- 歌单名称
+	name varchar(50) NOT NULL COMMENT '歌单名称',
+	-- 歌单描述
+	remark varchar(500) COMMENT '歌单描述',
+	PRIMARY KEY (id)
+) COMMENT = '歌单表';
 
 
 -- 歌曲表
