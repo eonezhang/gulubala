@@ -19,6 +19,22 @@ public class MusicListDAOImpl extends BaseMybatisDAO implements MusicListDAO {
 		getSqlSessionTemplate().insert(getMapperKey("insertMusicList"), musicList);
 	}
 
+	public void incrMusicListComments(Long listId) {
+		getSqlSessionTemplate().update(getMapperKey("incrMusicListComments"), listId);
+	}
+
+	public void incrMusicListPlays(Long listId) {
+		getSqlSessionTemplate().update(getMapperKey("incrMusicListPlays"), listId);
+	}
+
+	public void incrMusicListPraises(Long listId) {
+		getSqlSessionTemplate().update(getMapperKey("incrMusicListPraises"), listId);
+	}
+
+	public void incrMusicListCollects(Long listId) {
+		getSqlSessionTemplate().update(getMapperKey("incrMusicListCollects"), listId);
+	}
+
 	public MusicList getMusicListById(Long listId) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getMusicListById"), listId, new MusicListEscapeFilter());
 	}

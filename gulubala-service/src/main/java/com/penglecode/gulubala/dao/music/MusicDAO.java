@@ -22,6 +22,30 @@ public interface MusicDAO {
 	public void insertMusic(Music music);
 	
 	/**
+	 * 自增音乐的人气数
+	 * @param musicId
+	 */
+	public void incrMusicHots(Long musicId);
+	
+	/**
+	 * 自增音乐的播放次数
+	 * @param musicId
+	 */
+	public void incrMusicPlays(Long musicId);
+	
+	/**
+	 * 自增音乐的点赞次数
+	 * @param musicId
+	 */
+	public void incrMusicPraises(Long musicId);
+	
+	/**
+	 * 自增音乐的收藏次数
+	 * @param musicId
+	 */
+	public void incrMusicCollects(Long musicId);
+	
+	/**
 	 * 根据id查询音乐详情
 	 * @param musicId
 	 * @return

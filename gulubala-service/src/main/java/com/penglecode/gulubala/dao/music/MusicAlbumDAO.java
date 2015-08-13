@@ -18,6 +18,12 @@ public interface MusicAlbumDAO {
 	public void insertMusicAlbum(MusicAlbum album);
 	
 	/**
+	 * 自增专辑的播放次数
+	 * @param albumId
+	 */
+	public void incrMusicAlbumPlays(Long albumId);
+	
+	/**
 	 * 根据id查询音乐专辑详情
 	 * @param albumId
 	 * @return

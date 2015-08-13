@@ -15,7 +15,9 @@ import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
+import com.penglecode.gulubala.dao.music.MusicAlbumDAO;
 import com.penglecode.gulubala.dao.music.MusicDAO;
+import com.penglecode.gulubala.dao.music.MusicListDAO;
 import com.penglecode.gulubala.service.music.MusicService;
 
 @Service("musicService")
@@ -23,6 +25,12 @@ public class MusicServiceImpl implements MusicService {
 
 	@Resource(name="musicDAO")
 	private MusicDAO musicDAO;
+	
+	@Resource(name="musicAlbumDAO")
+	private MusicAlbumDAO musicAlbumDAO;
+	
+	@Resource(name="musicListDAO")
+	private MusicListDAO musicListDAO;
 	
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
 	public Long createMusic(Music music) {
@@ -43,6 +51,28 @@ public class MusicServiceImpl implements MusicService {
 		return musicDAO.getMusicById(musicId);
 	}
 
+	public Music playMusic(final Long musicId, final Long listId, final Long albumId) {
+		final Music music = getMusicById(musicId);
+		new Thread(new Runnable(){
+			public void run() {
+				afterPlayMusic(music, listId, albumId);
+			}
+		}).start();
+		return music;
+	}
+
+	protected void afterPlayMusic(Music music, Long listId, Long albumId) {
+		if(music != null){
+			musicDAO.incrMusicHots(music.getMusicId()); //增加人气数
+			musicDAO.incrMusicPlays(music.getMusicId()); //增加人播放数
+			if(listId != null){
+				musicListDAO.incrMusicListPlays(listId); //增加人播放数
+			}else if(albumId != null){
+				musicAlbumDAO.incrMusicAlbumPlays(music.getAlbumId()); //增加人播放数
+			}
+		}
+	}
+	
 	public PagingList<Music> getMusicList4index(Integer mediaType,
 			Integer categoryId, Integer currentPage, Integer pageSize,
 			String orderby, String order) {

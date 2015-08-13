@@ -25,6 +25,18 @@ public class MusicList implements Serializable {
 	/** 音乐Ids(逗号隔开) */
 	private String musicIds;
 	
+	/** 评论数 */
+	private Integer comments;
+	
+	/** 点赞次数 */
+	private Integer praises;
+	
+	/** 收藏次数 */
+	private Integer collects;
+	
+	/** 播放次数 */
+	private Integer plays;
+	
 	/** 歌单描述 */
 	private String remark;
 	
@@ -68,6 +80,38 @@ public class MusicList implements Serializable {
 
 	public void setMusicIds(String musicIds) {
 		this.musicIds = musicIds;
+	}
+
+	public Integer getComments() {
+		return comments;
+	}
+
+	public void setComments(Integer comments) {
+		this.comments = comments;
+	}
+
+	public Integer getPraises() {
+		return praises;
+	}
+
+	public void setPraises(Integer praises) {
+		this.praises = praises;
+	}
+
+	public Integer getCollects() {
+		return collects;
+	}
+
+	public void setCollects(Integer collects) {
+		this.collects = collects;
+	}
+
+	public Integer getPlays() {
+		return plays;
+	}
+
+	public void setPlays(Integer plays) {
+		this.plays = plays;
 	}
 
 	public String getRemark() {

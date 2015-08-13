@@ -46,6 +46,18 @@ public interface MusicService {
 	public Music getMusicById(@PathParam("musicId") Long musicId);
 	
 	/**
+	 * 根据音乐ID播放音乐
+	 * @param musicId
+	 * @param listId	- 如果不为空,则被认为是来自歌单的音乐播放
+	 * @param albumId	- 如果不为空,则被认为是来自专辑的音乐播放
+	 * @return
+	 */
+	@GET
+	@Path(MusicServiceURL.URL_MUSIC_PLAY)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Music playMusic(@PathParam("musicId") Long musicId, @QueryParam("listId") Long listId, @QueryParam("albumId") Long albumId);
+	
+	/**
 	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]
 	 * @param mediaType		{@link #MediaTypeEnum}
 	 * @param categoryId

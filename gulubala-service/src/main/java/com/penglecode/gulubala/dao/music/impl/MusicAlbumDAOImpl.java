@@ -16,6 +16,10 @@ public class MusicAlbumDAOImpl extends BaseMybatisDAO implements MusicAlbumDAO {
 		getSqlSessionTemplate().insert(getMapperKey("insertMusicAlbum"), album);
 	}
 
+	public void incrMusicAlbumPlays(Long albumId) {
+		getSqlSessionTemplate().update(getMapperKey("incrMusicAlbumPlays"), albumId);
+	}
+	
 	public MusicAlbum getMusicAlbumById(Long albumId) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getMusicAlbumById"), albumId, new MusicAlbumEscapeFilter());
 	}

@@ -24,6 +24,10 @@
 		)
 	</insert>
 	
+	<update id="incrMusicAlbumPlays" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE albums a SET a.playCount = a.playCount + 1 WHERE a.id = #{albumId, jdbcType=BIGINT}
+	</update>
+	
 	<select id="getMusicAlbumById" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicAlbum">
 		SELECT a.id 				albumId,
 			   a.name				albumName,

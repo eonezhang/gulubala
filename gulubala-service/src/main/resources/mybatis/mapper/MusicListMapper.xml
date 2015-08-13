@@ -20,11 +20,31 @@
 		)
 	</insert>
 	
+	<update id="incrMusicListComments" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE songlists a SET a.comments = a.comments + 1 WHERE a.id = #{listId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="incrMusicListPlays" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE songlists a SET a.plays = a.plays + 1 WHERE a.id = #{listId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="incrMusicListPraises" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE songlists a SET a.praises = a.praises + 1 WHERE a.id = #{listId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="incrMusicListCollects" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE songlists a SET a.collects = a.collects + 1 WHERE a.id = #{listId, jdbcType=BIGINT}
+	</update>
+	
 	<select id="getMusicListById" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicList">
 		SELECT a.id 				listId,
 			   a.name				listName,
 			   a.userId				userId,
 			   a.songIds			musicIds,
+			   a.comments			comments,
+			   a.praises			praises,
+			   a.collects			collects,
+			   a.plays				plays,
 			   a.remark				remark,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
 			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
@@ -37,6 +57,10 @@
 			   a.name				listName,
 			   a.userId				userId,
 			   a.songIds			musicIds,
+			   a.comments			comments,
+			   a.praises			praises,
+			   a.collects			collects,
+			   a.plays				plays,
 			   a.remark				remark,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
 			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime

@@ -14,6 +14,9 @@ public interface MusicServiceURL {
 	/** 根据音乐id查询音乐详情 */
 	String URL_MUSIC_DETAIL = "music/detial/{musicId}";
 	
+	/** 根据音乐id播放音乐 */
+	String URL_MUSIC_PLAY = "music/play/{musicId}";
+	
 	/** 根据分类ID获取音乐列表(首页接口)[分页、排序] */
 	String URL_MUSIC_LIST_INDEX = "music/list/index/{mediaType}";
 	

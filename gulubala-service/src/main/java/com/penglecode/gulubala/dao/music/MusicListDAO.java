@@ -22,6 +22,30 @@ public interface MusicListDAO {
 	public void insertMusicList(MusicList musicList);
 	
 	/**
+	 * 自增歌单的评论数
+	 * @param listId
+	 */
+	public void incrMusicListComments(Long listId);
+	
+	/**
+	 * 自增歌单的播放次数
+	 * @param listId
+	 */
+	public void incrMusicListPlays(Long listId);
+	
+	/**
+	 * 自增歌单的点赞次数
+	 * @param listId
+	 */
+	public void incrMusicListPraises(Long listId);
+	
+	/**
+	 * 自增歌单的收藏次数
+	 * @param listId
+	 */
+	public void incrMusicListCollects(Long listId);
+	
+	/**
 	 * 根据歌单Id获取歌单详情
 	 * @param listId
 	 * @return
