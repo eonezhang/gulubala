@@ -36,6 +36,10 @@ public class MusicDAOImpl extends BaseMybatisDAO implements MusicDAO {
 		getSqlSessionTemplate().update(getMapperKey("incrMusicCollects"), musicId);
 	}
 
+	public Music getThinMusicById(Long musicId) {
+		return getSqlSessionTemplate().selectOne(getMapperKey("getThinMusicById"), musicId);
+	}
+
 	public Music getMusicById(Long musicId) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getMusicById"), musicId, new MusicEscapeFilter());
 	}

@@ -46,6 +46,13 @@ public interface MusicDAO {
 	public void incrMusicCollects(Long musicId);
 	
 	/**
+	 * 获取轻量级的Music对象
+	 * @param musicId
+	 * @return
+	 */
+	public Music getThinMusicById(Long musicId);
+	
+	/**
 	 * 根据id查询音乐详情
 	 * @param musicId
 	 * @return

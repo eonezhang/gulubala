@@ -49,6 +49,8 @@ CREATE TABLE danmu
 	userId int NOT NULL COMMENT '用户ID',
 	-- 弹幕内容
 	content varchar(255) NOT NULL COMMENT '弹幕内容',
+	-- 1-已弹幕;0-未弹幕
+	status tinyint DEFAULT 0 NOT NULL COMMENT '1-已弹幕;0-未弹幕',
 	-- 弹幕显示的时机
 	showAt datetime COMMENT '弹幕显示的时机',
 	-- 创建时间

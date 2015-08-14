@@ -25,6 +25,7 @@
         <typeAlias alias="MusicAlbumItem" type="com.penglecode.gulubala.common.model.MusicAlbumItem"/>
         <typeAlias alias="Music" type="com.penglecode.gulubala.common.model.Music"/>
         <typeAlias alias="MusicList" type="com.penglecode.gulubala.common.model.MusicList"/>
+        <typeAlias alias="MusicDanmu" type="com.penglecode.gulubala.common.model.MusicDanmu"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.penglecode.gulubala.common.mybatis.PaginationInterceptor"/>
@@ -40,5 +41,6 @@
     	<mapper resource="mybatis/mapper/MusicMapper.xml"/>
     	<mapper resource="mybatis/mapper/MusicAlbumMapper.xml"/>
     	<mapper resource="mybatis/mapper/MusicListMapper.xml"/>
+    	<mapper resource="mybatis/mapper/MusicDanmuMapper.xml"/>
     </mappers>
 </configuration>

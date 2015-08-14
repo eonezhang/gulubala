@@ -78,4 +78,24 @@ public interface MusicService {
 			@DefaultValue("createTime")@QueryParam("orderby") String orderby,
 			@DefaultValue("DESC")@QueryParam("order") String order);
 	
+	/**
+	 * 给音乐点赞
+	 * @param musicId
+	 * @return
+	 */
+	@GET
+	@Path(MusicServiceURL.URL_MUSIC_PRAISE)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Integer praiseMusic(@PathParam("musicId") Long musicId);
+	
+	/**
+	 * 收藏音乐
+	 * @param musicId
+	 * @return
+	 */
+	@GET
+	@Path(MusicServiceURL.URL_MUSIC_COLLECT)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Integer collectMusic(@PathParam("musicId") Long musicId);
+	
 }

@@ -68,6 +68,21 @@
 		UPDATE songs a SET a.shoucang = a.shoucang + 1 WHERE a.id = #{musicId, jdbcType=BIGINT}
 	</update>
 	
+	<select id="getThinMusicById" parameterType="java.lang.Long" statementType="PREPARED" resultType="Music">
+		SELECT a.id 				musicId,
+			   a.name				musicName,
+			   a.singerId			singerId,
+			   a.albumId			albumId,
+			   a.mv					mv,
+			   a.hot				hots,
+			   a.playCount			plays,
+			   a.zan				praises,
+			   a.shoucang			collects,
+			   a.categoryId			categoryId
+		  FROM songs a
+		 WHERE a.id = #{musicId, jdbcType=BIGINT}
+	</select>
+	
 	<select id="getMusicById" parameterType="java.lang.Long" statementType="PREPARED" resultType="Music">
 		SELECT a.id 				musicId,
 			   a.name				musicName,

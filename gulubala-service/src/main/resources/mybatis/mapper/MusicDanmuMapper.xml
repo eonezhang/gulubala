@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MusicDanmuMapper">
+	
+	<insert id="insertMusicDanmu" parameterType="MusicDanmu" statementType="PREPARED" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO danmu(
+			id,
+			songId,
+			userId,
+			content,
+			createdAt
+		) VALUES (
+			#{id, jdbcType=BIGINT},
+			#{musicId, jdbcType=BIGINT},
+			#{userId, jdbcType=BIGINT},
+			#{content, jdbcType=VARCHAR},
+			#{createTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="updateMusicDanmuStatus" parameterType="MusicDanmu" statementType="PREPARED">
+		UPDATE danmu a
+		   SET a.showAt 	= #{showTime, jdbcType=VARCHAR},
+		       a.status		= #{status, jdbcType=INTEGER},
+		       a.updatedAt	= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{id, jdbcType=BIGINT}
+	</update>
+	
+	<select id="lockNextMusicDanmu4show" parameterType="java.util.Map" statementType="PREPARED" resultType="MusicDanmu">
+		SELECT a.id 				id,
+			   a.songId				musicId,
+			   a.userId				userId,
+			   a.content			content,
+			   a.status				status,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM danmu a
+		 WHERE a.id = (SELECT MIN(b.id) FROM danmu b WHERE b.status = #{status, jdbcType=INTEGER} AND b.songId = #{musicId, jdbcType=BIGINT})
+		FOR UPDATE
+	</select>
+	
+</mapper>

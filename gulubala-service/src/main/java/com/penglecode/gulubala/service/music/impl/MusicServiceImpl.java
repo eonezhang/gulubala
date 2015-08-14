@@ -87,4 +87,24 @@ public class MusicServiceImpl implements MusicService {
 		return new PagingList<Music>(musicDAO.getMusicList4index(paramMap, pager), pager);
 	}
 
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public Integer praiseMusic(Long musicId) {
+		ValidationAssert.notNull(musicId, "音乐ID不能为空!");
+		musicDAO.incrMusicPraises(musicId);
+		Music music = musicDAO.getThinMusicById(musicId);
+		ValidationAssert.notNull(music, "该音乐已不存在了!(musicId=" + musicId + ")");
+		//TODO
+		return music.getPraises();
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public Integer collectMusic(Long musicId) {
+		ValidationAssert.notNull(musicId, "音乐ID不能为空!");
+		musicDAO.incrMusicCollects(musicId);
+		Music music = musicDAO.getThinMusicById(musicId);
+		ValidationAssert.notNull(music, "该音乐已不存在了!(musicId=" + musicId + ")");
+		//TODO
+		return music.getCollects();
+	}
+
 }

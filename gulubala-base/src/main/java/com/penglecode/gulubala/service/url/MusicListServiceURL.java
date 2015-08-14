@@ -17,4 +17,10 @@ public interface MusicListServiceURL {
 	/** 获取歌单列表[分页、排序] */
 	String URL_MUSIC_LIST_LIST = "musiclist/list";
 	
+	/** 给歌单点赞 */
+	String URL_MUSIC_LIST_PRAISE = "musiclist/praise/{listId}";
+	
+	/** 收藏歌单 */
+	String URL_MUSIC_LIST_COLLECT = "musiclist/collect/{listId}";
+	
 }

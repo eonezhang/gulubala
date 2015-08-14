@@ -64,4 +64,24 @@ public interface MusicListService {
 			@DefaultValue("createTime")@QueryParam("orderby") String orderby,
 			@DefaultValue("DESC")@QueryParam("order") String order);
 	
+	/**
+	 * 给歌单点赞
+	 * @param listId
+	 * @return
+	 */
+	@GET
+	@Path(MusicListServiceURL.URL_MUSIC_LIST_PRAISE)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Integer praiseMusicList(@PathParam("listId") Long listId);
+	
+	/**
+	 * 收藏歌单
+	 * @param listId
+	 * @return
+	 */
+	@GET
+	@Path(MusicListServiceURL.URL_MUSIC_LIST_COLLECT)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Integer collectMusicList(@PathParam("listId") Long listId);
+	
 }
