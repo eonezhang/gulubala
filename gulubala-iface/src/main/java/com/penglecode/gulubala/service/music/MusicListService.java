@@ -74,14 +74,4 @@ public interface MusicListService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public Integer praiseMusicList(@PathParam("listId") Long listId);
 	
-	/**
-	 * 收藏歌单
-	 * @param listId
-	 * @return
-	 */
-	@GET
-	@Path(MusicListServiceURL.URL_MUSIC_LIST_COLLECT)
-	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public Integer collectMusicList(@PathParam("listId") Long listId);
-	
 }

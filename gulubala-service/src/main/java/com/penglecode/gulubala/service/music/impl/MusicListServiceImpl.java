@@ -68,18 +68,7 @@ public class MusicListServiceImpl implements MusicListService {
 		musicListDAO.incrMusicListPraises(listId);
 		MusicList musicList = musicListDAO.getMusicListById(listId);
 		ValidationAssert.notNull(musicList, "该歌单已不存在了!(listId=" + listId + ")");
-		//TODO
 		return musicList.getPraises();
-	}
-
-	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
-	public Integer collectMusicList(Long listId) {
-		ValidationAssert.notNull(listId, "歌单ID不能为空!");
-		musicListDAO.incrMusicListCollects(listId);
-		MusicList musicList = musicListDAO.getMusicListById(listId);
-		ValidationAssert.notNull(musicList, "该歌单已不存在了!(listId=" + listId + ")");
-		//TODO
-		return musicList.getCollects();
 	}
 
 }

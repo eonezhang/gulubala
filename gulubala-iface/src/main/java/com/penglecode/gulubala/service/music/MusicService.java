@@ -88,14 +88,4 @@ public interface MusicService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public Integer praiseMusic(@PathParam("musicId") Long musicId);
 	
-	/**
-	 * 收藏音乐
-	 * @param musicId
-	 * @return
-	 */
-	@GET
-	@Path(MusicServiceURL.URL_MUSIC_COLLECT)
-	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public Integer collectMusic(@PathParam("musicId") Long musicId);
-	
 }

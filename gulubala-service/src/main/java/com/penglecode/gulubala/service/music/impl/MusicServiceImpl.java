@@ -63,7 +63,7 @@ public class MusicServiceImpl implements MusicService {
 
 	protected void afterPlayMusic(Music music, Long listId, Long albumId) {
 		if(music != null){
-			musicDAO.incrMusicHots(music.getMusicId()); //增加人气数
+			//musicDAO.incrMusicHots(music.getMusicId()); //增加人气数
 			musicDAO.incrMusicPlays(music.getMusicId()); //增加人播放数
 			if(listId != null){
 				musicListDAO.incrMusicListPlays(listId); //增加人播放数
@@ -93,18 +93,7 @@ public class MusicServiceImpl implements MusicService {
 		musicDAO.incrMusicPraises(musicId);
 		Music music = musicDAO.getThinMusicById(musicId);
 		ValidationAssert.notNull(music, "该音乐已不存在了!(musicId=" + musicId + ")");
-		//TODO
 		return music.getPraises();
-	}
-
-	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
-	public Integer collectMusic(Long musicId) {
-		ValidationAssert.notNull(musicId, "音乐ID不能为空!");
-		musicDAO.incrMusicCollects(musicId);
-		Music music = musicDAO.getThinMusicById(musicId);
-		ValidationAssert.notNull(music, "该音乐已不存在了!(musicId=" + musicId + ")");
-		//TODO
-		return music.getCollects();
 	}
 
 }

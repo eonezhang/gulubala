@@ -23,7 +23,4 @@ public interface MusicServiceURL {
 	/** 给音乐点赞 */
 	String URL_MUSIC_PRAISE = "music/praise/{musicId}";
 	
-	/** 收藏音乐 */
-	String URL_MUSIC_COLLECT = "music/collect/{musicId}";
-	
 }

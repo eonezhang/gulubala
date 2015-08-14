@@ -4,6 +4,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS albums;
 DROP TABLE IF EXISTS danmu;
+DROP TABLE IF EXISTS favorites;
 DROP TABLE IF EXISTS singers;
 DROP TABLE IF EXISTS songlists;
 DROP TABLE IF EXISTS songs;
@@ -59,6 +60,25 @@ CREATE TABLE danmu
 	updatedAt datetime COMMENT '更新时间',
 	PRIMARY KEY (id)
 ) COMMENT = '弹幕表';
+
+
+-- 收藏表
+CREATE TABLE favorites
+(
+	-- 收藏ID
+	id int NOT NULL AUTO_INCREMENT COMMENT '收藏ID',
+	-- 用户ID
+	userId int NOT NULL COMMENT '用户ID',
+	-- 收藏数据
+	data varchar(1000) COMMENT '收藏数据',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	-- 收藏对象类型:1-歌曲收藏2-歌单收藏
+	favoriteType tinyint NOT NULL COMMENT '收藏对象类型:1-歌曲收藏2-歌单收藏',
+	-- 根据favoriteType判断是歌曲ID或歌单ID
+	favoriteId int NOT NULL COMMENT '根据favoriteType判断是歌曲ID或歌单ID',
+	PRIMARY KEY (id)
+) COMMENT = '收藏表';
 
 
 -- 歌手表
