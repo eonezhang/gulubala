@@ -11,7 +11,7 @@ public interface MusicDanmuServiceURL {
 	/** 创建弹幕 */
 	String URL_MUSIC_DANMU_CREATE = "musicdanmu/create";
 	
-	/** 显示弹幕 */
-	String URL_MUSIC_DANMU_SHOW_NEXT = "musicdanmu/shownext/{musicId}";
+	/** 获取下一批弹幕数据给客户端 */
+	String URL_MUSIC_DANMU_LIST = "musicdanmu/list/{musicId}";
 	
 }

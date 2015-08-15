@@ -1,6 +1,9 @@
 package com.penglecode.gulubala.dao.music;
 
+import java.util.List;
+
 import com.penglecode.gulubala.common.model.MusicDanmu;
+import com.penglecode.gulubala.common.support.Pager;
 
 /**
  * 音乐弹幕DAO
@@ -18,15 +21,11 @@ public interface MusicDanmuDAO {
 	public void insertMusicDanmu(MusicDanmu danmu);
 	
 	/**
-	 * 更新弹幕状态
-	 * @param danmu
-	 */
-	public void updateMusicDanmuStatus(MusicDanmu danmu);
-	
-	/**
-	 * 获取先一个待弹出的弹幕
+	 * 获取下一批弹幕数据给客户端
+	 * @param musicId
+	 * @param pager
 	 * @return
 	 */
-	public MusicDanmu lockNextMusicDanmu4show(Long musicId);
+	public List<MusicDanmu> getNextMusicDanmuList(Long musicId, Pager pager);
 	
 }

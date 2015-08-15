@@ -21,6 +21,7 @@ import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
 import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.exception.SystemException;
 import com.penglecode.gulubala.common.support.Result;
+import com.penglecode.gulubala.common.support.ServiceResultNoWrap;
 import com.penglecode.gulubala.common.util.ExceptionUtils;
 
 /**
@@ -41,17 +42,19 @@ public class RestRpcResultWrappHandler implements ContainerResponseFilter, Excep
 	 */
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
 		Object responseEntity = responseContext.getEntity();
-		if(!(responseEntity instanceof Result)){ //当调用的服务方法返回结果集不是Result类型时,使用Result进行包裹
-			Result<Object> result = new Result<Object>();
-			result.setSuccess(true);
-			result.setCode(GlobalConstants.RESULT_CODE_SUCCESS);
-			result.setMessage("OK");
-			result.setData(responseEntity);
-			
-			MediaType mediaType = resolveResponseMediaType(requestContext, responseContext);
-			responseContext.setEntity(result, responseContext.getEntityAnnotations(), mediaType);
-			responseContext.setStatus(Response.Status.OK.getStatusCode());
-			logger.debug("Rest rpc result has been wrapped, the wrapped result is : " + result);
+		if(!(responseEntity instanceof Result)){ //当调用的服务方法返回结果集不是Result类型时,且不是ServiceResultNoWrap类型时,使用Result进行包裹
+			if(!(responseEntity instanceof ServiceResultNoWrap)){
+				Result<Object> result = new Result<Object>();
+				result.setSuccess(true);
+				result.setCode(GlobalConstants.RESULT_CODE_SUCCESS);
+				result.setMessage("OK");
+				result.setData(responseEntity);
+				
+				MediaType mediaType = resolveResponseMediaType(requestContext, responseContext);
+				responseContext.setEntity(result, responseContext.getEntityAnnotations(), mediaType);
+				responseContext.setStatus(Response.Status.OK.getStatusCode());
+				logger.debug("Rest rpc result has been wrapped, the wrapped result is : " + result);
+			}
 		}
 	}
 	
@@ -63,7 +66,7 @@ public class RestRpcResultWrappHandler implements ContainerResponseFilter, Excep
         if (cause instanceof ConstraintViolationException) {
             return handleConstraintViolationException((ConstraintViolationException) cause);
         }
-        logger.error("Rest rpc exception mapper got an Exception: " + e.getMessage());
+        logger.error("Rest rpc exception mapper got an Exception: " + e.getMessage(), e);
         Result<Object> result = new Result<Object>();
         Throwable rootException = ExceptionUtils.getRootCause(e);
 		String code = GlobalConstants.RESULT_CODE_FAILURE;

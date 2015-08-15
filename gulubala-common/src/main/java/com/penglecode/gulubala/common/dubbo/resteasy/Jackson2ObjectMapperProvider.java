@@ -7,7 +7,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -28,7 +27,7 @@ public class Jackson2ObjectMapperProvider implements ContextResolver<ObjectMappe
 	
 	static {
 		// 建只输出非Null且非Empty(如List.isEmpty)的属性到Json字符串的Mapper,建议在外部接口中使用
-		objectMapper.setSerializationInclusion(Include.NON_DEFAULT);
+		//objectMapper.setSerializationInclusion(Include.NON_DEFAULT);
 		//去掉默认的时间戳格式
 		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 		//设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性

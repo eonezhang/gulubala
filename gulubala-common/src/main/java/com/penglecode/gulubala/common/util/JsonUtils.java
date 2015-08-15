@@ -37,7 +37,7 @@ public class JsonUtils {
 		try {
 			return defaultObjectMapper.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
-			throw new JacksonException(e);
+			throw new JacksonJsonException(e);
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class JsonUtils {
 		try {
 			return defaultObjectMapper.readValue(json, clazz);
 		} catch (Exception e) {
-			throw new JacksonException(e);
+			throw new JacksonJsonException(e);
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class JsonUtils {
 		try {
 			return defaultObjectMapper.readValue(json, typeReference);
 		} catch (Exception e) {
-			throw new JacksonException(e);
+			throw new JacksonJsonException(e);
 		}
 	}
 	
@@ -77,19 +77,19 @@ public class JsonUtils {
 		return defaultObjectMapper;
 	}
 	
-	public static class JacksonException extends RuntimeException {
+	public static class JacksonJsonException extends RuntimeException {
 
 		private static final long serialVersionUID = 1L;
 
-		public JacksonException(String message, Throwable cause) {
+		public JacksonJsonException(String message, Throwable cause) {
 			super(message, cause);
 		}
 
-		public JacksonException(String message) {
+		public JacksonJsonException(String message) {
 			super(message);
 		}
 
-		public JacksonException(Throwable cause) {
+		public JacksonJsonException(Throwable cause) {
 			super(cause);
 		}
 		

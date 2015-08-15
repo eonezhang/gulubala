@@ -50,8 +50,6 @@ CREATE TABLE danmu
 	userId int NOT NULL COMMENT '用户ID',
 	-- 弹幕内容
 	content varchar(255) NOT NULL COMMENT '弹幕内容',
-	-- 1-已弹幕;0-未弹幕
-	status tinyint DEFAULT 0 NOT NULL COMMENT '1-已弹幕;0-未弹幕',
 	-- 弹幕显示的时机
 	showAt datetime COMMENT '弹幕显示的时机',
 	-- 创建时间
@@ -77,7 +75,8 @@ CREATE TABLE favorites
 	favoriteType tinyint NOT NULL COMMENT '收藏对象类型:1-歌曲收藏2-歌单收藏',
 	-- 根据favoriteType判断是歌曲ID或歌单ID
 	favoriteId int NOT NULL COMMENT '根据favoriteType判断是歌曲ID或歌单ID',
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	CONSTRAINT uk_favorites_user UNIQUE (userId, favoriteType, favoriteId)
 ) COMMENT = '收藏表';
 
 

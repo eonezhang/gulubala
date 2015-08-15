@@ -1,14 +1,17 @@
 package com.penglecode.gulubala.service.music;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.model.MusicDanmu;
+import com.penglecode.gulubala.common.support.DanmuMessageTemplate;
 import com.penglecode.gulubala.service.url.MusicDanmuServiceURL;
 
 /**
@@ -33,13 +36,17 @@ public interface MusicDanmuService {
 	public Long createMusicDanmu(MusicDanmu danmu);
 	
 	/**
-	 * 显示下一个弹幕
-	 * @param danmu
+	 * 获取下一批弹幕数据给客户端
+	 * @param musicId
+	 * @param currentPage
+	 * @param pageSize
 	 * @return
 	 */
 	@GET
-	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_SHOW_NEXT)
-	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public MusicDanmu showNextMusicDanmu(@PathParam("musicId")Long musicId);
+	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST)
+	@Produces({ContentType.APPLICATION_XML_UTF_8})
+	public DanmuMessageTemplate getNextMusicDanmuList(@PathParam("musicId")Long musicId, 
+			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
 	
 }

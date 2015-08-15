@@ -24,9 +24,6 @@ public class MusicDanmu implements Serializable {
 	/** 弹幕内容 */
 	private String content;
 	
-	/** 状态:1-已弹幕;0-未弹幕 */
-	private Integer status;
-	
 	/** 评论时间 */
 	private String showTime;
 	
@@ -64,14 +61,6 @@ public class MusicDanmu implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 
 	public String getShowTime() {

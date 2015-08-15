@@ -1,13 +1,16 @@
 package com.penglecode.gulubala.service.music.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.penglecode.gulubala.common.consts.em.MusicDanmuStatusEnum;
 import com.penglecode.gulubala.common.model.MusicDanmu;
+import com.penglecode.gulubala.common.support.DanmuMessageTemplate;
+import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
 import com.penglecode.gulubala.dao.music.MusicDanmuDAO;
@@ -27,18 +30,12 @@ public class MusicDanmuServiceImpl implements MusicDanmuService {
 		return danmu.getId();
 	}
 
-	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
-	public MusicDanmu showNextMusicDanmu(Long musicId) {
+	public DanmuMessageTemplate getNextMusicDanmuList(Long musicId, Integer currentPage, Integer pageSize) {
 		ValidationAssert.notNull(musicId, "请求参数不能为空!");
-		MusicDanmu danmu = musicDanmuDAO.lockNextMusicDanmu4show(musicId);
-		if(danmu != null){
-			String nowTime = DateTimeUtils.formatNow();
-			danmu.setStatus(MusicDanmuStatusEnum.DANMU_STATUS_YES.getStatusCode());
-			danmu.setShowTime(nowTime);
-			danmu.setUpdateTime(nowTime);
-			musicDanmuDAO.updateMusicDanmuStatus(danmu);
-		}
-		return danmu;
+		ValidationAssert.isTrue(pageSize % 10 == 0, "分页参数pageSize必须是10的整数倍!");
+		Pager pager = new Pager(currentPage, pageSize);
+		List<MusicDanmu> danmuList = musicDanmuDAO.getNextMusicDanmuList(musicId, pager);
+		return MusicDanmuUtils.createDanmuMessage(danmuList, pager);
 	}
 
 }

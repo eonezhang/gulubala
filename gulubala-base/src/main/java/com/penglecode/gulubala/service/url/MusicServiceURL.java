@@ -12,7 +12,7 @@ public interface MusicServiceURL {
 	String URL_MUSIC_CREATE = "music/create";
 	
 	/** 根据音乐id查询音乐详情 */
-	String URL_MUSIC_DETAIL = "music/detial/{musicId}";
+	String URL_MUSIC_DETAIL = "music/detail/{musicId}";
 	
 	/** 根据音乐id播放音乐 */
 	String URL_MUSIC_PLAY = "music/play/{musicId}";
