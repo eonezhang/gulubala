@@ -26,7 +26,7 @@ public class MusicDanmuServiceTest {
 	public static void testShowNextMusicDanmu(){
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("musicId", 1);
-		Result<MusicDanmu> result = RestServiceUtils.get(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST, paramMap, new GenericType<Result<MusicDanmu>>(){});
+		Result<MusicDanmu> result = RestServiceUtils.get(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST_ANDROID, paramMap, new GenericType<Result<MusicDanmu>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	

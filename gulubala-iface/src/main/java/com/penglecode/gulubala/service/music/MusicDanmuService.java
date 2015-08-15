@@ -36,16 +36,16 @@ public interface MusicDanmuService {
 	public Long createMusicDanmu(MusicDanmu danmu);
 	
 	/**
-	 * 获取下一批弹幕数据给客户端
+	 * 获取下一批弹幕数据给Android客户端
 	 * @param musicId
 	 * @param currentPage
 	 * @param pageSize
 	 * @return
 	 */
 	@GET
-	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST)
+	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST_ANDROID)
 	@Produces({ContentType.APPLICATION_XML_UTF_8})
-	public DanmuMessageTemplate getNextMusicDanmuList(@PathParam("musicId")Long musicId, 
+	public DanmuMessageTemplate getNextMusicDanmuList4Andriod(@PathParam("musicId")Long musicId, 
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
 	
