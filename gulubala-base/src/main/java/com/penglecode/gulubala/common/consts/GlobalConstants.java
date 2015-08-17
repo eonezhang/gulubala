@@ -68,4 +68,9 @@ public class GlobalConstants extends AbstractConstants {
 	@ConstValue("${global.usericon.default}")
 	public static final String DEFAULT_USER_ICON = valueOf("/img/user/default_user_icon.png");
 	
+	/**
+	 * 默认的音乐评论ROOT节点ID
+	 */
+	public static final long DEFAULT_MUSIC_COMMENT_ROOT_ID = valueOf(0);
+	
 }

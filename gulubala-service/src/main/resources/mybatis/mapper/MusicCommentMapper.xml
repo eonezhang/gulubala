@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MusicCommentMapper">
+	
+	<insert id="insertMusicComment" parameterType="MusicComment" statementType="PREPARED" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO songcomments(
+			id,
+			parentId,
+			userId,
+			content,
+			commentType,
+			commentId,
+			commentPraises,
+			createdAt
+		) VALUES (
+			#{id, jdbcType=BIGINT},
+			#{parentId, jdbcType=BIGINT},
+			#{userId, jdbcType=BIGINT},
+			#{content, jdbcType=VARCHAR},
+			#{commentType, jdbcType=INTEGER},
+			#{commentId, jdbcType=BIGINT},
+			#{commentPraises, jdbcType=INTEGER},
+			#{commentTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<delete id="deleteMusicCommentById" parameterType="java.lang.Long" statementType="PREPARED">
+		DELETE a FROM songcomments a WHERE a.id = #{id, jdbcType=BIGINT}
+	</delete>
+	
+	<update id="incrMusicCommentPraises" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE songcomments a
+		   SET a.commentPraises = a.commentPraises + 1
+		 WHERE a.id = #{id, jdbcType=BIGINT}
+	</update>
+	
+	<select id="getMusicCommentPraisesById" parameterType="java.lang.Long" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT a.commentPraises		commentPraises
+		  FROM songcomments a
+		 WHERE a.id = #{id, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getMusicCommentId" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicComment">
+		SELECT a.id 				id,
+			   a.parentId			parentId,
+			   a.userId				userId,
+			   a.commentType		commentType,
+			   a.commentId			commentId,
+			   a.content			content,
+			   a.commentPraises		commentPraises
+		  FROM songcomments a
+		 WHERE a.id = #{id, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getMusicCommentsByUserId" parameterType="java.util.Map" statementType="PREPARED" resultType="MusicComment">
+		SELECT a.id 				id,
+			   a.parentId			parentId,
+			   a.userId				userId,
+			   a.commentType		commentType,
+			   a.commentId			commentId,
+			   a.content			content,
+			   a.commentPraises		commentPraises,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	commentTime,
+			   CASE WHEN a.commentType = #{musicCommentType, jdbcType=INTEGER} THEN (SELECT b.name FROM songs b WHERE b.id = a.commentId)
+					WHEN a.commentType = #{musicListCommentType, jdbcType=INTEGER} THEN (SELECT b.name FROM songlists b WHERE b.id = a.commentId)
+         		END commentName
+		  FROM songcomments a
+		 WHERE a.userId = #{userId, jdbcType=BIGINT}
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(commentType)">
+		   AND a.commentType = #{commentType, jdbcType=INTEGER}
+		</if>
+		 ORDER BY a.createdAt DESC
+	</select>
+	
+</mapper>

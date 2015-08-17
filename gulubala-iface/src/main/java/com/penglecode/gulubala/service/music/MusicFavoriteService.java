@@ -50,7 +50,7 @@ public interface MusicFavoriteService {
 	 * @param favoriteType
 	 */
 	@GET
-	@Path(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST)
+	@Path(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST_USER)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public List<MusicFavorite> getMusicFavoritesByUserId(@PathParam("userId") Long userId, @QueryParam("favoriteType") Integer favoriteType);
 	

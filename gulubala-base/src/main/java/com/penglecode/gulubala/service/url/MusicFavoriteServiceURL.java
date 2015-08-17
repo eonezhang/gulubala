@@ -15,6 +15,6 @@ public interface MusicFavoriteServiceURL {
 	String URL_MUSIC_FAVORITE_DELETE = "favorite/delete/{id}";
 	
 	/** 获取用户的收藏列表 */
-	String URL_MUSIC_FAVORITE_LIST = "favorite/list/{userId}";
+	String URL_MUSIC_FAVORITE_LIST_USER = "favorite/list/{userId}";
 	
 }

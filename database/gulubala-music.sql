@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS albums;
 DROP TABLE IF EXISTS danmu;
 DROP TABLE IF EXISTS favorites;
 DROP TABLE IF EXISTS singers;
+DROP TABLE IF EXISTS songcomments;
 DROP TABLE IF EXISTS songlists;
 DROP TABLE IF EXISTS songs;
 
@@ -111,6 +112,29 @@ CREATE TABLE singers
 	zhiye varchar(50) COMMENT '职业',
 	PRIMARY KEY (id)
 ) COMMENT = '歌手表';
+
+
+-- 歌曲/歌单评论表
+CREATE TABLE songcomments
+(
+	-- 评论ID
+	id int NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+	-- 父评论ID，默认0代表没有父评论
+	parentId int DEFAULT 0 NOT NULL COMMENT '父评论ID，默认0代表没有父评论',
+	-- 用户ID
+	userId int NOT NULL COMMENT '用户ID',
+	-- 评论内容
+	content varchar(1000) NOT NULL COMMENT '评论内容',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	-- 评论类型:1-歌曲评论2-歌单评论
+	commentType tinyint NOT NULL COMMENT '评论类型:1-歌曲评论2-歌单评论',
+	-- 评论对象ID，歌曲ID或者歌单ID
+	commentId int NOT NULL COMMENT '评论对象ID，歌曲ID或者歌单ID',
+	-- 评论点赞数
+	commentPraises int DEFAULT 0 NOT NULL COMMENT '评论点赞数',
+	PRIMARY KEY (id)
+) COMMENT = '歌曲/歌单评论表';
 
 
 -- 歌单表

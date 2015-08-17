@@ -13,32 +13,48 @@ public class MusicComment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** 评论ID */
-	private Long commentId;
+	private Long id;
+	
+	/** 评论的父节点ID */
+	private Long parentId;
 	
 	/** 评论内容 */
 	private String content;
 	
-	/** 评论的音乐ID */
-	private Long musicId;
-	
 	/** 评论时间 */
 	private String commentTime;
 	
-	/** 评论的父节点ID */
-	private Long parentCommentId;
-	
-	/** 评论点赞数 */
-	private Integer commentPraiseCount;
-	
 	/** 评论用户ID */
 	private Long userId;
+	
+	/** 评论类型 # */
+	private Integer commentType;
+	
+	/** 评论的对象ID,歌曲ID或者歌单ID */
+	private Long commentId;
+	
+	/** 评论点赞数 */
+	private Integer commentPraises;
 
-	public Long getCommentId() {
-		return commentId;
+	//以下属于辅助字段
+	
+	/** 评论对象的名称 */
+	private String commentName;
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getContent() {
@@ -49,14 +65,6 @@ public class MusicComment implements Serializable {
 		this.content = content;
 	}
 
-	public Long getMusicId() {
-		return musicId;
-	}
-
-	public void setMusicId(Long musicId) {
-		this.musicId = musicId;
-	}
-
 	public String getCommentTime() {
 		return commentTime;
 	}
@@ -65,28 +73,44 @@ public class MusicComment implements Serializable {
 		this.commentTime = commentTime;
 	}
 
-	public Long getParentCommentId() {
-		return parentCommentId;
-	}
-
-	public void setParentCommentId(Long parentCommentId) {
-		this.parentCommentId = parentCommentId;
-	}
-
-	public Integer getCommentPraiseCount() {
-		return commentPraiseCount;
-	}
-
-	public void setCommentPraiseCount(Integer commentPraiseCount) {
-		this.commentPraiseCount = commentPraiseCount;
-	}
-
 	public Long getUserId() {
 		return userId;
 	}
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Integer getCommentType() {
+		return commentType;
+	}
+
+	public void setCommentType(Integer commentType) {
+		this.commentType = commentType;
+	}
+
+	public Long getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(Long commentId) {
+		this.commentId = commentId;
+	}
+
+	public Integer getCommentPraises() {
+		return commentPraises;
+	}
+
+	public void setCommentPraises(Integer commentPraises) {
+		this.commentPraises = commentPraises;
+	}
+
+	public String getCommentName() {
+		return commentName;
+	}
+
+	public void setCommentName(String commentName) {
+		this.commentName = commentName;
 	}
 	
 }

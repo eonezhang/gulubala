@@ -1,0 +1,56 @@
+package com.penglecode.gulubala.dao.music;
+
+import java.util.List;
+
+import com.penglecode.gulubala.common.model.MusicComment;
+
+/**
+ * 音乐评论DAO
+ * 
+ * @author  pengpeng
+ * @date 	 2015年8月17日 上午10:51:17
+ * @version 1.0
+ */
+public interface MusicCommentDAO {
+
+	/**
+	 * 新增评论
+	 * @param comment
+	 */
+	public void insertMusicComment(MusicComment comment);
+	
+	/**
+	 * 删除评论
+	 * @param id
+	 */
+	public void deleteMusicCommentById(Long id);
+	
+	/**
+	 * 更新点赞
+	 * @param id
+	 */
+	public void incrMusicCommentPraises(Long id);
+	
+	/**
+	 * 根据评论ID获取评论点赞数
+	 * @param id
+	 * @return
+	 */
+	public Integer getMusicCommentPraisesById(Long id);
+	
+	/**
+	 * 根据评论ID获取评论详情
+	 * @param id
+	 * @return
+	 */
+	public MusicComment getMusicCommentById(Long id);
+	
+	/**
+	 * 根据用户ID获取用户的评论列表
+	 * @param userId			- 必填
+	 * @param commentType		- 选填
+	 * @return
+	 */
+	public List<MusicComment> getMusicCommentsByUserId(Long userId, Integer commentType);
+	
+}

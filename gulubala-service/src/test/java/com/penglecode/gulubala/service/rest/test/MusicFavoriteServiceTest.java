@@ -35,7 +35,7 @@ public class MusicFavoriteServiceTest {
 	public static void testGetMusicFavoritesByUserId(){
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", 2);
-		Result<List<MusicFavorite>> result = RestServiceUtils.get(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST, paramMap, new GenericType<Result<List<MusicFavorite>>>(){});
+		Result<List<MusicFavorite>> result = RestServiceUtils.get(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST_USER, paramMap, new GenericType<Result<List<MusicFavorite>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
