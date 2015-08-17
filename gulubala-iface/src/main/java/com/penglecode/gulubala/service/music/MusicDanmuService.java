@@ -15,7 +15,7 @@ import com.penglecode.gulubala.common.support.DanmuMessageTemplate;
 import com.penglecode.gulubala.service.url.MusicDanmuServiceURL;
 
 /**
- * 弹幕服务
+ * 音乐弹幕服务
  * 
  * @author  pengpeng
  * @date 	 2015年8月13日 下午8:34:27
@@ -37,7 +37,7 @@ public interface MusicDanmuService {
 	
 	/**
 	 * 获取下一批弹幕数据给Android客户端
-	 * @param musicId
+	 * @param musicId			- 必填
 	 * @param currentPage
 	 * @param pageSize
 	 * @return
@@ -48,5 +48,5 @@ public interface MusicDanmuService {
 	public DanmuMessageTemplate getNextMusicDanmuList4Andriod(@PathParam("musicId")Long musicId, 
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
-	
+
 }
