@@ -62,9 +62,18 @@ public interface MusicDAO {
 	/**
 	 * 根据多个音乐Id查询音乐列表
 	 * @param musicIdList
+	 * @param orderedAsIdList	- 和musicIdList一样的顺序?
 	 * @return
 	 */
-	public List<Music> getMusicListByIds(List<Long> musicIdList);
+	public List<Music> getMusicListByIds(List<Long> musicIdList, boolean orderedAsIdList);
+	
+	/**
+	 * 根据音乐名字关键字模糊搜索(首页接口)[分页、排序]
+	 * @param paramMap
+	 * @param pager
+	 * @return
+	 */
+	public List<Music> getMusicList4search(Map<String,Object> paramMap, Pager pager);
 	
 	/**
 	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]

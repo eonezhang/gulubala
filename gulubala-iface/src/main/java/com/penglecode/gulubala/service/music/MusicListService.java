@@ -74,4 +74,33 @@ public interface MusicListService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public Integer praiseMusicList(@PathParam("listId") Long listId);
 	
+	/**
+	 * 删除歌单中的某个歌曲
+	 * @param listId
+	 * @param musicId
+	 */
+	@GET
+	@Path(MusicListServiceURL.URL_MUSIC_LIST_DEL_ITEM)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void delItemFromMusicList(@PathParam("listId") Long listId, @PathParam("musicId") Long musicId);
+	
+	/**
+	 * 向歌单中添加某个歌曲
+	 * @param listId
+	 * @param musicId
+	 */
+	@GET
+	@Path(MusicListServiceURL.URL_MUSIC_LIST_ADD_ITEM)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void addItemIntoMusicList(@PathParam("listId") Long listId, @PathParam("musicId") Long musicId);
+	
+	/**
+	 * 删除歌单
+	 * @param listId
+	 */
+	@GET
+	@Path(MusicListServiceURL.URL_MUSIC_LIST_DELETE)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void deleteMusicListById(@PathParam("listId") Long listId);
+	
 }

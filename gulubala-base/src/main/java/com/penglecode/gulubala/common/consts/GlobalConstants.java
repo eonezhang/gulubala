@@ -73,4 +73,14 @@ public class GlobalConstants extends AbstractConstants {
 	 */
 	public static final long DEFAULT_MUSIC_COMMENT_ROOT_ID = valueOf(0);
 	
+	/**
+	 * 默认的音乐播放历史最大记录数
+	 */
+	public static final long DEFAULT_MUSIC_PLAY_HISTORY_MAX_SIZE = valueOf(100);
+	
+	/**
+	 * 默认的歌单中歌曲的最大容量
+	 */
+	public static final long DEFAULT_MUSIC_LIST_MAX_SIZE = valueOf(100);
+	
 }

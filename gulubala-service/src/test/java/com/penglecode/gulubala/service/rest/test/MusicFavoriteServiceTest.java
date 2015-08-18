@@ -41,8 +41,8 @@ public class MusicFavoriteServiceTest {
 	
 	public static void main(String[] args) {
 		//testCreateMusicFavorite();
-		testDeleteMusicFavoriteById();
-		//testGetMusicFavoritesByUserId();
+		//testDeleteMusicFavoriteById();
+		testGetMusicFavoritesByUserId();
 	}
 
 }

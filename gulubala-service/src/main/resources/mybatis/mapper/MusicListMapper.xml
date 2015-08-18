@@ -36,6 +36,17 @@
 		UPDATE songlists a SET a.collects = a.collects + 1 WHERE a.id = #{listId, jdbcType=BIGINT}
 	</update>
 	
+	<update id="updateMusicIds" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE songlists a 
+		   SET a.songIds 	= #{musicIds},
+		   	   a.updatedAt	= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{listId, jdbcType=BIGINT}
+	</update>
+	
+	<delete id="deleteMusicListById" parameterType="java.lang.Long" statementType="PREPARED">
+		DELETE a FROM songlists a WHERE a.id = #{listId, jdbcType=BIGINT}
+	</delete>
+	
 	<select id="getMusicListById" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicList">
 		SELECT a.id 				listId,
 			   a.name				listName,

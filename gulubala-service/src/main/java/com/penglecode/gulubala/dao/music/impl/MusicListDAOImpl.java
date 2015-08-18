@@ -1,5 +1,6 @@
 package com.penglecode.gulubala.dao.music.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.penglecode.gulubala.common.model.MusicList;
 import com.penglecode.gulubala.common.mybatis.EscapeFilter;
 import com.penglecode.gulubala.common.support.Pager;
+import com.penglecode.gulubala.common.util.DateTimeUtils;
 import com.penglecode.gulubala.common.util.StringUtils;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
 import com.penglecode.gulubala.dao.music.MusicListDAO;
@@ -33,6 +35,18 @@ public class MusicListDAOImpl extends BaseMybatisDAO implements MusicListDAO {
 
 	public void incrMusicListCollects(Long listId) {
 		getSqlSessionTemplate().update(getMapperKey("incrMusicListCollects"), listId);
+	}
+
+	public void updateMusicIds(Long listId, String musicIds) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("listId", listId);
+		paramMap.put("musicIds", musicIds);
+		paramMap.put("updateTime", DateTimeUtils.formatNow());
+		getSqlSessionTemplate().update(getMapperKey("updateMusicIds"), listId);
+	}
+
+	public void deleteMusicListById(Long listId) {
+		getSqlSessionTemplate().delete(getMapperKey("deleteMusicListById"), listId);
 	}
 
 	public MusicList getMusicListById(Long listId) {

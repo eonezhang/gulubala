@@ -173,4 +173,31 @@
 		</if>
 	</select>
 	
+	<select id="getMusicList4search" parameterType="java.util.Map" statementType="PREPARED" resultType="Music">
+		SELECT a.id 				musicId,
+			   a.name				musicName,
+			   a.singerId			singerId,
+			   a.albumId			albumId,
+			   a.mv					mv,
+			   a.hot				hots,
+			   a.playCount			plays,
+			   a.zan				praises,
+			   a.shoucang			collects,
+			   a.categoryId			categoryId,
+			   a.smallPicUrl		smallPictureUrl,
+			   a.songUrl			musicUrl,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM songs a
+		 WHERE a.name like CONCAT('%', #{musicName, jdbcType=VARCHAR}, '%')
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(orderby)">
+		   ORDER BY ${orderby} ${order}
+		</if>
+	</select>
+	
+	<select id="getMusicList4search_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		  FROM songs a
+		 WHERE a.name like CONCAT('%', #{musicName, jdbcType=VARCHAR}, '%')
+	</select>
+	
 </mapper>

@@ -37,4 +37,5 @@
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicDanmuService" ref="musicDanmuService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicFavoriteService" ref="musicFavoriteService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicCommentService" ref="musicCommentService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicPlayHistoryService" ref="musicPlayHistoryService" protocol="dubbo,rest"/>
 </beans>

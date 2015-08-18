@@ -48,6 +48,7 @@ public interface MusicService {
 	/**
 	 * 根据音乐ID播放音乐
 	 * @param musicId
+	 * @param userId	- 如果不为空,则需要记录用户的播放历史记录
 	 * @param listId	- 如果不为空,则被认为是来自歌单的音乐播放
 	 * @param albumId	- 如果不为空,则被认为是来自专辑的音乐播放
 	 * @return
@@ -55,7 +56,10 @@ public interface MusicService {
 	@GET
 	@Path(MusicServiceURL.URL_MUSIC_PLAY)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public Music playMusic(@PathParam("musicId") Long musicId, @QueryParam("listId") Long listId, @QueryParam("albumId") Long albumId);
+	public Music playMusic(@PathParam("musicId") Long musicId,
+			@QueryParam("userId") Long userId,
+			@QueryParam("listId") Long listId,
+			@QueryParam("albumId") Long albumId);
 	
 	/**
 	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]
@@ -73,6 +77,25 @@ public interface MusicService {
 	public PagingList<Music> getMusicList4index(
 			@PathParam("mediaType") Integer mediaType,
 			@QueryParam("categoryId") Integer categoryId,
+			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize,
+			@DefaultValue("createTime")@QueryParam("orderby") String orderby,
+			@DefaultValue("DESC")@QueryParam("order") String order);
+	
+	/**
+	 * 根据音乐名字关键字模糊搜索(首页接口)[分页、排序]
+	 * @param musicName
+	 * @param currentPage
+	 * @param pageSize
+	 * @param orderby
+	 * @param order
+	 * @return
+	 */
+	@GET
+	@Path(MusicServiceURL.URL_MUSIC_LIST_SEARCH)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public PagingList<Music> getMusicList4search(
+			@QueryParam("musicName") String musicName,
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize,
 			@DefaultValue("createTime")@QueryParam("orderby") String orderby,

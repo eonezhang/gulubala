@@ -1,6 +1,7 @@
 package com.penglecode.gulubala.service.music.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.model.MusicList;
 import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.support.PagingList;
@@ -47,7 +49,7 @@ public class MusicListServiceImpl implements MusicListService {
 			for(String id : ids){
 				idList.add(Long.valueOf(id));
 			}
-			musicList.setMusicList(musicDAO.getMusicListByIds(idList));
+			musicList.setMusicList(musicDAO.getMusicListByIds(idList, true));
 		}
 		return musicList;
 	}
@@ -71,4 +73,52 @@ public class MusicListServiceImpl implements MusicListService {
 		return musicList.getPraises();
 	}
 
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public void delItemFromMusicList(Long listId, Long musicId) {
+		ValidationAssert.notNull(listId, "歌单ID不能为空!");
+		ValidationAssert.notNull(musicId, "音乐ID不能为空!");
+		MusicList musicList = musicListDAO.getMusicListById(listId);
+		if(!StringUtils.isEmpty(musicList.getMusicIds())){
+			String[] musicIds = musicList.getMusicIds().split(",");
+			StringBuilder sb = new StringBuilder();
+			for(int i = 0, len = musicIds.length; i < len; i++){
+				if(!musicIds[i].equals(musicId.toString())){
+					sb.append(musicIds[i] + ",");
+				}
+			}
+			musicListDAO.updateMusicIds(listId, StringUtils.strip(sb.toString(), ","));
+		}
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public void addItemIntoMusicList(Long listId, Long musicId) {
+		ValidationAssert.notNull(listId, "歌单ID不能为空!");
+		ValidationAssert.notNull(musicId, "音乐ID不能为空!");
+		MusicList musicList = musicListDAO.getMusicListById(listId);
+		String musicIds = StringUtils.defaultIfEmpty(musicList.getMusicIds(), "");
+		musicIds = StringUtils.strip(musicIds, ",");
+		List<String> musicIdList = new ArrayList<String>(Arrays.asList(musicIds.split(",")));
+		if(!musicIdList.contains(musicId.toString())){ //防止重复记录
+			musicIdList.add(0, musicId.toString()); //最近加入的放在前面
+			long maxSize = GlobalConstants.DEFAULT_MUSIC_LIST_MAX_SIZE;
+			ValidationAssert.isTrue(musicIdList.size() <= maxSize, "添加失败！歌单中歌曲的数量已超出最大容量" + maxSize + "首!");
+			long length = musicIdList.size();
+			StringBuilder sb = new StringBuilder();
+			for(int i = 0; i < length; i++){
+				sb.append(musicIdList.get(i) + ",");
+			}
+			musicListDAO.updateMusicIds(listId, StringUtils.strip(sb.toString(), ","));
+		}
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public void deleteMusicListById(Long listId) {
+		ValidationAssert.notNull(listId, "歌单ID不能为空!");
+		musicListDAO.deleteMusicListById(listId);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Arrays.asList("".split(",")));
+	}
+	
 }

@@ -20,6 +20,9 @@ public interface MusicServiceURL {
 	/** 根据分类ID获取音乐列表(首页接口)[分页、排序] */
 	String URL_MUSIC_LIST_INDEX = "music/list/index/{mediaType}";
 	
+	/** 根据音乐名字关键字模糊搜索(首页接口)[分页、排序] */
+	String URL_MUSIC_LIST_SEARCH = "music/list/search";
+	
 	/** 给音乐点赞 */
 	String URL_MUSIC_PRAISE = "music/praise/{musicId}";
 	

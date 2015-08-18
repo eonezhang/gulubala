@@ -46,6 +46,19 @@ public interface MusicListDAO {
 	public void incrMusicListCollects(Long listId);
 	
 	/**
+	 * 更新歌单中的音乐列表
+	 * @param listId
+	 * @param musicIds
+	 */
+	public void updateMusicIds(Long listId, String musicIds);
+	
+	/**
+	 * 删除歌单
+	 * @param listId
+	 */
+	public void deleteMusicListById(Long listId);
+	
+	/**
 	 * 根据歌单Id获取歌单详情
 	 * @param listId
 	 * @return

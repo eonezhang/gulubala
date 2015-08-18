@@ -5,6 +5,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS albums;
 DROP TABLE IF EXISTS danmu;
 DROP TABLE IF EXISTS favorites;
+DROP TABLE IF EXISTS playlists;
 DROP TABLE IF EXISTS singers;
 DROP TABLE IF EXISTS songcomments;
 DROP TABLE IF EXISTS songlists;
@@ -79,6 +80,24 @@ CREATE TABLE favorites
 	PRIMARY KEY (id),
 	CONSTRAINT uk_favorites_user UNIQUE (userId, favoriteType, favoriteId)
 ) COMMENT = '收藏表';
+
+
+-- 播放历史表
+CREATE TABLE playlists
+(
+	-- 播放历史ID
+	id int NOT NULL AUTO_INCREMENT COMMENT '播放历史ID',
+	-- 用户ID
+	userId int NOT NULL COMMENT '用户ID',
+	-- 歌曲ID,逗号隔开
+	songIds varchar(1000) COMMENT '歌曲ID,逗号隔开',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	-- 更新时间
+	updatedAt datetime COMMENT '更新时间',
+	PRIMARY KEY (id),
+	UNIQUE (userId)
+) COMMENT = '播放历史表';
 
 
 -- 歌手表
@@ -162,7 +181,8 @@ CREATE TABLE songlists
 	collects int DEFAULT 0 NOT NULL COMMENT '收藏数',
 	-- 播放次数
 	plays int DEFAULT 0 NOT NULL COMMENT '播放次数',
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	UNIQUE (userId)
 ) COMMENT = '歌单表';
 
 

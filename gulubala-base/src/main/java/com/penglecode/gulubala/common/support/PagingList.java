@@ -78,5 +78,12 @@ public class PagingList<T> implements Serializable {
 		this.totalRowCount = pager.getTotalRowCount();
 		this.totalPageCount = pager.getTotalPageCount();
 	}
+
+	public String toString() {
+		return "PagingList [currentPage=" + currentPage + ", pageSize="
+				+ pageSize + ", totalPageCount=" + totalPageCount
+				+ ", totalRowCount=" + totalRowCount + ", dataList=" + dataList
+				+ "]";
+	}
 	
 }

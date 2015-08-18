@@ -1,5 +1,6 @@
 package com.penglecode.gulubala.dao.music.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.mybatis.EscapeFilter;
 import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.util.AppResourceUtils;
+import com.penglecode.gulubala.common.util.CollectionUtils;
 import com.penglecode.gulubala.common.util.StringUtils;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
 import com.penglecode.gulubala.dao.music.MusicDAO;
@@ -44,10 +46,26 @@ public class MusicDAOImpl extends BaseMybatisDAO implements MusicDAO {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getMusicById"), musicId, new MusicEscapeFilter());
 	}
 
-	public List<Music> getMusicListByIds(List<Long> musicIdList) {
-		return getSqlSessionTemplate().selectList(getMapperKey("getMusicListByIds"), musicIdList, new MusicEscapeFilter());
+	public List<Music> getMusicListByIds(List<Long> musicIdList, boolean orderedAsIdList) {
+		List<Music> list = getSqlSessionTemplate().selectList(getMapperKey("getMusicListByIds"), musicIdList, new MusicEscapeFilter());
+		if(orderedAsIdList && !CollectionUtils.isEmpty(list)){
+			List<Music> dataList = new ArrayList<Music>();
+			for(Long id : musicIdList){
+				for(Music music : list){
+					if(music.getMusicId().equals(id)){
+						dataList.add(music);
+					}
+				}
+			}
+			return dataList;
+		}
+		return list;
 	}
 
+	public List<Music> getMusicList4search(Map<String,Object> paramMap, Pager pager) {
+		return getSqlSessionTemplate().selectList(getMapperKey("getMusicList4search"), paramMap, new MusicEscapeFilter(), pager);
+	}
+	
 	public List<Music> getMusicList4index(Map<String,Object> paramMap, Pager pager) {
 		return getSqlSessionTemplate().selectList(getMapperKey("getMusicList4index"), paramMap, new MusicEscapeFilter(), pager);
 	}
