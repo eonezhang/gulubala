@@ -72,4 +72,31 @@ public interface UserService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public Boolean isAccountNameExists(@PathParam("accountName") String accountName);
 	
+	/**
+	 * 自增用户的被关注数
+	 * @param userId
+	 */
+	@GET
+	@Path(UserServiceURL.URL_USER_INCR_FOLLOWS)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void incrUserFollows(@PathParam("userId") Long userId);
+	
+	/**
+	 * 自增用户的人气数
+	 * @param userId
+	 */
+	@GET
+	@Path(UserServiceURL.URL_USER_INCR_HOTS)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void incrUserHots(@PathParam("userId") Long userId);
+	
+	/**
+	 * 自增用户的点赞数
+	 * @param userId
+	 */
+	@GET
+	@Path(UserServiceURL.URL_USER_INCR_PRAISES)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void incrUserPraises(@PathParam("userId") Long userId);
+	
 }

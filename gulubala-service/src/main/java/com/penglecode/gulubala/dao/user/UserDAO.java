@@ -65,4 +65,28 @@ public interface UserDAO {
 	 */
 	public boolean isEmailExists(String email);
 	
+	/**
+	 * 自增用户的被关注数
+	 * @param userId
+	 */
+	public void incrUserFollows(Long userId);
+
+	/**
+	 * 自减用户的被关注数
+	 * @param userId
+	 */
+	public void decrUserFollows(Long userId);
+	
+	/**
+	 * 自增用户的人气数
+	 * @param userId
+	 */
+	public void incrUserHots(Long userId);
+
+	/**
+	 * 自增用户的点赞数
+	 * @param userId
+	 */
+	public void incrUserPraises(Long userId);
+	
 }

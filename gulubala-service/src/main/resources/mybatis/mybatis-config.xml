@@ -18,6 +18,7 @@
     	
         <typeAlias alias="User" type="com.penglecode.gulubala.common.model.User"/>
         <typeAlias alias="UserLog" type="com.penglecode.gulubala.common.model.UserLog"/>
+        <typeAlias alias="UserFollow" type="com.penglecode.gulubala.common.model.UserFollow"/>
         
         <typeAlias alias="MediaCategory" type="com.penglecode.gulubala.common.model.MediaCategory"/>
         <typeAlias alias="Singer" type="com.penglecode.gulubala.common.model.Singer"/>
@@ -38,6 +39,7 @@
     
     	<mapper resource="mybatis/mapper/UserMapper.xml"/>
     	<mapper resource="mybatis/mapper/UserLogMapper.xml"/>
+    	<mapper resource="mybatis/mapper/UserFollowMapper.xml"/>
     	
     	<mapper resource="mybatis/mapper/MediaCategoryMapper.xml"/>
     	<mapper resource="mybatis/mapper/SingerMapper.xml"/>

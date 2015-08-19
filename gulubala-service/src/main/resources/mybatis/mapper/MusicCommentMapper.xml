@@ -61,15 +61,66 @@
 			   a.content			content,
 			   a.commentPraises		commentPraises,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	commentTime,
-			   CASE WHEN a.commentType = #{musicCommentType, jdbcType=INTEGER} THEN (SELECT b.name FROM songs b WHERE b.id = a.commentId)
-					WHEN a.commentType = #{musicListCommentType, jdbcType=INTEGER} THEN (SELECT b.name FROM songlists b WHERE b.id = a.commentId)
-         		END commentName
+			   b.name commentName
 		  FROM songcomments a
+		<if test="commentType == 0 or commentType == 1">
+			,songs b
+		</if>
+		<if test="commentType == 2">
+			,songlists b
+		</if>
 		 WHERE a.userId = #{userId, jdbcType=BIGINT}
-		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(commentType)">
-		   AND a.commentType = #{commentType, jdbcType=INTEGER}
+		   AND a.commentId = b.id
+		<if test="commentType == 0 or commentType == 1">
+		   AND a.commentType = #{musicCommentType, jdbcType=INTEGER}
+		   AND b.mv = #{commentType, jdbcType=INTEGER}
+		</if>
+		<if test="commentType == 2">
+		   AND a.commentType = #{musicListCommentType, jdbcType=INTEGER}
 		</if>
 		 ORDER BY a.createdAt DESC
+	</select>
+	
+	<select id="getMusicCommentsByUserId_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		  FROM songcomments a
+		<if test="commentType == 0 or commentType == 1">
+			,songs b
+		</if>
+		<if test="commentType == 2">
+			,songlists b
+		</if>
+		 WHERE a.userId = #{userId, jdbcType=BIGINT}
+		   AND a.commentId = b.id
+		<if test="commentType == 0 or commentType == 1">
+		   AND a.commentType = #{musicCommentType, jdbcType=INTEGER}
+		   AND b.mv = #{commentType, jdbcType=INTEGER}
+		</if>
+		<if test="commentType == 2">
+		   AND a.commentType = #{musicListCommentType, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getMusicCommentsByCommentId" parameterType="java.util.Map" statementType="PREPARED" resultType="MusicComment">
+		SELECT a.id 				id,
+			   a.parentId			parentId,
+			   a.userId				userId,
+			   a.commentType		commentType,
+			   a.commentId			commentId,
+			   a.content			content,
+			   a.commentPraises		commentPraises,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	commentTime
+		  FROM songcomments a
+		 WHERE a.commentType = #{commentType, jdbcType=INTEGER}
+		   AND a.commentId = #{commentId, jdbcType=BIGINT}
+		 ORDER BY a.createdAt DESC
+	</select>
+	
+	<select id="getMusicCommentsByCommentId_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		  FROM songcomments a
+		 WHERE a.commentType = #{commentType, jdbcType=INTEGER}
+		   AND a.commentId = #{commentId, jdbcType=BIGINT}
 	</select>
 	
 </mapper>

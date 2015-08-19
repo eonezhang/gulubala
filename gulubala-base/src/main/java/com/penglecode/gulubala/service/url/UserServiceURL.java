@@ -23,4 +23,13 @@ public interface UserServiceURL {
 	/** 判断手机号或邮箱是否已存在 */
 	String URL_USER_ACCOUNTNAME_EXISTS = "user/accountname/exists/{accountName}";
 	
+	/** 自增用户的被关注数 */
+	String URL_USER_INCR_FOLLOWS = "user/follows/incr/{userId}";
+	
+	/** 自增用户的人气数 */
+	String URL_USER_INCR_HOTS = "user/hots/incr/{userId}";
+	
+	/** 自增用户的点赞数 */
+	String URL_USER_INCR_PRAISES = "user/praises/incr/{userId}";
+	
 }

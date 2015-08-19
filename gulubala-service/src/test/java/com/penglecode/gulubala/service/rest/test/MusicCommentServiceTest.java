@@ -1,13 +1,13 @@
 package com.penglecode.gulubala.service.rest.test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.GenericType;
 
 import com.penglecode.gulubala.common.consts.em.MusicCommentTypeEnum;
 import com.penglecode.gulubala.common.model.MusicComment;
+import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.Result;
 import com.penglecode.gulubala.common.util.JsonUtils;
 import com.penglecode.gulubala.common.util.RestServiceUtils;
@@ -44,7 +44,15 @@ public class MusicCommentServiceTest {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", 2);
 		paramMap.put("commentType", 1);
-		Result<List<MusicComment>> result = RestServiceUtils.get(MusicCommentServiceURL.URL_MUSIC_COMMENT_LIST_USER, paramMap, new GenericType<Result<List<MusicComment>>>(){});
+		Result<PagingList<MusicComment>> result = RestServiceUtils.get(MusicCommentServiceURL.URL_MUSIC_COMMENT_LIST_USER, paramMap, new GenericType<Result<PagingList<MusicComment>>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
+	public static void testGetMusicCommentsByCommentId(){
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("commentId", 5);
+		paramMap.put("commentType", 1);
+		Result<PagingList<MusicComment>> result = RestServiceUtils.get(MusicCommentServiceURL.URL_MUSIC_COMMENT_LIST_MUSIC, paramMap, new GenericType<Result<PagingList<MusicComment>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
@@ -52,7 +60,8 @@ public class MusicCommentServiceTest {
 		//testCreateMusicComment();
 		//testPraiseMusicComment();
 		//testDeleteMusicCommentById();
-		testGetMusicCommentsByUserId();
+		//testGetMusicCommentsByUserId();
+		testGetMusicCommentsByCommentId();
 	}
 
 }

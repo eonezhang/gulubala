@@ -1,8 +1,7 @@
 package com.penglecode.gulubala.service.music;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +11,7 @@ import javax.ws.rs.QueryParam;
 
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.model.MusicComment;
+import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.service.url.MusicCommentServiceURL;
 
 /**
@@ -57,11 +57,30 @@ public interface MusicCommentService {
 	/**
 	 * 获取用户的评论列表
 	 * @param userId
-	 * @param favoriteType
+	 * @param commentType	- 0代表音频歌曲评论,1代表MV歌曲评论,2代表歌单评论
 	 */
 	@GET
 	@Path(MusicCommentServiceURL.URL_MUSIC_COMMENT_LIST_USER)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public List<MusicComment> getMusicCommentsByUserId(@PathParam("userId") Long userId, @QueryParam("commentType") Integer commentType);
+	public PagingList<MusicComment> getMusicCommentsByUserId(
+			@PathParam("userId") Long userId,
+			@PathParam("commentType") Integer commentType,
+			@DefaultValue("1") @QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10") @QueryParam("pageSize") Integer pageSize);
+	
+	/**
+	 * 获取歌曲/歌单的评论列表
+	 * @param commentType
+	 * @param commentId
+	 * @return
+	 */
+	@GET
+	@Path(MusicCommentServiceURL.URL_MUSIC_COMMENT_LIST_MUSIC)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public PagingList<MusicComment> getMusicCommentsByCommentId(
+			@PathParam("commentType") Integer commentType,
+			@PathParam("commentId") Long commentId,
+			@DefaultValue("1") @QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10") @QueryParam("pageSize") Integer pageSize);
 	
 }

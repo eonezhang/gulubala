@@ -112,5 +112,20 @@ public class UserServiceImpl implements UserService {
 		}
 		return Boolean.FALSE;
 	}
+
+	public void incrUserFollows(Long userId) {
+		ValidationAssert.notNull(userId, "用户ID不能为空!");
+		userDAO.incrUserFollows(userId);
+	}
+
+	public void incrUserHots(Long userId) {
+		ValidationAssert.notNull(userId, "用户ID不能为空!");
+		userDAO.incrUserHots(userId);
+	}
+
+	public void incrUserPraises(Long userId) {
+		ValidationAssert.notNull(userId, "用户ID不能为空!");
+		userDAO.incrUserPraises(userId);
+	}
 	
 }

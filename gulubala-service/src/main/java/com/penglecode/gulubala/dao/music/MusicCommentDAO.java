@@ -3,6 +3,7 @@ package com.penglecode.gulubala.dao.music;
 import java.util.List;
 
 import com.penglecode.gulubala.common.model.MusicComment;
+import com.penglecode.gulubala.common.support.Pager;
 
 /**
  * 音乐评论DAO
@@ -48,9 +49,19 @@ public interface MusicCommentDAO {
 	/**
 	 * 根据用户ID获取用户的评论列表
 	 * @param userId			- 必填
-	 * @param commentType		- 选填
+	 * @param commentType		- 必填
+	 * @param pager				- 分页
 	 * @return
 	 */
-	public List<MusicComment> getMusicCommentsByUserId(Long userId, Integer commentType);
+	public List<MusicComment> getMusicCommentsByUserId(Long userId, Integer commentType, Pager pager);
+	
+	/**
+	 * 根据用户ID获取用户的评论列表
+	 * @param userId			- 必填
+	 * @param commentType		- 必填
+	 * @param pager				- 分页
+	 * @return
+	 */
+	public List<MusicComment> getMusicCommentsByCommentId(Integer commentType, Long commentId, Pager pager);
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.penglecode.gulubala.common.consts.em.MusicCommentTypeEnum;
 import com.penglecode.gulubala.common.model.MusicComment;
+import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
 import com.penglecode.gulubala.dao.music.MusicCommentDAO;
 
@@ -34,13 +35,20 @@ public class MusicCommentDAOImpl extends BaseMybatisDAO implements MusicCommentD
 		return getSqlSessionTemplate().selectOne(getMapperKey("getMusicCommentById"), id);
 	}
 
-	public List<MusicComment> getMusicCommentsByUserId(Long userId, Integer commentType) {
+	public List<MusicComment> getMusicCommentsByUserId(Long userId, Integer commentType, Pager pager) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", userId);
 		paramMap.put("musicCommentType", MusicCommentTypeEnum.COMMENT_TYPE_MUSIC.getTypeCode());
 		paramMap.put("musicListCommentType", MusicCommentTypeEnum.COMMENT_TYPE_MUSIC_LIST.getTypeCode());
 		paramMap.put("commentType", commentType);
-		return getSqlSessionTemplate().selectList(getMapperKey("getMusicCommentsByUserId"), paramMap);
+		return getSqlSessionTemplate().selectList(getMapperKey("getMusicCommentsByUserId"), paramMap, pager);
+	}
+
+	public List<MusicComment> getMusicCommentsByCommentId(Integer commentType, Long commentId, Pager pager) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("commentType", commentType);
+		paramMap.put("commentId", commentId);
+		return getSqlSessionTemplate().selectList(getMapperKey("getMusicCommentsByCommentId"), paramMap, pager);
 	}
 
 	protected Class<?> getBoundModelClass() {

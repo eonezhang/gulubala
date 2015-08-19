@@ -3,6 +3,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS appauths;
+DROP TABLE IF EXISTS follows;
 DROP TABLE IF EXISTS mediacategory;
 DROP TABLE IF EXISTS userlogs;
 DROP TABLE IF EXISTS users;
@@ -31,7 +32,22 @@ CREATE TABLE appauths
 ) COMMENT = '客户端应用认证配置表';
 
 
--- 媒体分类表
+-- 用户关注表
+CREATE TABLE follows
+(
+	-- 关注ID
+	id int NOT NULL AUTO_INCREMENT COMMENT '关注ID',
+	-- 关注者用户ID
+	userId int NOT NULL COMMENT '关注者用户ID',
+	-- 被关注者用户ID
+	followId int NOT NULL COMMENT '被关注者用户ID',
+	-- 关注时间
+	createdAt datetime NOT NULL COMMENT '关注时间',
+	PRIMARY KEY (id)
+) COMMENT = '用户关注表';
+
+
+-- 媒体分类表,ID[1-99]区间的都是固定死的
 CREATE TABLE mediacategory
 (
 	-- 分类ID
@@ -48,7 +64,7 @@ CREATE TABLE mediacategory
 	createdAt datetime NOT NULL COMMENT '创建时间',
 	PRIMARY KEY (categoryId),
 	CONSTRAINT uk_mediacategory_name UNIQUE (categoryName, parentCategoryId)
-) COMMENT = '媒体分类表'
+) COMMENT = '媒体分类表,ID[1-99]区间的都是固定死的'
 AUTO_INCREMENT = 100;
 
 
@@ -127,6 +143,12 @@ CREATE TABLE users
 	remark varchar(255) COMMENT '个性签名',
 	-- 用户头像地址
 	iconUrl varchar(255) COMMENT '用户头像地址',
+	-- 被关注数
+	follows int DEFAULT 0 NOT NULL COMMENT '被关注数',
+	-- 人气数
+	hots int DEFAULT 0 NOT NULL COMMENT '人气数',
+	-- 点赞数
+	praises int DEFAULT 0 NOT NULL COMMENT '点赞数',
 	PRIMARY KEY (id),
 	CONSTRAINT uk_users_phone UNIQUE (phone),
 	CONSTRAINT uk_users_email UNIQUE (email)

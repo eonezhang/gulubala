@@ -31,6 +31,34 @@
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</update>
 	
+	<update id="incrUserFollows" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.follows 		= a.follows + 1,
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="decrUserFollows" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.follows 		= IF(a.follows > 0, a.follows - 1, 0),
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="incrUserHots" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.hots 			= a.hots + 1,
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="incrUserPraises" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.praises 		= a.praises + 1,
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
 	<select id="getUserById" parameterType="java.lang.Long" statementType="PREPARED" resultType="User">
 		SELECT a.id					userId,
 			   a.nickname			nickName,
@@ -44,6 +72,9 @@
 			   a.loginTimes			loginTimes,
 			   a.remark				remark,
 			   a.iconUrl			iconUrl,
+			   a.follows			follows,
+			   a.hots				hots,
+			   a.praises			praises,
 			   a.sex				sex,
 			   a.birthday			birthday,
 			   a.status				status,
@@ -80,6 +111,9 @@
 			   a.loginTimes			loginTimes,
 			   a.remark				remark,
 			   a.iconUrl			iconUrl,
+			   a.follows			follows,
+			   a.hots				hots,
+			   a.praises			praises,
 			   a.sex				sex,
 			   a.birthday			birthday,
 			   a.status				status,
@@ -102,6 +136,9 @@
 			   a.loginTimes			loginTimes,
 			   a.remark				remark,
 			   a.iconUrl			iconUrl,
+			   a.follows			follows,
+			   a.hots				hots,
+			   a.praises			praises,
 			   a.sex				sex,
 			   a.birthday			birthday,
 			   a.status				status,
