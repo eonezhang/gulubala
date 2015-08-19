@@ -19,9 +19,19 @@ public class PaginationUtils {
 	 * 内存分页方法
 	 * @param allDataList
 	 * @param pager
-	 * @return
+	 * @return 分页列表大对象
 	 */
 	public static <T> PagingList<T> getPagingList(List<T> allDataList, Pager pager) {
+		return new PagingList<T>(getPagedList(allDataList, pager), pager);
+	}
+	
+	/**
+	 * 内存分页方法
+	 * @param allDataList
+	 * @param pager
+	 * @return	分页数据结果集
+	 */
+	public static <T> List<T> getPagedList(List<T> allDataList, Pager pager) {
 		int totalRowCount = 0;
 		List<T> dataList = new ArrayList<T>();
 		if(!CollectionUtils.isEmpty(allDataList)){
@@ -36,7 +46,7 @@ public class PaginationUtils {
 			}
 		}
 		pager.setTotalRowCount(totalRowCount);
-		return new PagingList<T>(dataList, pager);
+		return dataList;
 	}
 	
 }

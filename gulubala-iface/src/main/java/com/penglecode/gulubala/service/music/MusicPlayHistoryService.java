@@ -1,5 +1,8 @@
 package com.penglecode.gulubala.service.music;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -32,13 +35,20 @@ public interface MusicPlayHistoryService {
 	public void deleteMusicPlayHistoryByUserId(@PathParam("userId") Long userId);
 	
 	/**
-	 * 获取播放历史列表
+	 * 获取用户的播放历史列表
+	 * @param userId
+	 * @return
+	 */
+	public List<Music> getMusicPlayHistoryByUserId(Long userId);
+	
+	/**
+	 * 获取用户的播放历史列表
 	 * @param userId
 	 */
 	@GET
 	@Path(MusicPlayHistoryServiceURL.URL_MUSIC_PLAY_HISTORY_LIST)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public PagingList<Music> getMusicPlayHistoryByUserId(@PathParam("userId") Long userId,
+	public PagingList<Map<String,Object>> getMusicPlayHistoryByUserId(@PathParam("userId") Long userId,
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
 	
