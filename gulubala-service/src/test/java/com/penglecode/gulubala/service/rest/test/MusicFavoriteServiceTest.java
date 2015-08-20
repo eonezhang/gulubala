@@ -1,13 +1,13 @@
 package com.penglecode.gulubala.service.rest.test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.GenericType;
 
 import com.penglecode.gulubala.common.consts.em.MusicFavoriteTypeEnum;
 import com.penglecode.gulubala.common.model.MusicFavorite;
+import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.Result;
 import com.penglecode.gulubala.common.util.JsonUtils;
 import com.penglecode.gulubala.common.util.RestServiceUtils;
@@ -35,7 +35,8 @@ public class MusicFavoriteServiceTest {
 	public static void testGetMusicFavoritesByUserId(){
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", 2);
-		Result<List<MusicFavorite>> result = RestServiceUtils.get(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST_USER, paramMap, new GenericType<Result<List<MusicFavorite>>>(){});
+		paramMap.put("favoriteType", 1);
+		Result<PagingList<MusicFavorite>> result = RestServiceUtils.get(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST_USER, paramMap, new GenericType<Result<PagingList<MusicFavorite>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	

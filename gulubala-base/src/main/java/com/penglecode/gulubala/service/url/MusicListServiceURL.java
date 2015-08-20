@@ -17,6 +17,9 @@ public interface MusicListServiceURL {
 	/** 获取歌单列表[分页、排序] */
 	String URL_MUSIC_LIST_LIST = "musiclist/list";
 	
+	/** 获取用户的歌单列表[分页] */
+	String URL_MUSIC_LIST_LIST_USER = "musiclist/list/{userId}";
+	
 	/** 删除歌单 */
 	String URL_MUSIC_LIST_DELETE = "musiclist/delete/{listId}";
 	

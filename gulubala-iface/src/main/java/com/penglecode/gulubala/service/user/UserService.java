@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.model.User;
+import com.penglecode.gulubala.common.model.UserMessage;
 import com.penglecode.gulubala.service.url.UserServiceURL;
 
 /**
@@ -98,5 +99,25 @@ public interface UserService {
 	@Path(UserServiceURL.URL_USER_INCR_PRAISES)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public void incrUserPraises(@PathParam("userId") Long userId);
+	
+	/**
+	 * 修改用户基本信息
+	 * @param user
+	 */
+	@POST
+	@Path(UserServiceURL.URL_USER_PROFILE_UPDATE)
+	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void updateUserProfile(User user);
+	
+	/**
+	 * 用户提交留言信息
+	 * @param message
+	 */
+	@POST
+	@Path(UserServiceURL.URL_USER_MESSAGE_SUBMIT)
+	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public Long submitUserMessage(UserMessage message);
 	
 }

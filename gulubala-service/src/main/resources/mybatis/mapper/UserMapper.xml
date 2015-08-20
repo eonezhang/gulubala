@@ -31,6 +31,15 @@
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</update>
 	
+	<update id="updateUserProfile" parameterType="User" statementType="PREPARED">
+		UPDATE users a
+		   SET a.nickname		= #{nickName, jdbcType=VARCHAR},
+		   	   a.sex			= #{sex, jdbcType=INTEGER},
+		   	   a.birthday		= #{birthday, jdbcType=VARCHAR},
+		   	   a.remark			= #{remark, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
 	<update id="incrUserFollows" parameterType="java.util.Map" statementType="PREPARED">
 		UPDATE users a
 		   SET a.follows 		= a.follows + 1,

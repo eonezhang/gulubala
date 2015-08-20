@@ -27,6 +27,10 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 		getSqlSessionTemplate().update(getMapperKey("updateUser4Login"), paramMap);
 	}
 
+	public void updateUserProfile(User user) {
+		getSqlSessionTemplate().update(getMapperKey("updateUserProfile"), user);
+	}
+
 	public User getUserById(Long userId) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getUserById"), userId, new UserEscapeFilter());
 	}

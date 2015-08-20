@@ -48,5 +48,19 @@ public interface MusicDanmuService {
 	public DanmuMessageTemplate getNextMusicDanmuList4Andriod(@PathParam("musicId")Long musicId, 
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
+	
+	/**
+	 * 获取下一批弹幕数据给IOS客户端
+	 * @param musicId			- 必填
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	@GET
+	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST_IOS)
+	@Produces({ContentType.APPLICATION_XML_UTF_8})
+	public DanmuMessageTemplate getNextMusicDanmuList4IOS(@PathParam("musicId")Long musicId, 
+			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
 
 }

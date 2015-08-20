@@ -33,7 +33,7 @@
 		SELECT a.id				id,
 			   a.userId			userId,
 			   a.followId		followId,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T') createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T') createTime,
 			   b.follows		follows,
 			   b.hots			hots,
 			   b.praises		praises,

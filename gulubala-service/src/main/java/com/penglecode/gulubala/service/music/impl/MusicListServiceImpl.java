@@ -41,7 +41,7 @@ public class MusicListServiceImpl implements MusicListService {
 		return musicList.getListId();
 	}
 
-	public MusicList getMusicById(Long listId) {
+	public MusicList getMusicListById(Long listId) {
 		MusicList musicList = musicListDAO.getMusicListById(listId);
 		if(musicList != null && !StringUtils.isEmpty(musicList.getMusicIds())){
 			List<Long> idList = new ArrayList<Long>();
@@ -60,6 +60,15 @@ public class MusicListServiceImpl implements MusicListService {
 		paramMap.put("userId", userId);
 		paramMap.put("orderby", orderby);
 		paramMap.put("order", order);
+		Pager pager = new Pager(currentPage, pageSize);
+		return new PagingList<MusicList>(musicListDAO.getMusicLists(paramMap, pager), pager);
+	}
+
+	public PagingList<MusicList> getMusicListsByUserId(Long userId,
+			Integer currentPage, Integer pageSize) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("orderby", "createTime");
+		paramMap.put("order", "DESC");
 		Pager pager = new Pager(currentPage, pageSize);
 		return new PagingList<MusicList>(musicListDAO.getMusicLists(paramMap, pager), pager);
 	}
@@ -115,10 +124,6 @@ public class MusicListServiceImpl implements MusicListService {
 	public void deleteMusicListById(Long listId) {
 		ValidationAssert.notNull(listId, "歌单ID不能为空!");
 		musicListDAO.deleteMusicListById(listId);
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(Arrays.asList("".split(",")));
 	}
 	
 }

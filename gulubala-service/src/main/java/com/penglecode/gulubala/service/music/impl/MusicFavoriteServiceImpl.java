@@ -1,7 +1,5 @@
 package com.penglecode.gulubala.service.music.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.dao.DuplicateKeyException;
@@ -12,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.penglecode.gulubala.common.consts.em.MusicFavoriteTypeEnum;
 import com.penglecode.gulubala.common.model.MusicFavorite;
 import com.penglecode.gulubala.common.support.BusinessAssert;
+import com.penglecode.gulubala.common.support.Pager;
+import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
 import com.penglecode.gulubala.dao.music.MusicDAO;
@@ -59,9 +59,11 @@ public class MusicFavoriteServiceImpl implements MusicFavoriteService {
 		musicFavoriteDAO.deleteMusicFavoriteById(id);
 	}
 
-	public List<MusicFavorite> getMusicFavoritesByUserId(Long userId, Integer favoriteType) {
+	public PagingList<MusicFavorite> getMusicFavoritesByUserId(Long userId, Integer favoriteType, Integer currentPage, Integer pageSize) {
 		ValidationAssert.notNull(userId, "用户ID不能为空!");
-		return musicFavoriteDAO.getMusicFavoritesByUserId(userId, favoriteType);
+		ValidationAssert.notNull(userId, "收藏类型[favoriteType]不能为空!");
+		Pager pager = new Pager(currentPage, pageSize);
+		return new PagingList<MusicFavorite>(musicFavoriteDAO.getMusicFavoritesByUserId(userId, favoriteType, pager), pager);
 	}
 
 }

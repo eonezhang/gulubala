@@ -31,15 +31,30 @@
 			   a.favoriteId			favoriteId,
 			   a.data				data,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
-			   CASE WHEN a.favoriteType = #{musicFavoriteType, jdbcType=INTEGER} THEN (SELECT b.name FROM songs b WHERE b.id = a.favoriteId)
-					WHEN a.favoriteType = #{musicListFavoriteType, jdbcType=INTEGER} THEN (SELECT b.name FROM songlists b WHERE b.id = a.favoriteId)
-         		END favoriteName
+			   b.name favoriteName
 		  FROM favorites a
-		 WHERE a.userId = #{userId, jdbcType=BIGINT}
-		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(favoriteType)">
-		   AND a.favoriteType = #{favoriteType, jdbcType=INTEGER}
+		<if test="favoriteType == 1">
+			,songs b
 		</if>
+		<if test="favoriteType == 2">
+			,songlists b
+		</if>
+		 WHERE a.userId = #{userId, jdbcType=BIGINT}
+		   AND a.favoriteType = #{favoriteType, jdbcType=INTEGER}
 		 ORDER BY a.createdAt DESC
+	</select>
+	
+	<select id="getMusicFavoritesByUserId_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		  FROM favorites a
+		<if test="favoriteType == 1">
+			,songs b
+		</if>
+		<if test="favoriteType == 2">
+			,songlists b
+		</if>
+		 WHERE a.userId = #{userId, jdbcType=BIGINT}
+		   AND a.favoriteType = #{favoriteType, jdbcType=INTEGER}
 	</select>
 	
 </mapper>

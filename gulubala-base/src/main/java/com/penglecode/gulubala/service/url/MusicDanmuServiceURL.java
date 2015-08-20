@@ -14,4 +14,7 @@ public interface MusicDanmuServiceURL {
 	/** 获取下一批弹幕数据给Android客户端 */
 	String URL_MUSIC_DANMU_LIST_ANDROID = "musicdanmu/list/android/{musicId}";
 	
+	/** 获取下一批弹幕数据给IOS客户端 */
+	String URL_MUSIC_DANMU_LIST_IOS = "musicdanmu/list/ios/{musicId}";
+	
 }

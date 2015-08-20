@@ -5,6 +5,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS appauths;
 DROP TABLE IF EXISTS follows;
 DROP TABLE IF EXISTS mediacategory;
+DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS userlogs;
 DROP TABLE IF EXISTS users;
 
@@ -43,7 +44,8 @@ CREATE TABLE follows
 	followId int NOT NULL COMMENT '被关注者用户ID',
 	-- 关注时间
 	createdAt datetime NOT NULL COMMENT '关注时间',
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	CONSTRAINT uk_user_follows UNIQUE (userId, followId)
 ) COMMENT = '用户关注表';
 
 
@@ -66,6 +68,23 @@ CREATE TABLE mediacategory
 	CONSTRAINT uk_mediacategory_name UNIQUE (categoryName, parentCategoryId)
 ) COMMENT = '媒体分类表,ID[1-99]区间的都是固定死的'
 AUTO_INCREMENT = 100;
+
+
+-- 用户留言表
+CREATE TABLE messages
+(
+	-- 留言ID
+	id int NOT NULL AUTO_INCREMENT COMMENT '留言ID',
+	-- 提交留言的用户ID
+	userId int NOT NULL COMMENT '提交留言的用户ID',
+	-- 留言内容
+	messageContent varchar(500) NOT NULL COMMENT '留言内容',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	-- 留言回复
+	messageReply varchar(500) COMMENT '留言回复',
+	PRIMARY KEY (id)
+) COMMENT = '用户留言表';
 
 
 -- 用户操作日志表

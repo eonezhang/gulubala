@@ -3,6 +3,7 @@ package com.penglecode.gulubala.dao.music;
 import java.util.List;
 
 import com.penglecode.gulubala.common.model.MusicFavorite;
+import com.penglecode.gulubala.common.support.Pager;
 
 /**
  * 歌曲收藏DAO
@@ -28,9 +29,10 @@ public interface MusicFavoriteDAO {
 	/**
 	 * 根据用户ID获取用户的歌曲收藏列表
 	 * @param userId			- 必填
-	 * @param favoriteType		- 选填
+	 * @param favoriteType		- 必填
+	 * @param pager 			- 分页
 	 * @return
 	 */
-	public List<MusicFavorite> getMusicFavoritesByUserId(Long userId, Integer favoriteType);
+	public List<MusicFavorite> getMusicFavoritesByUserId(Long userId, Integer favoriteType, Pager pager);
 	
 }

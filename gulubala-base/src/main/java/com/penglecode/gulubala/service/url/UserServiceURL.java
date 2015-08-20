@@ -32,4 +32,10 @@ public interface UserServiceURL {
 	/** 自增用户的点赞数 */
 	String URL_USER_INCR_PRAISES = "user/praises/incr/{userId}";
 	
+	/** 修改用户基本信息 */
+	String URL_USER_PROFILE_UPDATE = "user/profile/update";
+	
+	/** 用户提交留言信息 */
+	String URL_USER_MESSAGE_SUBMIT = "user/message/submit";
+	
 }

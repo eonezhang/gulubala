@@ -11,6 +11,7 @@ import com.penglecode.gulubala.common.cache.ValidateCodeCacheManager;
 import com.penglecode.gulubala.common.consts.em.UserRegisterTypeEnum;
 import com.penglecode.gulubala.common.consts.em.UserStatusEnum;
 import com.penglecode.gulubala.common.model.User;
+import com.penglecode.gulubala.common.model.UserMessage;
 import com.penglecode.gulubala.common.support.BusinessAssert;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.CommonValidateUtils;
@@ -18,6 +19,7 @@ import com.penglecode.gulubala.common.util.DateTimeUtils;
 import com.penglecode.gulubala.common.util.StringUtils;
 import com.penglecode.gulubala.common.util.UserPasswordUtils;
 import com.penglecode.gulubala.dao.user.UserDAO;
+import com.penglecode.gulubala.dao.user.UserMessageDAO;
 import com.penglecode.gulubala.service.user.UserService;
 
 @Service("userService")
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Resource(name="userDAO")
 	private UserDAO userDAO;
+	
+	@Resource(name="userMessageDAO")
+	private UserMessageDAO userMessageDAO;
 	
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
 	public Long userRegister4App(User user) {
@@ -126,6 +131,20 @@ public class UserServiceImpl implements UserService {
 	public void incrUserPraises(Long userId) {
 		ValidationAssert.notNull(userId, "用户ID不能为空!");
 		userDAO.incrUserPraises(userId);
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public void updateUserProfile(User user) {
+		ValidationAssert.notNull(user, "请求参数不能为空!");
+		userDAO.updateUserProfile(user);
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public Long submitUserMessage(UserMessage message) {
+		ValidationAssert.notNull(message, "请求参数不能为空!");
+		message.setCreateTime(DateTimeUtils.formatNow());
+		userMessageDAO.insertUserMessage(message);
+		return message.getId();
 	}
 	
 }

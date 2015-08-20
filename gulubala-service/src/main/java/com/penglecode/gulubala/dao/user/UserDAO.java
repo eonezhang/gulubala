@@ -24,6 +24,12 @@ public interface UserDAO {
 	public void updateUser4Login(Long userId, String loginTime);
 	
 	/**
+	 * 更新用户基本信息
+	 * @param user
+	 */
+	public void updateUserProfile(User user);
+	
+	/**
 	 * 根据userId获取用户信息(全字段)
 	 * @param userId
 	 * @return

@@ -31,6 +31,14 @@ public class MusicDanmuServiceImpl implements MusicDanmuService {
 	}
 
 	public DanmuMessageTemplate getNextMusicDanmuList4Andriod(Long musicId, Integer currentPage, Integer pageSize) {
+		return getNextMusicDanmuList(musicId, currentPage, pageSize);
+	}
+
+	public DanmuMessageTemplate getNextMusicDanmuList4IOS(Long musicId, Integer currentPage, Integer pageSize) {
+		return getNextMusicDanmuList(musicId, currentPage, pageSize);
+	}
+	
+	protected DanmuMessageTemplate getNextMusicDanmuList(Long musicId, Integer currentPage, Integer pageSize) {
 		ValidationAssert.notNull(musicId, "请求参数不能为空!");
 		ValidationAssert.isTrue(pageSize % 10 == 0, "分页参数pageSize必须是10的整数倍!");
 		ValidationAssert.isTrue(pageSize <= 500, "分页参数pageSize至多不超过500!");
@@ -38,5 +46,5 @@ public class MusicDanmuServiceImpl implements MusicDanmuService {
 		List<MusicDanmu> danmuList = musicDanmuDAO.getNextMusicDanmuList(musicId, pager);
 		return MusicDanmuUtils.createDanmuMessage(danmuList, pager);
 	}
-
+	
 }

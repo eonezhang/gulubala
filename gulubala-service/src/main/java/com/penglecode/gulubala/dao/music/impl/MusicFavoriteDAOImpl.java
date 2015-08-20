@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.penglecode.gulubala.common.consts.em.MusicFavoriteTypeEnum;
 import com.penglecode.gulubala.common.model.MusicFavorite;
+import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
 import com.penglecode.gulubala.dao.music.MusicFavoriteDAO;
 
@@ -22,13 +23,13 @@ public class MusicFavoriteDAOImpl extends BaseMybatisDAO implements MusicFavorit
 		getSqlSessionTemplate().delete(getMapperKey("deleteMusicFavoriteById"), id);
 	}
 
-	public List<MusicFavorite> getMusicFavoritesByUserId(Long userId, Integer favoriteType) {
+	public List<MusicFavorite> getMusicFavoritesByUserId(Long userId, Integer favoriteType, Pager pager) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", userId);
 		paramMap.put("musicFavoriteType", MusicFavoriteTypeEnum.FAVORITE_TYPE_MUSIC.getTypeCode());
 		paramMap.put("musicListFavoriteType", MusicFavoriteTypeEnum.FAVORITE_TYPE_MUSIC_LIST.getTypeCode());
 		paramMap.put("favoriteType", favoriteType);
-		return getSqlSessionTemplate().selectList(getMapperKey("getMusicFavoritesByUserId"), paramMap);
+		return getSqlSessionTemplate().selectList(getMapperKey("getMusicFavoritesByUserId"), paramMap, pager);
 	}
 
 	protected Class<?> getBoundModelClass() {

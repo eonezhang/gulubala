@@ -43,7 +43,7 @@ public interface MusicListService {
 	@GET
 	@Path(MusicListServiceURL.URL_MUSIC_LIST_DETAIL)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public MusicList getMusicById(@PathParam("listId") Long listId);
+	public MusicList getMusicListById(@PathParam("listId") Long listId);
 	
 	/**
 	 * 获取歌单列表[分页、排序]
@@ -63,6 +63,21 @@ public interface MusicListService {
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize,
 			@DefaultValue("createTime")@QueryParam("orderby") String orderby,
 			@DefaultValue("DESC")@QueryParam("order") String order);
+	
+	/**
+	 * 获取歌单列表[分页]
+	 * @param userId
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	@GET
+	@Path(MusicListServiceURL.URL_MUSIC_LIST_LIST_USER)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public PagingList<MusicList> getMusicListsByUserId(
+			@PathParam("userId") Long userId,
+			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
 	
 	/**
 	 * 给歌单点赞

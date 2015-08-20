@@ -1,8 +1,7 @@
 package com.penglecode.gulubala.service.music;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +11,7 @@ import javax.ws.rs.QueryParam;
 
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.model.MusicFavorite;
+import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.service.url.MusicFavoriteServiceURL;
 
 /**
@@ -45,13 +45,17 @@ public interface MusicFavoriteService {
 	public void deleteMusicFavorite(@PathParam("id") Long id);
 	
 	/**
-	 * 获取用户的收藏列表
+	 * 获取用户的收藏(歌曲/歌单)列表
 	 * @param userId
 	 * @param favoriteType
 	 */
 	@GET
 	@Path(MusicFavoriteServiceURL.URL_MUSIC_FAVORITE_LIST_USER)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public List<MusicFavorite> getMusicFavoritesByUserId(@PathParam("userId") Long userId, @QueryParam("favoriteType") Integer favoriteType);
+	public PagingList<MusicFavorite> getMusicFavoritesByUserId(
+			@PathParam("userId") Long userId,
+			@PathParam("favoriteType") Integer favoriteType,
+			@DefaultValue("1") @QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10") @QueryParam("pageSize") Integer pageSize);
 	
 }
