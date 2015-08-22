@@ -6,15 +6,15 @@ package com.penglecode.gulubala.common.consts.em;
  * @date 	 2015年8月5日 下午5:08:49
  * @version 1.0
  */
-public enum MediaCategoryEnum {
+public enum MediaCategoryTypeEnum {
 
-	MEDIA_CATEGORY_MUSIC(1, "音乐分类"), MEDIA_CATEGORY_VIDEO(2, "视频分类");
+	MEDIA_CATEGORY_TYPE_MUSIC(1, "音乐分类"), MEDIA_CATEGORY_TYPE_VIDEO(2, "视频分类"), MEDIA_CATEGORY_TYPE_HOTS(3, "排行榜分类");
 	
 	private Integer typeCode;
 	
 	private String typeName;
 
-	private MediaCategoryEnum(Integer typeCode, String typeName) {
+	private MediaCategoryTypeEnum(Integer typeCode, String typeName) {
 		this.typeCode = typeCode;
 		this.typeName = typeName;
 	}
@@ -35,8 +35,8 @@ public enum MediaCategoryEnum {
 		this.typeName = typeName;
 	}
 
-	public static MediaCategoryEnum getCategory(Integer typeCode){
-		for(MediaCategoryEnum em : values()){
+	public static MediaCategoryTypeEnum getCategoryType(Integer typeCode){
+		for(MediaCategoryTypeEnum em : values()){
 			if(em.getTypeCode().equals(typeCode)){
 				return em;
 			}

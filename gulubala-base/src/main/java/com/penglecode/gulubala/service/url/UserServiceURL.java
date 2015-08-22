@@ -35,6 +35,12 @@ public interface UserServiceURL {
 	/** 修改用户基本信息 */
 	String URL_USER_PROFILE_UPDATE = "user/profile/update";
 	
+	/** 用户修改密码 */
+	String URL_USER_PASSWORD_UPDATE = "user/password/update";
+	
+	/** 用户重置密码 */
+	String URL_USER_PASSWORD_RESET = "user/password/reset";
+	
 	/** 用户提交留言信息 */
 	String URL_USER_MESSAGE_SUBMIT = "user/message/submit";
 	

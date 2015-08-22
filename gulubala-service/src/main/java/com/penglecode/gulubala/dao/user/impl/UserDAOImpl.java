@@ -30,6 +30,10 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 	public void updateUserProfile(User user) {
 		getSqlSessionTemplate().update(getMapperKey("updateUserProfile"), user);
 	}
+	
+	public void updateUserPassword(User user) {
+		getSqlSessionTemplate().update(getMapperKey("updateUserPassword"), user);
+	}
 
 	public User getUserById(Long userId) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getUserById"), userId, new UserEscapeFilter());
@@ -37,6 +41,14 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 	
 	public User getThinUserById(Long userId) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getThinUserById"), userId);
+	}
+
+	public User getThinUserByMobile(String mobilePhone) {
+		return getSqlSessionTemplate().selectOne(getMapperKey("getThinUserByMobile"), mobilePhone);
+	}
+
+	public User getThinUserByEmail(String email) {
+		return getSqlSessionTemplate().selectOne(getMapperKey("getThinUserByEmail"), email);
 	}
 
 	public User getUserByMobile(String mobilePhone) {

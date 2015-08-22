@@ -1,5 +1,7 @@
 package com.penglecode.gulubala.service.user;
 
+import java.util.Map;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -109,6 +111,26 @@ public interface UserService {
 	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public void updateUserProfile(User user);
+	
+	/**
+	 * 用户修改密码
+	 * @param parameter
+	 */
+	@POST
+	@Path(UserServiceURL.URL_USER_PASSWORD_UPDATE)
+	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void updateUserPassword(Map<String,String> parameter);
+	
+	/**
+	 * 重置用户密码
+	 * @param parameter
+	 */
+	@POST
+	@Path(UserServiceURL.URL_USER_PASSWORD_RESET)
+	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public void restUserPassword(Map<String,String> parameter);
 	
 	/**
 	 * 用户提交留言信息

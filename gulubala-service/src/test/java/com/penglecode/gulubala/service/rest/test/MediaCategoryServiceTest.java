@@ -20,7 +20,7 @@ public class MediaCategoryServiceTest {
 		MediaCategory category = null;
 		category = new MediaCategory();
 		category.setCategoryName("华语金曲");
-		category.setParentCategoryId(1);
+		category.setCategoryType(1);
 		category.setCreateBy(0L);
 		category.setSiblingsOrder(1);
 		result = RestServiceUtils.post(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_CREATE, category, new GenericType<Result<Object>>(){});
@@ -28,7 +28,7 @@ public class MediaCategoryServiceTest {
 		System.out.println("<---------------------------------------------------------------------->");
 		category = new MediaCategory();
 		category.setCategoryName("欧美流行");
-		category.setParentCategoryId(1);
+		category.setCategoryType(1);
 		category.setCreateBy(0L);
 		category.setSiblingsOrder(2);
 		result = RestServiceUtils.post(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_CREATE, category, new GenericType<Result<Object>>(){});
@@ -36,7 +36,7 @@ public class MediaCategoryServiceTest {
 		System.out.println("<---------------------------------------------------------------------->");
 		category = new MediaCategory();
 		category.setCategoryName("经典翻唱");
-		category.setParentCategoryId(1);
+		category.setCategoryType(1);
 		category.setCreateBy(0L);
 		category.setSiblingsOrder(3);
 		result = RestServiceUtils.post(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_CREATE, category, new GenericType<Result<Object>>(){});
@@ -44,7 +44,7 @@ public class MediaCategoryServiceTest {
 		System.out.println("<---------------------------------------------------------------------->");
 		category = new MediaCategory();
 		category.setCategoryName("酒吧最热");
-		category.setParentCategoryId(1);
+		category.setCategoryType(1);
 		category.setCreateBy(0L);
 		category.setSiblingsOrder(4);
 		result = RestServiceUtils.post(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_CREATE, category, new GenericType<Result<Object>>(){});

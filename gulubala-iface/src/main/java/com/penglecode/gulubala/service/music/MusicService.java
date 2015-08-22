@@ -102,6 +102,27 @@ public interface MusicService {
 			@DefaultValue("DESC")@QueryParam("order") String order);
 	
 	/**
+	 * 根据分类ID获取排行榜列表(排行榜接口)[分页]
+	 * @param mediaType		{@link #MediaTypeEnum}
+	 * @param categoryId
+	 * @param hotType		- hots,dayHots,threeDayHots,weekHots；默认hots
+	 * @param currentPage
+	 * @param pageSize
+	 * @param orderby
+	 * @param order
+	 * @return
+	 */
+	@GET
+	@Path(MusicServiceURL.URL_MUSIC_LIST_HOTS)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public PagingList<Music> getMusicList4hots(
+			@PathParam("mediaType") Integer mediaType,
+			@QueryParam("categoryId") Integer categoryId,
+			@DefaultValue("hots")@QueryParam("hotType") String hotType,
+			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
+	
+	/**
 	 * 给音乐点赞
 	 * @param musicId
 	 * @return

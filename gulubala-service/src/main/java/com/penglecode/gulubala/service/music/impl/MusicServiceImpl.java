@@ -136,6 +136,24 @@ public class MusicServiceImpl implements MusicService {
 		return new PagingList<Music>(musicDAO.getMusicList4search(paramMap, pager), pager);
 	}
 
+	public PagingList<Music> getMusicList4hots(Integer mediaType,
+			Integer categoryId, String hotType, Integer currentPage,
+			Integer pageSize) {
+		if(!StringUtils.isEmpty(hotType)){
+			List<String> hotTypes = Arrays.asList("hots","dayHots","threeDayHots","weekHots");
+			ValidationAssert.isTrue(hotTypes.contains(hotType), "无法识别的排行类型[hotType]");
+		}
+		MediaTypeEnum em = MediaTypeEnum.getMediaType(mediaType);
+		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("mediaType", em.getTypeCode());
+		paramMap.put("categoryId", categoryId);
+		paramMap.put("orderby", hotType);
+		paramMap.put("order", "DESC");
+		Pager pager = new Pager(currentPage, pageSize);
+		return new PagingList<Music>(musicDAO.getMusicList4index(paramMap, pager), pager);
+	}
+
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
 	public Integer praiseMusic(Long musicId) {
 		ValidationAssert.notNull(musicId, "音乐ID不能为空!");

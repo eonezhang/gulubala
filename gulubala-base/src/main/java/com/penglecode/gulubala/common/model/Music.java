@@ -60,6 +60,27 @@ public class Music implements Serializable {
 	/** 收藏数 */
 	private Integer collects;
 	
+	/** 今日人气数 */
+	private Integer dayHots;
+	
+	/** 3日人气数 */
+	private Integer threeDayHots;
+	
+	/** 一周人气数 */
+	private Integer weekHots;
+	
+	/** 人气趋势（0：下降；1：上升） */
+	private Integer hotTrend;
+	
+	/** GU主id */
+	private Long userId;
+	
+	/** 歌曲时长 */
+	private String musicTime;
+	
+	/** 是否是官方推荐 */
+	private boolean recommend;
+	
 	/** 音乐分类 */
 	private Integer categoryId;
 	
@@ -74,6 +95,9 @@ public class Music implements Serializable {
 	
 	/** 音乐文件地址 */
 	private String musicUrl;
+	
+	/** 歌曲描述 */
+	private String description;
 	
 	/** 创建时间 */
 	private String createTime;
@@ -218,6 +242,62 @@ public class Music implements Serializable {
 	public void setCollects(Integer collects) {
 		this.collects = collects;
 	}
+	
+	public Integer getDayHots() {
+		return dayHots;
+	}
+
+	public void setDayHots(Integer dayHots) {
+		this.dayHots = dayHots;
+	}
+
+	public Integer getThreeDayHots() {
+		return threeDayHots;
+	}
+
+	public void setThreeDayHots(Integer threeDayHots) {
+		this.threeDayHots = threeDayHots;
+	}
+
+	public Integer getWeekHots() {
+		return weekHots;
+	}
+
+	public void setWeekHots(Integer weekHots) {
+		this.weekHots = weekHots;
+	}
+
+	public Integer getHotTrend() {
+		return hotTrend;
+	}
+
+	public void setHotTrend(Integer hotTrend) {
+		this.hotTrend = hotTrend;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getMusicTime() {
+		return musicTime;
+	}
+
+	public void setMusicTime(String musicTime) {
+		this.musicTime = musicTime;
+	}
+
+	public boolean isRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(boolean recommend) {
+		this.recommend = recommend;
+	}
 
 	public Integer getCategoryId() {
 		return categoryId;
@@ -257,6 +337,14 @@ public class Music implements Serializable {
 
 	public void setMusicUrl(String musicUrl) {
 		this.musicUrl = musicUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getCreateTime() {

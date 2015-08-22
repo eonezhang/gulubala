@@ -54,6 +54,9 @@ public class User implements Serializable {
 	/** 点赞数 */
 	private Integer praises;
 	
+	/** 生日 */
+	private String birthday;
+	
 	/** 性别:1-男0-女 */
 	private Integer sex;
 	
@@ -68,6 +71,9 @@ public class User implements Serializable {
 	
 	/** 注册时间 */
 	private String createTime;
+	
+	/** 更新时间 */
+	private String updateTime;
 	
 	//以下属于辅助字段
 	
@@ -191,6 +197,14 @@ public class User implements Serializable {
 		this.praises = praises;
 	}
 
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
 	public Integer getSex() {
 		return sex;
 	}
@@ -229,6 +243,14 @@ public class User implements Serializable {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public String getFullIconUrl() {

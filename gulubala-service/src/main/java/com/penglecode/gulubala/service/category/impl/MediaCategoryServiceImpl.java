@@ -1,6 +1,5 @@
 package com.penglecode.gulubala.service.category.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,10 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.penglecode.gulubala.common.consts.em.MediaCategoryEnum;
+import com.penglecode.gulubala.common.consts.em.MediaCategoryTypeEnum;
 import com.penglecode.gulubala.common.model.MediaCategory;
 import com.penglecode.gulubala.common.support.ValidationAssert;
-import com.penglecode.gulubala.common.util.CollectionUtils;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
 import com.penglecode.gulubala.dao.category.MediaCategoryDAO;
 import com.penglecode.gulubala.service.category.MediaCategoryService;
@@ -31,40 +29,10 @@ public class MediaCategoryServiceImpl implements MediaCategoryService {
 		return category.getCategoryId();
 	}
 
-	public List<MediaCategory> getCategoryList(Integer parentCategoryId, boolean loadAll) {
-		List<MediaCategory> resultList = new ArrayList<MediaCategory>();
-		List<MediaCategory> allCategoryList = mediaCategoryDAO.getCategoryList(parentCategoryId);
-		if(!CollectionUtils.isEmpty(allCategoryList)){
-			if(parentCategoryId == null){
-				resultList.addAll(allCategoryList);
-			}else{
-				if(loadAll){
-					//递归加载parentCategoryId下的所有子节点
-					loadCategorysByParentId(allCategoryList, parentCategoryId, resultList, true);
-				}else{
-					//加载parentCategoryId下的直接子节点
-					loadCategorysByParentId(allCategoryList, parentCategoryId, resultList, false);
-				}
-			}
-		}
-		return resultList;
-	}
-	
-	protected void loadCategorysByParentId(List<MediaCategory> allCategoryList, Integer parentCategoryId, List<MediaCategory> resultList, boolean recursiveLoad) {
-		for(MediaCategory category : allCategoryList){
-			if(parentCategoryId.equals(category.getParentCategoryId())){
-				resultList.add(category);
-				if(recursiveLoad){
-					loadCategorysByParentId(allCategoryList, category.getParentCategoryId(), resultList, recursiveLoad);
-				}
-			}
-		}
-	}
-
 	public List<MediaCategory> getCategoryList4index(Integer category) {
-		MediaCategoryEnum em = MediaCategoryEnum.getCategory(category);
-		ValidationAssert.notNull(em, "无法识别的category类型!");
-		return getCategoryList(em.getTypeCode(), false);
+		MediaCategoryTypeEnum categoryType = MediaCategoryTypeEnum.getCategoryType(category);
+		ValidationAssert.notNull(categoryType, "无法识别的category类型!");
+		return mediaCategoryDAO.getCategoryList(categoryType.getTypeCode());
 	}
 	
 }

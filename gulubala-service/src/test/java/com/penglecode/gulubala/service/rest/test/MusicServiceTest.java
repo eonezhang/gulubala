@@ -261,7 +261,7 @@ public class MusicServiceTest {
 	
 	public static void testGetMusicById() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("musicId", 1);
+		paramMap.put("musicId", 2);
 		Result<Music> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_DETAIL, paramMap, new GenericType<Result<Music>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
@@ -282,11 +282,20 @@ public class MusicServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
+	public static void testGetMusicList4hots() {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("categoryId", 303);
+		paramMap.put("mediaType", 1);
+		Result<PagingList<Music>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_HOTS, paramMap, new GenericType<Result<PagingList<Music>>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) {
 		//testCreateMusic();
 		//testGetMusicById();
 		//testGetMusicList4index();
-		testPlayMusic();
+		testGetMusicList4hots();
+		//testPlayMusic();
 	}
 
 }

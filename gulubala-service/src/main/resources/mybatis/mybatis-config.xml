@@ -31,6 +31,8 @@
         <typeAlias alias="MusicFavorite" type="com.penglecode.gulubala.common.model.MusicFavorite"/>
         <typeAlias alias="MusicComment" type="com.penglecode.gulubala.common.model.MusicComment"/>
         <typeAlias alias="MusicPlayHistory" type="com.penglecode.gulubala.common.model.MusicPlayHistory"/>
+        
+        <typeAlias alias="SlideAdv" type="com.penglecode.gulubala.common.model.SlideAdv"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.penglecode.gulubala.common.mybatis.PaginationInterceptor"/>
@@ -52,5 +54,7 @@
     	<mapper resource="mybatis/mapper/MusicFavoriteMapper.xml"/>
     	<mapper resource="mybatis/mapper/MusicCommentMapper.xml"/>
     	<mapper resource="mybatis/mapper/MusicPlayHistoryMapper.xml"/>
+    	
+    	<mapper resource="mybatis/mapper/SlideAdvMapper.xml"/>
     </mappers>
 </configuration>

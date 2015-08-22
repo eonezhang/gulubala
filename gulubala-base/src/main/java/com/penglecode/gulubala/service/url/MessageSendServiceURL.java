@@ -9,9 +9,9 @@ package com.penglecode.gulubala.service.url;
 public interface MessageSendServiceURL {
 
 	/** 发送注册短信验证码 */
-	String URL_MSG_SEND_REGISTER_SMS = "common/msgsend/register/sms/{mobilePhone}";
+	String URL_MSG_SEND_SMS = "common/msgsend/{sceneType}/sms/{mobilePhone}";
 	
 	/** 发送注册邮件验证码 */
-	String URL_MSG_SEND_REGISTER_EMAIL = "common/msgsend/register/email/{email}";
+	String URL_MSG_SEND_EMAIL = "common/msgsend/{sceneType}/email/{email}";
 	
 }

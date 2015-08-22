@@ -40,6 +40,13 @@
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</update>
 	
+	<update id="updateUserPassword" parameterType="User" statementType="PREPARED">
+		UPDATE users a
+		   SET a.password		= #{encryptedPassword, jdbcType=VARCHAR},
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
 	<update id="incrUserFollows" parameterType="java.util.Map" statementType="PREPARED">
 		UPDATE users a
 		   SET a.follows 		= a.follows + 1,
@@ -88,7 +95,8 @@
 			   a.birthday			birthday,
 			   a.status				status,
 			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')		updateTime
 		  FROM users a
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</select>
@@ -105,6 +113,34 @@
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM users a
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getThinUserByMobile" parameterType="java.lang.String" statementType="PREPARED" resultType="User">
+		SELECT a.id					userId,
+			   a.nickname			nickName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.registerType		registerType,
+			   a.gurz				authenticated,
+			   a.status				status,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM users a
+		 WHERE a.phone = #{mobilePhone, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getThinUserByEmail" parameterType="java.lang.String" statementType="PREPARED" resultType="User">
+		SELECT a.id					userId,
+			   a.nickname			nickName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.registerType		registerType,
+			   a.gurz				authenticated,
+			   a.status				status,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM users a
+		 WHERE a.email = #{email, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="getUserByEmail" parameterType="java.lang.String" statementType="PREPARED" resultType="User">

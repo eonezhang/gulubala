@@ -1,5 +1,7 @@
 package com.penglecode.gulubala.service.user.impl;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.dao.DuplicateKeyException;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.penglecode.gulubala.common.cache.ValidateCodeCacheManager;
+import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.consts.em.UserRegisterTypeEnum;
 import com.penglecode.gulubala.common.consts.em.UserStatusEnum;
 import com.penglecode.gulubala.common.model.User;
@@ -64,6 +67,7 @@ public class UserServiceImpl implements UserService {
 		user.setVip(Boolean.FALSE);
 		user.setStatus(UserStatusEnum.USER_STATUS_ENABLED.getStatusCode());
 		user.setLastLoginTime(nowTime);
+		user.setIconUrl(GlobalConstants.DEFAULT_USER_ICON);
 		try {
 			userDAO.insertUser(user);
 		} catch (DuplicateKeyException e) {
@@ -114,6 +118,8 @@ public class UserServiceImpl implements UserService {
 			return userDAO.isMobilePhoneExists(accountName);
 		}else if(CommonValidateUtils.isEmail(accountName)){
 			return userDAO.isEmailExists(accountName);
+		}else{
+			ValidationAssert.isTrue(false, "无法识别的账户名!");
 		}
 		return Boolean.FALSE;
 	}
@@ -137,6 +143,64 @@ public class UserServiceImpl implements UserService {
 	public void updateUserProfile(User user) {
 		ValidationAssert.notNull(user, "请求参数不能为空!");
 		userDAO.updateUserProfile(user);
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public void updateUserPassword(Map<String, String> parameter) {
+		ValidationAssert.notNull(parameter, "请求参数不能为空!");
+		ValidationAssert.notEmpty(parameter.get("userId"), "用户ID不能为空!");
+		ValidationAssert.notEmpty(parameter.get("oldPassword"), "旧密码不能为空!");
+		ValidationAssert.notEmpty(parameter.get("newPassword"), "新密码不能为空!");
+		Long userId = Long.parseLong(parameter.get("userId"));
+		String oldPassword = parameter.get("oldPassword");
+		String newPassword = parameter.get("newPassword");
+		
+		User puser = userDAO.getThinUserById(userId);
+		ValidationAssert.notNull(puser, "该用户已不存在!");
+		
+		User user = new User();
+		user.setUserId(puser.getUserId());
+		user.setPassword(oldPassword);
+		user.setCreateTime(puser.getCreateTime());
+		String encryptedOldPassword = UserPasswordUtils.encryptPassword(user);
+		ValidationAssert.isTrue(encryptedOldPassword.equals(puser.getEncryptedPassword()), "旧密码输入不正确!");
+		
+		user.setPassword(newPassword);
+		String encryptedNewPassword = UserPasswordUtils.encryptPassword(user);
+		user.setEncryptedPassword(encryptedNewPassword);
+		user.setUpdateTime(DateTimeUtils.formatNow());
+		userDAO.updateUserPassword(user);
+	}
+
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public void restUserPassword(Map<String, String> parameter) {
+		ValidationAssert.notNull(parameter, "请求参数不能为空!");
+		ValidationAssert.notEmpty(parameter.get("validateCode"), "验证码不能为空!");
+		ValidationAssert.notEmpty(parameter.get("newPassword"), "新密码不能为空!");
+		ValidationAssert.notEmpty(parameter.get("accountName"), "手机号码或邮箱不能为空!");
+		String validateCode = parameter.get("validateCode");
+		String accountName = parameter.get("accountName");
+		String newPassword = parameter.get("newPassword");
+		User user = null;
+		if(CommonValidateUtils.isMobilePhone(accountName)){
+			user = userDAO.getThinUserByMobile(accountName);
+		}else if(CommonValidateUtils.isEmail(accountName)){
+			user = userDAO.getThinUserByEmail(accountName);
+		}else{
+			ValidationAssert.isTrue(false, "无法识别的账户名!(必须是手机号或Email)");
+		}
+		ValidationAssert.notNull(user, "该用户已不存在!");
+		
+		String recipient = accountName;
+		String realValidateCode = validateCodeCacheManager.getCache(recipient);
+		ValidationAssert.notEmpty(realValidateCode, "验证码已过期!");
+		ValidationAssert.isTrue(validateCode.equals(realValidateCode), "验证码不正确!");
+		
+		user.setPassword(newPassword);
+		String encryptedNewPassword = UserPasswordUtils.encryptPassword(user);
+		user.setEncryptedPassword(encryptedNewPassword);
+		user.setUpdateTime(DateTimeUtils.formatNow());
+		userDAO.updateUserPassword(user);
 	}
 
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)

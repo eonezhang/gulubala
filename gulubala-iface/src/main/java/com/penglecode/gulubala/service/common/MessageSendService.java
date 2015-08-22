@@ -19,23 +19,23 @@ import com.penglecode.gulubala.service.url.MessageSendServiceURL;
 public interface MessageSendService {
 
 	/**
-	 * 发送注册短信验证码
+	 * 发送短信消息
 	 * @param mobilePhone
 	 * @return
 	 */
 	@GET
-	@Path(MessageSendServiceURL.URL_MSG_SEND_REGISTER_SMS)
+	@Path(MessageSendServiceURL.URL_MSG_SEND_SMS)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public String sendMessageBySms4Register(@PathParam("mobilePhone") String mobilePhone);
+	public String sendValidateCodeBySms(@PathParam("sceneType") String sceneType, @PathParam("mobilePhone") String mobilePhone);
 	
 	/**
-	 * 发送注册邮件验证码
+	 * 发送邮件消息
 	 * @param email
 	 * @return
 	 */
 	@GET
-	@Path(MessageSendServiceURL.URL_MSG_SEND_REGISTER_EMAIL)
+	@Path(MessageSendServiceURL.URL_MSG_SEND_EMAIL)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public String sendMessageByEmail4Register(@PathParam("email") String email);
+	public String sendValidateCodeByEmail(@PathParam("sceneType") String sceneType, @PathParam("email") String email);
 	
 }

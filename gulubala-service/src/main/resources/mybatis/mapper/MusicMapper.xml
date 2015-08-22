@@ -21,7 +21,6 @@
 			zan,
 			shoucang,
 			createdAt,
-			categoryId,
 			lrcUrl,
 			smallPicUrl,
 			picUrl,
@@ -44,7 +43,6 @@
 			#{praises, jdbcType=INTEGER},
 			#{collects, jdbcType=INTEGER},
 			#{createTime, jdbcType=VARCHAR},
-			#{categoryId, jdbcType=INTEGER},
 			#{lrcUrl, jdbcType=VARCHAR},
 			#{smallPictureUrl, jdbcType=VARCHAR},
 			#{pictureUrl, jdbcType=VARCHAR},
@@ -77,8 +75,7 @@
 			   a.hot				hots,
 			   a.playCount			plays,
 			   a.zan				praises,
-			   a.shoucang			collects,
-			   a.categoryId			categoryId
+			   a.shoucang			collects
 		  FROM songs a
 		 WHERE a.id = #{musicId, jdbcType=BIGINT}
 	</select>
@@ -97,15 +94,22 @@
 			   a.publisher			publisher,
 			   DATE_FORMAT(a.publishAt, '%Y-%m-%d %T')	publishTime,
 			   a.hot				hots,
+			   a.dayhot				dayHots,
+			   a.threedayhot		threeDayHots,
+			   a.weekhot			weekHots,
+			   a.hottrend			hotTrend,
+			   a.userId				userId,
+			   a.songTime			musicTime,
+			   a.sRecommend			recommend,
 			   a.playCount			plays,
 			   a.zan				praises,
 			   a.shoucang			collects,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
-			   a.categoryId			categoryId,
 			   a.lrcUrl				lrcUrl,
 			   a.smallPicUrl		smallPictureUrl,
 			   a.picUrl				pictureUrl,
-			   a.songUrl			musicUrl
+			   a.songUrl			musicUrl,
+			   a.description		description
 		  FROM songs a
 		 WHERE a.id = #{musicId, jdbcType=BIGINT}
 	</select>
@@ -124,15 +128,22 @@
 			   a.publisher			publisher,
 			   DATE_FORMAT(a.publishAt, '%Y-%m-%d %T')	publishTime,
 			   a.hot				hots,
+			   a.dayhot				dayHots,
+			   a.threedayhot		threeDayHots,
+			   a.weekhot			weekHots,
+			   a.hottrend			hotTrend,
+			   a.userId				userId,
+			   a.songTime			musicTime,
+			   a.sRecommend			recommend,
 			   a.playCount			plays,
 			   a.zan				praises,
 			   a.shoucang			collects,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
-			   a.categoryId			categoryId,
 			   a.lrcUrl				lrcUrl,
 			   a.smallPicUrl		smallPictureUrl,
 			   a.picUrl				pictureUrl,
-			   a.songUrl			musicUrl
+			   a.songUrl			musicUrl,
+			   a.description		description
 		  FROM songs a
 		 WHERE a.id in
 		<foreach collection="list" item="musicId" open="(" separator="," close=")">
@@ -150,14 +161,17 @@
 			   a.playCount			plays,
 			   a.zan				praises,
 			   a.shoucang			collects,
-			   a.categoryId			categoryId,
 			   a.smallPicUrl		smallPictureUrl,
 			   a.songUrl			musicUrl,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM songs a
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
+		       ,songcategorys b
+		</if>
 		 WHERE a.mv = #{mediaType, jdbcType=INTEGER}
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
-		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
+		   AND a.id = b.songId
+		   AND b.categoryId = #{categoryId, jdbcType=INTEGER}
 		</if>
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(orderby)">
 		   ORDER BY ${orderby} ${order}
@@ -167,9 +181,13 @@
 	<select id="getMusicList4index_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
 		SELECT COUNT(1)
 		  FROM songs a
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
+		       ,songcategorys b
+		</if>
 		 WHERE a.mv = #{mediaType, jdbcType=INTEGER}
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
-		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
+		   AND a.id = b.songId
+		   AND b.categoryId = #{categoryId, jdbcType=INTEGER}
 		</if>
 	</select>
 	
@@ -183,7 +201,6 @@
 			   a.playCount			plays,
 			   a.zan				praises,
 			   a.shoucang			collects,
-			   a.categoryId			categoryId,
 			   a.smallPicUrl		smallPictureUrl,
 			   a.songUrl			musicUrl,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime

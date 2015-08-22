@@ -18,8 +18,8 @@ public class MediaCategory implements Serializable {
 	/** 分类名称 */
 	private String categoryName;
 	
-	/** 父分类ID */
-	private Integer parentCategoryId;
+	/** 分类类型 #MediaCategoryTypeEnum */
+	private Integer categoryType;
 	
 	/** 兄弟分类节点间的排序值,ASC */
 	private Integer siblingsOrder;
@@ -46,12 +46,12 @@ public class MediaCategory implements Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public Integer getParentCategoryId() {
-		return parentCategoryId;
+	public Integer getCategoryType() {
+		return categoryType;
 	}
 
-	public void setParentCategoryId(Integer parentCategoryId) {
-		this.parentCategoryId = parentCategoryId;
+	public void setCategoryType(Integer categoryType) {
+		this.categoryType = categoryType;
 	}
 
 	public Integer getSiblingsOrder() {

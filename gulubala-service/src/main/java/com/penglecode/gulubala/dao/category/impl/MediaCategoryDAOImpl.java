@@ -16,8 +16,8 @@ public class MediaCategoryDAOImpl extends BaseMybatisDAO implements MediaCategor
 		getSqlSessionTemplate().insert(getMapperKey("insertCategory"), category);
 	}
 
-	public List<MediaCategory> getCategoryList(Integer parentCategoryId) {
-		return getSqlSessionTemplate().selectList(getMapperKey("getCategoryList"), Collections.singletonMap("parentCategoryId", parentCategoryId));
+	public List<MediaCategory> getCategoryList(Integer categoryType) {
+		return getSqlSessionTemplate().selectList(getMapperKey("getCategoryList"), Collections.singletonMap("categoryType", categoryType));
 	}
 
 	protected Class<?> getBoundModelClass() {

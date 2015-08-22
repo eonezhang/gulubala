@@ -5,8 +5,11 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS albums;
 DROP TABLE IF EXISTS danmu;
 DROP TABLE IF EXISTS favorites;
+DROP TABLE IF EXISTS mediacategory;
 DROP TABLE IF EXISTS playlists;
 DROP TABLE IF EXISTS singers;
+DROP TABLE IF EXISTS slideadv;
+DROP TABLE IF EXISTS songcategorys;
 DROP TABLE IF EXISTS songcomments;
 DROP TABLE IF EXISTS songlists;
 DROP TABLE IF EXISTS songs;
@@ -82,6 +85,27 @@ CREATE TABLE favorites
 ) COMMENT = '收藏表';
 
 
+-- 媒体分类表,ID[1-99]区间的都是固定死的
+CREATE TABLE mediacategory
+(
+	-- 分类ID
+	categoryId int NOT NULL AUTO_INCREMENT COMMENT '分类ID',
+	-- 分类名称
+	categoryName varchar(32) NOT NULL COMMENT '分类名称',
+	-- 分类类型(1-音乐分类2-视频分类3-排行榜分类)
+	categoryType int NOT NULL COMMENT '分类类型(1-音乐分类2-视频分类3-排行榜分类)',
+	-- 兄弟节点间的排序值
+	siblingsOrder int NOT NULL COMMENT '兄弟节点间的排序值',
+	-- 创建者ID
+	createdBy int NOT NULL COMMENT '创建者ID',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (categoryId),
+	CONSTRAINT uk_mediacategory_name UNIQUE (categoryName, categoryType)
+) COMMENT = '媒体分类表,ID[1-99]区间的都是固定死的'
+AUTO_INCREMENT = 100;
+
+
 -- 播放历史表
 CREATE TABLE playlists
 (
@@ -96,7 +120,7 @@ CREATE TABLE playlists
 	-- 更新时间
 	updatedAt datetime COMMENT '更新时间',
 	PRIMARY KEY (id),
-	UNIQUE (userId)
+	CONSTRAINT uk_playlists_userId UNIQUE (userId)
 ) COMMENT = '播放历史表';
 
 
@@ -133,6 +157,42 @@ CREATE TABLE singers
 ) COMMENT = '歌手表';
 
 
+-- 轮播广告表
+CREATE TABLE slideadv
+(
+	-- 轮播广告ID
+	id int NOT NULL AUTO_INCREMENT COMMENT '轮播广告ID',
+	-- 轮播广告标题
+	title varchar(255) NOT NULL COMMENT '轮播广告标题',
+	-- 广告图片URL
+	imgUrl varchar(255) NOT NULL COMMENT '广告图片URL',
+	-- 排序值
+	orderIndex int NOT NULL COMMENT '排序值',
+	-- 状态(1-上架,0-下架)
+	status tinyint DEFAULT 1 NOT NULL COMMENT '状态(1-上架,0-下架)',
+	-- 广告备注
+	remark varchar(500) COMMENT '广告备注',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间',
+	-- 更新时间
+	updatedAt datetime COMMENT '更新时间',
+	PRIMARY KEY (id)
+) COMMENT = '轮播广告表';
+
+
+-- 歌曲分类关系表
+CREATE TABLE songcategorys
+(
+	-- 歌曲id
+	songId int NOT NULL COMMENT '歌曲id',
+	-- 分类id
+	categoryId int NOT NULL COMMENT '分类id',
+	-- 创建时间
+	createdAt datetime NOT NULL COMMENT '创建时间'
+) COMMENT = '歌曲分类关系表'
+ALTER TABLE songcategorys ADD PRIMARY KEY pk_songid_categoryid(songId,categoryId);
+
+
 -- 歌曲/歌单评论表
 CREATE TABLE songcomments
 (
@@ -162,9 +222,9 @@ CREATE TABLE songlists
 	-- 歌单Id
 	id int NOT NULL AUTO_INCREMENT COMMENT '歌单Id',
 	-- 用户Id
-	userId int COMMENT '用户Id',
+	userId int NOT NULL COMMENT '用户Id',
 	-- 歌曲Id集合","分割
-	songIds varchar(500) NOT NULL COMMENT '歌曲Id集合","分割',
+	songIds varchar(1000) COMMENT '歌曲Id集合","分割',
 	-- 创建时间
 	createdAt datetime NOT NULL COMMENT '创建时间',
 	-- 更新时间
@@ -181,8 +241,7 @@ CREATE TABLE songlists
 	collects int DEFAULT 0 NOT NULL COMMENT '收藏数',
 	-- 播放次数
 	plays int DEFAULT 0 NOT NULL COMMENT '播放次数',
-	PRIMARY KEY (id),
-	UNIQUE (userId)
+	PRIMARY KEY (id)
 ) COMMENT = '歌单表';
 
 

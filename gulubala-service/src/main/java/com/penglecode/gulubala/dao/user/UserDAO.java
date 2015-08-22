@@ -30,6 +30,12 @@ public interface UserDAO {
 	public void updateUserProfile(User user);
 	
 	/**
+	 * 更新用户密码
+	 * @param user
+	 */
+	public void updateUserPassword(User user);
+	
+	/**
 	 * 根据userId获取用户信息(全字段)
 	 * @param userId
 	 * @return
@@ -42,6 +48,20 @@ public interface UserDAO {
 	 * @return
 	 */
 	public User getThinUserById(Long userId);
+	
+	/**
+	 * 根据mobilePhone获取用户信息(部分字段)
+	 * @param userId
+	 * @return
+	 */
+	public User getThinUserByMobile(String mobilePhone);
+	
+	/**
+	 * 根据email获取用户信息(部分字段)
+	 * @param email
+	 * @return
+	 */
+	public User getThinUserByEmail(String email);
 	
 	/**
 	 * 根据mobilePhone获取用户信息(全字段)

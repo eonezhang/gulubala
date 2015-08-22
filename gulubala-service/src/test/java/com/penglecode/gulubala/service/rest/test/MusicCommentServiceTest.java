@@ -60,8 +60,8 @@ public class MusicCommentServiceTest {
 		//testCreateMusicComment();
 		//testPraiseMusicComment();
 		//testDeleteMusicCommentById();
-		//testGetMusicCommentsByUserId();
-		testGetMusicCommentsByCommentId();
+		testGetMusicCommentsByUserId();
+		//testGetMusicCommentsByCommentId();
 	}
 
 }

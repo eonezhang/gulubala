@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.penglecode.gulubala.common.cache.ValidateCodeCacheManager;
+import com.penglecode.gulubala.common.consts.em.MessageSendSceneTypeEnum;
 import com.penglecode.gulubala.common.support.Messages;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.CommonValidateUtils;
@@ -19,25 +20,30 @@ public class MessageSendServiceImpl implements MessageSendService {
 	@Resource(name="validateCodeCacheManager")
 	private ValidateCodeCacheManager validateCodeCacheManager;
 
-	public String sendMessageBySms4Register(String mobilePhone) {
+	public String sendValidateCodeBySms(String sceneType, String mobilePhone) {
+		ValidationAssert.notEmpty(sceneType, "发送信息场景[sceneType]不能为空!");
+		MessageSendSceneTypeEnum sceneTypeEm = MessageSendSceneTypeEnum.getSceneType(sceneType);
+		ValidationAssert.notNull(sceneTypeEm, "发送信息场景[sceneType]无法识别!");
 		ValidationAssert.notEmpty(mobilePhone, "手机号码不能为空!");
 		ValidationAssert.isTrue(CommonValidateUtils.isMobilePhone(mobilePhone), "手机号码不合法!");
 		String validateCode = RandomUtils.randomNumberCode(6);
-		String message = Messages.getMessage("message.validatecode.register", validateCode);
+		String message = Messages.getMessage(String.format("message.validatecode.%s", sceneType), validateCode);
 		SmsUtils.sendMessage(mobilePhone, message);
 		validateCodeCacheManager.setCache(mobilePhone, validateCode);
 		return validateCode;
 	}
 
-	public String sendMessageByEmail4Register(String email) {
+	public String sendValidateCodeByEmail(String sceneType, String email) {
+		ValidationAssert.notEmpty(sceneType, "发送信息场景[sceneType]不能为空!");
+		MessageSendSceneTypeEnum sceneTypeEm = MessageSendSceneTypeEnum.getSceneType(sceneType);
+		ValidationAssert.notNull(sceneTypeEm, "发送信息场景[sceneType]无法识别!");
 		ValidationAssert.notEmpty(email, "Email不能为空!");
 		ValidationAssert.isTrue(CommonValidateUtils.isEmail(email), "Email不合法!");
 		String validateCode = RandomUtils.randomNumberCode(6);
-		String message = Messages.getMessage("message.validatecode.register", validateCode);
+		String message = Messages.getMessage(String.format("message.validatecode.%s", sceneType), validateCode);
 		JavaMailUtils.sendTextMail(email, "注册验证码", message);
 		validateCodeCacheManager.setCache(email, validateCode);
 		return validateCode;
 	}
-	
 	
 }

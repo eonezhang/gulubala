@@ -39,4 +39,5 @@
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicCommentService" ref="musicCommentService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicPlayHistoryService" ref="musicPlayHistoryService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.user.UserFollowService" ref="userFollowService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.app.SlideAdvService" ref="slideAdvService" protocol="dubbo,rest"/>
 </beans>
