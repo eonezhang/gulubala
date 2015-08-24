@@ -19,6 +19,9 @@ public class MusicList implements Serializable {
 	/** 歌单名称 */
 	private String listName;
 	
+	/** 歌单封面图URL */
+	private String pictureUrl;
+	
 	/** 用户Id */
 	private Long userId;
 	
@@ -49,6 +52,8 @@ public class MusicList implements Serializable {
 	private int musicCount;
 	
 	private List<Music> musicList;
+	
+	private String fullPictureUrl;
 
 	public Long getListId() {
 		return listId;
@@ -64,6 +69,14 @@ public class MusicList implements Serializable {
 
 	public void setListName(String listName) {
 		this.listName = listName;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
 
 	public Long getUserId() {
@@ -152,6 +165,14 @@ public class MusicList implements Serializable {
 
 	public void setMusicList(List<Music> musicList) {
 		this.musicList = musicList;
+	}
+
+	public String getFullPictureUrl() {
+		return fullPictureUrl;
+	}
+
+	public void setFullPictureUrl(String fullPictureUrl) {
+		this.fullPictureUrl = fullPictureUrl;
 	}
 
 }

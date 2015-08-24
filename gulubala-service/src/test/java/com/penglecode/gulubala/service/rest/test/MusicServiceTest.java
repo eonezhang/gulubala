@@ -290,11 +290,19 @@ public class MusicServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
+	public static void testGetMusicList4search() {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("musicName", "泡沫");
+		Result<PagingList<Music>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_SEARCH, paramMap, new GenericType<Result<PagingList<Music>>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) {
 		//testCreateMusic();
 		//testGetMusicById();
 		//testGetMusicList4index();
-		testGetMusicList4hots();
+		//testGetMusicList4hots();
+		testGetMusicList4search();
 		//testPlayMusic();
 	}
 

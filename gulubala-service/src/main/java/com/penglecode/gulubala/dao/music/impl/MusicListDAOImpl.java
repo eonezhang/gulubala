@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.penglecode.gulubala.common.model.MusicList;
 import com.penglecode.gulubala.common.mybatis.EscapeFilter;
 import com.penglecode.gulubala.common.support.Pager;
+import com.penglecode.gulubala.common.util.AppResourceUtils;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
 import com.penglecode.gulubala.common.util.StringUtils;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
@@ -66,6 +67,9 @@ public class MusicListDAOImpl extends BaseMybatisDAO implements MusicListDAO {
 		public void doEscapeFilter(MusicList element) {
 			if(!StringUtils.isEmpty(element.getMusicIds())){
 				element.setMusicCount(element.getMusicIds().split(",").length);
+			}
+			if(!StringUtils.isEmpty(element.getPictureUrl())){
+				element.setFullPictureUrl(AppResourceUtils.getFullPictureUrl(element.getPictureUrl()));
 			}
 		}
 		

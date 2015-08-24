@@ -15,7 +15,6 @@ import com.penglecode.gulubala.service.url.SlideAdvServiceURL;
 public class SlideAdvServiceTest {
 
 	public static void testCreateSlideAdv() {
-		
 		String[] imgs = new String[]{
 			"2308f7d3d2.jpg", "13fb90e91d7.jpg", "82d1584f75.jpg", "93d70cf5091.jpg",
 			"510fd8f9a1d5.jpg", "9ea15cebf7c.jpg", "2397dd8c30.jpg", "703908fc1d2.jpg"

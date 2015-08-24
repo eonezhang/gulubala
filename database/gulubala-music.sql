@@ -241,6 +241,8 @@ CREATE TABLE songlists
 	collects int DEFAULT 0 NOT NULL COMMENT '收藏数',
 	-- 播放次数
 	plays int DEFAULT 0 NOT NULL COMMENT '播放次数',
+	-- 歌单封面图URL
+	pictureUrl varchar(255) NOT NULL COMMENT '歌单封面图URL',
 	PRIMARY KEY (id)
 ) COMMENT = '歌单表';
 
