@@ -297,7 +297,7 @@ public class MusicServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		//testCreateMusic();
 		//testGetMusicById();
 		//testGetMusicList4index();
