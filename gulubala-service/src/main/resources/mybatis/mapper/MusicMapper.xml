@@ -203,6 +203,7 @@
 			   a.shoucang			collects,
 			   a.smallPicUrl		smallPictureUrl,
 			   a.songUrl			musicUrl,
+			   a.description		description,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM songs a
 		 WHERE a.name like CONCAT('%', #{musicName, jdbcType=VARCHAR}, '%')

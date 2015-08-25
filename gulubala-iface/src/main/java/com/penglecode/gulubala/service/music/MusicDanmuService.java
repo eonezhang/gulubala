@@ -11,7 +11,7 @@ import javax.ws.rs.QueryParam;
 
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.model.MusicDanmu;
-import com.penglecode.gulubala.common.support.DanmuMessageTemplate;
+import com.penglecode.gulubala.common.support.DanmuMsgTpl4Andriod;
 import com.penglecode.gulubala.service.url.MusicDanmuServiceURL;
 
 /**
@@ -45,7 +45,7 @@ public interface MusicDanmuService {
 	@GET
 	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST_ANDROID)
 	@Produces({ContentType.APPLICATION_XML_UTF_8})
-	public DanmuMessageTemplate getNextMusicDanmuList4Andriod(@PathParam("musicId")Long musicId, 
+	public DanmuMsgTpl4Andriod getNextMusicDanmuList4Andriod(@PathParam("musicId")Long musicId, 
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
 	
@@ -58,8 +58,8 @@ public interface MusicDanmuService {
 	 */
 	@GET
 	@Path(MusicDanmuServiceURL.URL_MUSIC_DANMU_LIST_IOS)
-	@Produces({ContentType.APPLICATION_XML_UTF_8})
-	public DanmuMessageTemplate getNextMusicDanmuList4IOS(@PathParam("musicId")Long musicId, 
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public String getNextMusicDanmuList4IOS(@PathParam("musicId")Long musicId, 
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("100")@QueryParam("pageSize") Integer pageSize);
 

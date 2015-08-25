@@ -70,6 +70,7 @@ public class MusicPlayHistoryServiceImpl implements MusicPlayHistoryService {
 				map.put("singerId", music.getSingerId());
 				map.put("fullSmallPictureUrl", music.getFullSmallPictureUrl());
 				map.put("mv", music.isMv());
+				map.put("description", music.getDescription());
 				mapList.add(map);
 			}
 		}

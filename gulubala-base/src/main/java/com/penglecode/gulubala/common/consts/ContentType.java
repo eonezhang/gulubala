@@ -15,6 +15,9 @@ public class ContentType {
 	public static final String APPLICATION_XML_UTF_8 = "application/xml; charset=UTF-8";
 	
 	/** 请求/响应数据格式 */
+	public static final String TEXT_PLAIN_UTF_8 = "text/xml; charset=UTF-8";
+	
+	/** 请求/响应数据格式 */
 	public static final String APPLICATION_FORM = "application/x-www-form-urlencoded";
 	
 }

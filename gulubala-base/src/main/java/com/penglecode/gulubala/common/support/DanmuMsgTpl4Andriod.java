@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="i")
 @XmlType(propOrder={"chatServer", "chatId", "mission", "maxLimit", "source", "items"}) 
-public class DanmuMessageTemplate implements ServiceResultNoWrap {
+public class DanmuMsgTpl4Andriod implements DanmuMsgTpl {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class DanmuMessageTemplate implements ServiceResultNoWrap {
 	private String source;
 	
 	@XmlElement(name="d")
-	private List<DanmuMessageItem> items;
+	private List<DanmuMsgItem4Andriod> items;
 
 	public String getChatServer() {
 		return chatServer;
@@ -81,11 +81,11 @@ public class DanmuMessageTemplate implements ServiceResultNoWrap {
 		this.source = source;
 	}
 
-	public List<DanmuMessageItem> getItems() {
+	public List<DanmuMsgItem4Andriod> getItems() {
 		return items;
 	}
 
-	public void setItems(List<DanmuMessageItem> items) {
+	public void setItems(List<DanmuMsgItem4Andriod> items) {
 		this.items = items;
 	}
 	

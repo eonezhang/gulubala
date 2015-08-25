@@ -33,6 +33,9 @@ public class MusicFavorite implements Serializable {
 	
 	/** 收藏对象的名称 */
 	private String favoriteName;
+	
+	/** 用户昵称 */
+	private String nickName;
 
 	public Long getId() {
 		return id;
@@ -88,6 +91,14 @@ public class MusicFavorite implements Serializable {
 
 	public void setFavoriteName(String favoriteName) {
 		this.favoriteName = favoriteName;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 }

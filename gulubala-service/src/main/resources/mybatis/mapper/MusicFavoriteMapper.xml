@@ -27,12 +27,13 @@
 	<select id="getMusicFavoritesByUserId" parameterType="java.util.Map" statementType="PREPARED" resultType="MusicFavorite">
 		SELECT a.id 				id,
 			   a.userId				userId,
+			   u.nickname 			nickName,
 			   a.favoriteType		favoriteType,
 			   a.favoriteId			favoriteId,
 			   a.data				data,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
 			   b.name favoriteName
-		  FROM favorites a
+		  FROM favorites a LEFT JOIN users u ON(a.userId = u.id)
 		<if test="favoriteType == 1">
 			,songs b
 		</if>
@@ -40,6 +41,7 @@
 			,songlists b
 		</if>
 		 WHERE a.userId = #{userId, jdbcType=BIGINT}
+		   AND a.favoriteId = b.id
 		   AND a.favoriteType = #{favoriteType, jdbcType=INTEGER}
 		 ORDER BY a.createdAt DESC
 	</select>
@@ -54,6 +56,7 @@
 			,songlists b
 		</if>
 		 WHERE a.userId = #{userId, jdbcType=BIGINT}
+		   AND a.favoriteId = b.id
 		   AND a.favoriteType = #{favoriteType, jdbcType=INTEGER}
 	</select>
 	

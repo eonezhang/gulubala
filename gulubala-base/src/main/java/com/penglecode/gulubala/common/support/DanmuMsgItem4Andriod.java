@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlValue;
  * @version 1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DanmuMessageItem implements ServiceResultNoWrap {
+public class DanmuMsgItem4Andriod implements ServiceResultNoWrap {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,11 @@ public class DanmuMessageItem implements ServiceResultNoWrap {
 	@XmlValue()
 	private String content;
 
-	public DanmuMessageItem() {
+	public DanmuMsgItem4Andriod() {
 		super();
 	}
 
-	public DanmuMessageItem(String position, String content) {
+	public DanmuMsgItem4Andriod(String position, String content) {
 		super();
 		this.position = position;
 		this.content = content;
