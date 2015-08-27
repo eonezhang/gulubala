@@ -13,7 +13,7 @@ import static com.penglecode.gulubala.common.support.CacheDefinition.*;
 public interface CacheDefinitions {
 
 	/** 全局认证鉴权authToken缓存 */
-	CacheDefinition CACHE_GLOBAL_AUTH_TOKEN = valueOf("global_auth_token_%s", "全局认证鉴权authToken缓存Key", 60 * 60 * 24 * 7);
+	CacheDefinition CACHE_GLOBAL_AUTH_TOKEN = valueOf("global_auth_token_%s", "全局认证鉴权authToken缓存Key", 60 * 60 * 24 * 365);
 	
 	/** 全局验证码缓存 */
 	CacheDefinition CACHE_GLOBAL_VALIDATE_CODE = valueOf("global_validate_code_%s", "全局验证码缓存", 15 * 60);
