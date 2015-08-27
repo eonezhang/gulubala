@@ -1,5 +1,7 @@
 package com.penglecode.gulubala.common.util;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.model.User;
 import com.penglecode.gulubala.common.support.SimpleHash;
@@ -19,6 +21,11 @@ public class UserPasswordUtils {
 		return UserPasswordUtils.encryptPassword(user.getPassword(), UserPasswordUtils.generateSalt(user));
 	}
 	
+	public static String encryptPassword(String password) {
+		ValidationAssert.notEmpty(password, "参数password不能为空!");
+		return DigestUtils.md5Hex(password);
+	}
+	
 	public static String encryptPassword(String password, String salt) {
 		ValidationAssert.notEmpty(password, "参数password不能为空!");
 		SimpleHash hash = new SimpleHash("md5", password, salt, GlobalConstants.DEFAULT_PASSWORD_HASH_ITERATIONS);
@@ -30,6 +37,10 @@ public class UserPasswordUtils {
 		ValidationAssert.notNull(user, "参数user不能为空!");
 		ValidationAssert.notEmpty(user.getCreateTime(), "参数user[createTime]不能为空!");
 		return user.getCreateTime();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(encryptPassword("123456"));
 	}
 	
 }

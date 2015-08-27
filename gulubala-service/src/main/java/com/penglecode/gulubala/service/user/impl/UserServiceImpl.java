@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 		
 		String nowTime = DateTimeUtils.formatNow();
 		user.setCreateTime(nowTime);
-		user.setEncryptedPassword(UserPasswordUtils.encryptPassword(user));
+		user.setEncryptedPassword(UserPasswordUtils.encryptPassword(user.getPassword()));
 		user.setVip(Boolean.FALSE);
 		user.setStatus(UserStatusEnum.USER_STATUS_ENABLED.getStatusCode());
 		user.setLastLoginTime(nowTime);
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 		}
 		ValidationAssert.notNull(puser, "登录手机号码或邮箱不存在!");
 		user.setCreateTime(puser.getCreateTime());
-		String inputEncryptedPassword = UserPasswordUtils.encryptPassword(user);
+		String inputEncryptedPassword = UserPasswordUtils.encryptPassword(user.getPassword());
 		ValidationAssert.isTrue(inputEncryptedPassword.equals(puser.getEncryptedPassword()), "登录密码不正确!");
 		userDAO.updateUser4Login(puser.getUserId(), DateTimeUtils.formatNow());
 		return puser;
@@ -162,11 +162,11 @@ public class UserServiceImpl implements UserService {
 		user.setUserId(puser.getUserId());
 		user.setPassword(oldPassword);
 		user.setCreateTime(puser.getCreateTime());
-		String encryptedOldPassword = UserPasswordUtils.encryptPassword(user);
+		String encryptedOldPassword = UserPasswordUtils.encryptPassword(user.getPassword());
 		ValidationAssert.isTrue(encryptedOldPassword.equals(puser.getEncryptedPassword()), "旧密码输入不正确!");
 		
 		user.setPassword(newPassword);
-		String encryptedNewPassword = UserPasswordUtils.encryptPassword(user);
+		String encryptedNewPassword = UserPasswordUtils.encryptPassword(user.getPassword());
 		user.setEncryptedPassword(encryptedNewPassword);
 		user.setUpdateTime(DateTimeUtils.formatNow());
 		userDAO.updateUserPassword(user);
@@ -197,7 +197,7 @@ public class UserServiceImpl implements UserService {
 		ValidationAssert.isTrue(validateCode.equals(realValidateCode), "验证码不正确!");
 		
 		user.setPassword(newPassword);
-		String encryptedNewPassword = UserPasswordUtils.encryptPassword(user);
+		String encryptedNewPassword = UserPasswordUtils.encryptPassword(user.getPassword());
 		user.setEncryptedPassword(encryptedNewPassword);
 		user.setUpdateTime(DateTimeUtils.formatNow());
 		userDAO.updateUserPassword(user);
