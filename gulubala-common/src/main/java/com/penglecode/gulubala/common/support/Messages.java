@@ -35,31 +35,31 @@ public class Messages {
 
     public static String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {
         String message = messageSource.getMessage(code, args, defaultMessage, locale);
-        Assert.hasText(message, "No message found in i18n message resource file!");
+        Assert.hasText(message, String.format("No message (code=%s) found in i18n message resource file!", code));
         return message;
     }
 
     public static String getMessage(String code, Object[] args, String defaultMessage) {
         String message = messageSource.getMessage(code, args, defaultMessage, getCurrentLocale());
-        Assert.hasText(message, "No message found in i18n message resource file!");
+        Assert.hasText(message, String.format("No message (code=%s) found in i18n message resource file!", code));
         return message;
     }
 
     public static String getMessage(String code, Object[] args) {
         String message = messageSource.getMessage(code, args, "", getCurrentLocale());
-        Assert.hasText(message, "No message found in i18n message resource file!");
+        Assert.hasText(message, String.format("No message (code=%s) found in i18n message resource file!", code));
         return message;
     }
 
     public static String getMessage(String code, String args0) {
         String message = messageSource.getMessage(code, new Object[]{args0}, "", getCurrentLocale());
-        Assert.hasText(message, "No message found in i18n message resource file!");
+        Assert.hasText(message, String.format("No message (code=%s) found in i18n message resource file!", code));
         return message;
     }
 
     public static String getMessage(String code) {
         String message = messageSource.getMessage(code, null, "", getCurrentLocale());
-        Assert.hasText(message, "No message found in i18n message resource file for message code '" + code + "'!");
+        Assert.hasText(message, String.format("No message (code=%s) found in i18n message resource file!", code));
         return message;
     }
     
