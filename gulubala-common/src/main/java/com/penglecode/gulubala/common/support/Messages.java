@@ -1,6 +1,5 @@
 package com.penglecode.gulubala.common.support;
 
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.AbstractMessageSource;
 import org.springframework.util.Assert;
 
@@ -26,11 +25,11 @@ public class Messages {
     }
     
     public static Locale getCurrentLocale() {
-    	Locale locale = LocaleContextHolder.getLocale();
+    	/*Locale locale = LocaleContextHolder.getLocale();
     	if(locale == null){
     		locale = DEFAULT_LOCALE;
-    	}
-    	return locale;
+    	}*/
+    	return DEFAULT_LOCALE;
     }
 
     public static String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {

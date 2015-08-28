@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.penglecode.gulubala.common.cache.ValidateCodeCacheManager;
-import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.consts.em.MessageSendSceneTypeEnum;
 import com.penglecode.gulubala.common.support.Messages;
 import com.penglecode.gulubala.common.support.ValidationAssert;
@@ -28,7 +27,7 @@ public class MessageSendServiceImpl implements MessageSendService {
 		ValidationAssert.notEmpty(mobilePhone, "手机号码不能为空!");
 		ValidationAssert.isTrue(CommonValidateUtils.isMobilePhone(mobilePhone), "手机号码不合法!");
 		String validateCode = RandomUtils.randomNumberCode(6);
-		String message = Messages.getMessage(String.format("message.validatecode.%s", sceneType), new Object[]{validateCode}, "", GlobalConstants.SYSTEM_DEFAULT_LOCALE);
+		String message = Messages.getMessage(String.format("message.validatecode.%s", sceneType), validateCode);
 		SmsUtils.sendMessage(mobilePhone, message);
 		validateCodeCacheManager.setCache(mobilePhone, validateCode);
 		return validateCode;
@@ -41,7 +40,7 @@ public class MessageSendServiceImpl implements MessageSendService {
 		ValidationAssert.notEmpty(email, "Email不能为空!");
 		ValidationAssert.isTrue(CommonValidateUtils.isEmail(email), "Email不合法!");
 		String validateCode = RandomUtils.randomNumberCode(6);
-		String message = Messages.getMessage(String.format("message.validatecode.%s", sceneType), new Object[]{validateCode}, "", GlobalConstants.SYSTEM_DEFAULT_LOCALE);
+		String message = Messages.getMessage(String.format("message.validatecode.%s", sceneType), validateCode);
 		JavaMailUtils.sendTextMail(email, "注册验证码", message);
 		validateCodeCacheManager.setCache(email, validateCode);
 		return validateCode;
