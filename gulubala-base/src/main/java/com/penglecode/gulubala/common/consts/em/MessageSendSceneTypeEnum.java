@@ -8,7 +8,7 @@ package com.penglecode.gulubala.common.consts.em;
  */
 public enum MessageSendSceneTypeEnum {
 
-	SCENE_TYPE_REGISTER("register", "用户注册"), SCENE_TYPE_RETRIEVE_PASSWORD("password", "找回密码、修改密码");
+	SCENE_TYPE_REGISTER("register", "用户注册"), SCENE_TYPE_RETRIEVE_PASSWORD("retrievepwd", "找回密码、修改密码");
 	
 	private String sceneType;
 	
