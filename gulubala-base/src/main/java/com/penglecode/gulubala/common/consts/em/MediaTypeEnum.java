@@ -8,7 +8,7 @@ package com.penglecode.gulubala.common.consts.em;
  */
 public enum MediaTypeEnum {
 
-	MEDIA_TYPE_MUSIC(0, "音乐"), MEDIA_TYPE_MV(1, "MV");
+	MEDIA_TYPE_VIDIO(0, "视频"), MEDIA_TYPE_AUDIO(1, "音频");
 	
 	private Integer typeCode;
 	

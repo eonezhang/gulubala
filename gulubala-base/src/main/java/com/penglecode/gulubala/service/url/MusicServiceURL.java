@@ -18,10 +18,10 @@ public interface MusicServiceURL {
 	String URL_MUSIC_PLAY = "music/play/{musicId}";
 	
 	/** 根据媒体类型获取音乐列表(首页接口)[分页、排序] */
-	String URL_MUSIC_LIST_INDEX = "music/list/index/{mediaType}";
+	String URL_MUSIC_LIST_INDEX = "music/list/index";
 	
 	/** 根据分类ID获取排行榜列表(排行榜接口)[分页、排序] */
-	String URL_MUSIC_LIST_HOTS = "music/list/hots/{mediaType}";
+	String URL_MUSIC_LIST_HOTS = "music/list/hots";
 	
 	/** 根据音乐名字关键字模糊搜索(首页接口)[分页、排序] */
 	String URL_MUSIC_LIST_SEARCH = "music/list/search";

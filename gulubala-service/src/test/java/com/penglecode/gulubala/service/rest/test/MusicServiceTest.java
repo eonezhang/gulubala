@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.ws.rs.core.GenericType;
 
 import com.penglecode.gulubala.common.model.Music;
+import com.penglecode.gulubala.common.model.MusicRecommend;
 import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.Result;
 import com.penglecode.gulubala.common.util.JsonUtils;
@@ -276,16 +277,17 @@ public class MusicServiceTest {
 	
 	public static void testGetMusicList4index() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("mediaType", 0);
-		Result<PagingList<Music>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_INDEX, paramMap, new GenericType<Result<PagingList<Music>>>(){});
+		paramMap.put("categoryId", 9);
+		paramMap.put("mediaType", 1);
+		Result<PagingList<MusicRecommend>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_INDEX, paramMap, new GenericType<Result<PagingList<MusicRecommend>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
 	public static void testGetMusicList4hots() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("mediaType", 1);
-		paramMap.put("hotType", "hots");
-		Result<PagingList<Music>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_HOTS, paramMap, new GenericType<Result<PagingList<Music>>>(){});
+		paramMap.put("categoryId", 9);
+		//paramMap.put("mediaType", 1);
+		Result<PagingList<MusicRecommend>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_HOTS, paramMap, new GenericType<Result<PagingList<MusicRecommend>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	

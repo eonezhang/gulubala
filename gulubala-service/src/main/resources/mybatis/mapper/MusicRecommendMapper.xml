@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.MusicRecommendMapper">
+	
+	<select id="getRecommendList" parameterType="java.util.Map" statementType="PREPARED" resultType="MusicRecommend">
+		SELECT a.id 			id,
+			   a.categoryId		categoryId,
+			   a.title			title,
+			   a.url			url,
+			   a.imgUrl			imgUrl,
+			   a.orderNum		orderNum,
+			   a.recommendType	mediaType
+		  FROM recommend a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
+		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
+		</if>
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(mediaType)">
+		   AND a.recommendType = #{mediaType, jdbcType=INTEGER}
+		</if>
+		 ORDER BY a.orderNum DESC
+	</select>
+	
+	<select id="getRecommendList_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM recommend a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
+		   AND a.categoryId = #{categoryId, jdbcType=INTEGER}
+		</if>
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(mediaType)">
+		   AND a.recommendType = #{mediaType, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+</mapper>

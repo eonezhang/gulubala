@@ -16,6 +16,7 @@ import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.consts.em.MediaTypeEnum;
 import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.model.MusicPlayHistory;
+import com.penglecode.gulubala.common.model.MusicRecommend;
 import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.ValidationAssert;
@@ -25,6 +26,7 @@ import com.penglecode.gulubala.dao.music.MusicAlbumDAO;
 import com.penglecode.gulubala.dao.music.MusicDAO;
 import com.penglecode.gulubala.dao.music.MusicListDAO;
 import com.penglecode.gulubala.dao.music.MusicPlayHistoryDAO;
+import com.penglecode.gulubala.dao.music.MusicRecommendDAO;
 import com.penglecode.gulubala.service.music.MusicService;
 
 @Service("musicService")
@@ -32,6 +34,9 @@ public class MusicServiceImpl implements MusicService {
 
 	@Resource(name="musicPlayHistoryDAO")
 	private MusicPlayHistoryDAO musicPlayHistoryDAO;
+	
+	@Resource(name="musicRecommendDAO")
+	private MusicRecommendDAO musicRecommendDAO;
 	
 	@Resource(name="musicDAO")
 	private MusicDAO musicDAO;
@@ -112,16 +117,8 @@ public class MusicServiceImpl implements MusicService {
 		}
 	}
 	
-	public PagingList<Music> getMusicList4index(Integer mediaType, Integer currentPage, Integer pageSize,
-			String orderby, String order) {
-		MediaTypeEnum em = MediaTypeEnum.getMediaType(mediaType);
-		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("mediaType", em.getTypeCode());
-		paramMap.put("orderby", orderby);
-		paramMap.put("order", order);
-		Pager pager = new Pager(currentPage, pageSize);
-		return new PagingList<Music>(musicDAO.getMusicListByMediaType(paramMap, pager), pager);
+	public PagingList<MusicRecommend> getMusicList4index(Integer categoryId, Integer mediaType, Integer currentPage, Integer pageSize) {
+		return getRecommendList(categoryId, mediaType, currentPage, pageSize);
 	}
 
 	public PagingList<Music> getMusicList4search(String musicName,
@@ -134,20 +131,20 @@ public class MusicServiceImpl implements MusicService {
 		return new PagingList<Music>(musicDAO.getMusicList4search(paramMap, pager), pager);
 	}
 
-	public PagingList<Music> getMusicList4hots(Integer mediaType, String hotType, Integer currentPage,
-			Integer pageSize) {
-		if(!StringUtils.isEmpty(hotType)){
-			List<String> hotTypes = Arrays.asList("hots","dayHots","threeDayHots","weekHots");
-			ValidationAssert.isTrue(hotTypes.contains(hotType), "无法识别的排行类型[hotType]");
-		}
-		MediaTypeEnum em = MediaTypeEnum.getMediaType(mediaType);
-		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
+	protected PagingList<MusicRecommend> getRecommendList(Integer categoryId, Integer mediaType, Integer currentPage, Integer pageSize) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("mediaType", em.getTypeCode());
-		paramMap.put("orderby", hotType);
-		paramMap.put("order", "DESC");
+		paramMap.put("categoryId", categoryId);
+		if(mediaType != null){
+			MediaTypeEnum mediaTypeEm = MediaTypeEnum.getMediaType(mediaType);
+			ValidationAssert.notNull(mediaTypeEm, "无法识别的媒体类型mediaType");
+			paramMap.put("mediaType", mediaType);
+		}
 		Pager pager = new Pager(currentPage, pageSize);
-		return new PagingList<Music>(musicDAO.getMusicListByMediaType(paramMap, pager), pager);
+		return new PagingList<MusicRecommend>(musicRecommendDAO.getRecommendList(paramMap, pager), pager);
+	}
+	
+	public PagingList<MusicRecommend> getMusicList4hots(Integer categoryId, Integer mediaType, Integer currentPage, Integer pageSize) {
+		return getRecommendList(categoryId, mediaType, currentPage, pageSize);
 	}
 
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
