@@ -112,8 +112,7 @@ public class MusicServiceImpl implements MusicService {
 		}
 	}
 	
-	public PagingList<Music> getMusicList4index(Integer mediaType,
-			Integer categoryId, Integer currentPage, Integer pageSize,
+	public PagingList<Music> getMusicList4index(Integer mediaType, Integer currentPage, Integer pageSize,
 			String orderby, String order) {
 		MediaTypeEnum em = MediaTypeEnum.getMediaType(mediaType);
 		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
@@ -135,8 +134,7 @@ public class MusicServiceImpl implements MusicService {
 		return new PagingList<Music>(musicDAO.getMusicList4search(paramMap, pager), pager);
 	}
 
-	public PagingList<Music> getMusicList4hots(Integer mediaType,
-			Integer categoryId, String hotType, Integer currentPage,
+	public PagingList<Music> getMusicList4hots(Integer mediaType, String hotType, Integer currentPage,
 			Integer pageSize) {
 		if(!StringUtils.isEmpty(hotType)){
 			List<String> hotTypes = Arrays.asList("hots","dayHots","threeDayHots","weekHots");

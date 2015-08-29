@@ -76,7 +76,6 @@ public interface MusicService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public PagingList<Music> getMusicList4index(
 			@PathParam("mediaType") Integer mediaType,
-			@QueryParam("categoryId") Integer categoryId,
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize,
 			@DefaultValue("createTime")@QueryParam("orderby") String orderby,
@@ -117,7 +116,6 @@ public interface MusicService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public PagingList<Music> getMusicList4hots(
 			@PathParam("mediaType") Integer mediaType,
-			@QueryParam("categoryId") Integer categoryId,
 			@DefaultValue("hots")@QueryParam("hotType") String hotType,
 			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
