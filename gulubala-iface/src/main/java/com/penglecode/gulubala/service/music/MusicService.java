@@ -62,7 +62,7 @@ public interface MusicService {
 			@QueryParam("albumId") Long albumId);
 	
 	/**
-	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]
+	 * 根据媒体类型获取音乐列表(首页接口)[分页、排序]
 	 * @param mediaType		{@link #MediaTypeEnum}
 	 * @param categoryId
 	 * @param currentPage

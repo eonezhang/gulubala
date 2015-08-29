@@ -83,4 +83,9 @@ public class GlobalConstants extends AbstractConstants {
 	 */
 	public static final long DEFAULT_MUSIC_LIST_MAX_SIZE = valueOf(100);
 	
+	/**
+	 * 默认的APP推荐分类ID
+	 */
+	public static final Integer DEFAULT_APP_MEDIA_CATEGORY_ID = valueOf(2);
+	
 }

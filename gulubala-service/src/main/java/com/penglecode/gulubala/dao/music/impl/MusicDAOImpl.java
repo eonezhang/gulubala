@@ -66,8 +66,8 @@ public class MusicDAOImpl extends BaseMybatisDAO implements MusicDAO {
 		return getSqlSessionTemplate().selectList(getMapperKey("getMusicList4search"), paramMap, new MusicEscapeFilter(), pager);
 	}
 	
-	public List<Music> getMusicList4index(Map<String,Object> paramMap, Pager pager) {
-		return getSqlSessionTemplate().selectList(getMapperKey("getMusicList4index"), paramMap, new MusicEscapeFilter(), pager);
+	public List<Music> getMusicListByMediaType(Map<String,Object> paramMap, Pager pager) {
+		return getSqlSessionTemplate().selectList(getMapperKey("getMusicListByMediaType"), paramMap, new MusicEscapeFilter(), pager);
 	}
 
 	protected Class<?> getBoundModelClass() {

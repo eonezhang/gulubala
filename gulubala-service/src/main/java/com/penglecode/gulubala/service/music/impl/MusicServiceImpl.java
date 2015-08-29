@@ -119,11 +119,10 @@ public class MusicServiceImpl implements MusicService {
 		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("mediaType", em.getTypeCode());
-		paramMap.put("categoryId", categoryId);
 		paramMap.put("orderby", orderby);
 		paramMap.put("order", order);
 		Pager pager = new Pager(currentPage, pageSize);
-		return new PagingList<Music>(musicDAO.getMusicList4index(paramMap, pager), pager);
+		return new PagingList<Music>(musicDAO.getMusicListByMediaType(paramMap, pager), pager);
 	}
 
 	public PagingList<Music> getMusicList4search(String musicName,
@@ -147,11 +146,10 @@ public class MusicServiceImpl implements MusicService {
 		ValidationAssert.notNull(em, "无法识别的mediaType类型!");
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("mediaType", em.getTypeCode());
-		paramMap.put("categoryId", categoryId);
 		paramMap.put("orderby", hotType);
 		paramMap.put("order", "DESC");
 		Pager pager = new Pager(currentPage, pageSize);
-		return new PagingList<Music>(musicDAO.getMusicList4index(paramMap, pager), pager);
+		return new PagingList<Music>(musicDAO.getMusicListByMediaType(paramMap, pager), pager);
 	}
 
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)

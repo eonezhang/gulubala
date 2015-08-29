@@ -2,37 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.penglecode.gulubala.common.model.MediaCategoryMapper">
 	
-	<insert id="insertCategory" parameterType="MediaCategory" statementType="PREPARED" useGeneratedKeys="true" keyProperty="categoryId">
-		INSERT INTO mediacategory(
-			categoryId,
-			categoryName,
-			categoryType,
-			siblingsOrder,
-			createdBy,
-			createdAt
-		) VALUES (
-			#{categoryId, jdbcType=INTEGER},
-			#{categoryName, jdbcType=VARCHAR},
-			#{categoryType, jdbcType=INTEGER},
-			#{siblingsOrder, jdbcType=INTEGER},
-			#{createBy, jdbcType=BIGINT},
-			#{createTime, jdbcType=VARCHAR}
-		)
-	</insert>
-	
 	<select id="getCategoryList" parameterType="java.util.Map" statementType="PREPARED" resultType="MediaCategory">
-		SELECT a.categoryId 		categoryId,
-			   a.categoryName		categoryName,
-			   a.categoryType		categoryType,
-			   a.siblingsOrder		siblingsOrder,
-			   a.createdBy			createBy,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
-		  FROM mediacategory a
-		 WHERE 1=1
+		SELECT a.id 		categoryId,
+			   a.name		categoryName,
+			   a.parentId	parentCategoryId,
+			   a.type		categoryType
+		  FROM recommendcategory a
+		 WHERE a.parentId = #{appParentId, jdbcType=INTEGER}
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryType)">
-		   AND a.categoryType = #{categoryType, jdbcType=INTEGER}
-		  ORDER BY a.siblingsOrder ASC
+		   AND a.type = #{categoryType, jdbcType=INTEGER}
 		</if>
+		ORDER BY a.id ASC
 	</select>
 	
 </mapper>

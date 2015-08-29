@@ -151,7 +151,7 @@
 		</foreach>
 	</select>
 	
-	<select id="getMusicList4index" parameterType="java.util.Map" statementType="PREPARED" resultType="Music">
+	<select id="getMusicListByMediaType" parameterType="java.util.Map" statementType="PREPARED" resultType="Music">
 		SELECT a.id 				musicId,
 			   a.name				musicName,
 			   a.singerId			singerId,
@@ -165,30 +165,16 @@
 			   a.songUrl			musicUrl,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
 		  FROM songs a
-		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
-		       ,songcategorys b
-		</if>
 		 WHERE a.mv = #{mediaType, jdbcType=INTEGER}
-		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
-		   AND a.id = b.songId
-		   AND b.categoryId = #{categoryId, jdbcType=INTEGER}
-		</if>
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(orderby)">
 		   ORDER BY ${orderby} ${order}
 		</if>
 	</select>
 	
-	<select id="getMusicList4index_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+	<select id="getMusicListByMediaType_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
 		SELECT COUNT(1)
 		  FROM songs a
-		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
-		       ,songcategorys b
-		</if>
 		 WHERE a.mv = #{mediaType, jdbcType=INTEGER}
-		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">
-		   AND a.id = b.songId
-		   AND b.categoryId = #{categoryId, jdbcType=INTEGER}
-		</if>
 	</select>
 	
 	<select id="getMusicList4search" parameterType="java.util.Map" statementType="PREPARED" resultType="Music">

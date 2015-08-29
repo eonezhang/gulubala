@@ -8,9 +8,6 @@ package com.penglecode.gulubala.service.url;
  */
 public interface MediaCategoryServiceURL {
 
-	/** 创建媒体通用分类 */
-	String URL_MEDIA_CATEGORY_CREATE = "mcategory/create";
-	
 	/** 根据条件查询媒体通用分类 */
 	String URL_MEDIA_CATEGORY_LIST = "mcategory/list";
 	

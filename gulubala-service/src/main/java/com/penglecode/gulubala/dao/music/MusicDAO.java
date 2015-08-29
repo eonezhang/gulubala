@@ -76,11 +76,11 @@ public interface MusicDAO {
 	public List<Music> getMusicList4search(Map<String,Object> paramMap, Pager pager);
 	
 	/**
-	 * 根据分类ID获取音乐列表(首页接口)[分页、排序]
+	 * 根据获取音乐列表(首页接口)[分页、排序]
 	 * @param categoryId
 	 * @param pager
 	 * @return
 	 */
-	public List<Music> getMusicList4index(Map<String,Object> paramMap, Pager pager);
+	public List<Music> getMusicListByMediaType(Map<String,Object> paramMap, Pager pager);
 	
 }
