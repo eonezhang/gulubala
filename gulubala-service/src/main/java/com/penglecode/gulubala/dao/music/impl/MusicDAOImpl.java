@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.penglecode.gulubala.common.consts.em.MediaSource;
 import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.mybatis.EscapeFilter;
 import com.penglecode.gulubala.common.support.Pager;
@@ -84,10 +85,10 @@ public class MusicDAOImpl extends BaseMybatisDAO implements MusicDAO {
 				element.setFullPictureUrl(AppResourceUtils.getFullPictureUrl(element.getPictureUrl()));
 			}
 			if(!StringUtils.isEmpty(element.getMusicUrl())){
-				element.setFullMusicUrl(AppResourceUtils.getFullFileUrl(element.getMusicUrl()));
+				element.setFullMusicUrl(AppResourceUtils.getFullFileUrl(element.getMusicUrl(), MediaSource.EXTERNAL));
 			}
 			if(!StringUtils.isEmpty(element.getLrcUrl())){
-				element.setFullLrcUrl(AppResourceUtils.getFullFileUrl(element.getLrcUrl()));
+				element.setFullLrcUrl(AppResourceUtils.getFullFileUrl(element.getLrcUrl(), MediaSource.INTERNAL));
 			}
 		}
 		

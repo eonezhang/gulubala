@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.penglecode.gulubala.common.consts.em.MediaSource;
 import com.penglecode.gulubala.common.model.MusicRecommend;
 import com.penglecode.gulubala.common.mybatis.EscapeFilter;
 import com.penglecode.gulubala.common.support.Pager;
@@ -28,7 +29,7 @@ public class MusicRecommendDAOImpl extends BaseMybatisDAO implements MusicRecomm
 
 		public void doEscapeFilter(MusicRecommend element) {
 			if(!StringUtils.isEmpty(element.getUrl())){
-				element.setUrl(AppResourceUtils.getFullFileUrl(element.getUrl()));
+				element.setUrl(AppResourceUtils.getFullFileUrl(element.getUrl(), MediaSource.EXTERNAL));
 			}
 			if(!StringUtils.isEmpty(element.getImgUrl())){
 				element.setImgUrl(AppResourceUtils.getFullPictureUrl(element.getImgUrl()));

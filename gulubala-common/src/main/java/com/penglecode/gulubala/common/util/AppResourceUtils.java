@@ -1,6 +1,7 @@
 package com.penglecode.gulubala.common.util;
 
 import com.penglecode.gulubala.common.consts.GlobalConstants;
+import com.penglecode.gulubala.common.consts.em.MediaSource;
 
 /**
  * 应用图片工具类
@@ -22,12 +23,12 @@ public class AppResourceUtils {
 		return null;
 	}
 	
-	public static String getFullFileUrl(String fileUrl) {
+	public static String getFullFileUrl(String fileUrl, MediaSource mediaSource) {
 		if(!StringUtils.isEmpty(fileUrl)){
 			if(fileUrl.startsWith("http://")){
 				return fileUrl;
 			}else{
-				return GlobalConstants.GLOBAL_FILESERVER_DOMAIN + fileUrl;
+				return mediaSource.getDomainUrl() + fileUrl;
 			}
 		}
 		return null;
