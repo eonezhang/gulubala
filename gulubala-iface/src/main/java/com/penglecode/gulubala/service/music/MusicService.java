@@ -11,7 +11,6 @@ import javax.ws.rs.QueryParam;
 
 import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.model.Music;
-import com.penglecode.gulubala.common.model.MusicRecommend;
 import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.service.url.MusicServiceURL;
 
@@ -63,23 +62,6 @@ public interface MusicService {
 			@QueryParam("albumId") Long albumId);
 	
 	/**
-	 * 根据推荐分类获取音乐推荐列表(首页接口)[分页、排序]
-	 * @param categoryId
-	 * @param mediaType		{@link #MediaTypeEnum}
-	 * @param currentPage
-	 * @param pageSize
-	 * @return
-	 */
-	@GET
-	@Path(MusicServiceURL.URL_MUSIC_LIST_INDEX)
-	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public PagingList<MusicRecommend> getMusicList4index(
-			@QueryParam("categoryId") Integer categoryId,
-			@QueryParam("mediaType") Integer mediaType,
-			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
-			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
-	
-	/**
 	 * 根据音乐名字关键字模糊搜索(首页接口)[分页、排序]
 	 * @param musicName
 	 * @param currentPage
@@ -97,23 +79,6 @@ public interface MusicService {
 			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize,
 			@DefaultValue("createTime")@QueryParam("orderby") String orderby,
 			@DefaultValue("DESC")@QueryParam("order") String order);
-	
-	/**
-	 * 根据推荐分类获取音乐推荐列表(排行榜接口)[分页、排序]
-	 * @param categoryId
-	 * @param mediaType		{@link #MediaTypeEnum}
-	 * @param currentPage
-	 * @param pageSize
-	 * @return
-	 */
-	@GET
-	@Path(MusicServiceURL.URL_MUSIC_LIST_HOTS)
-	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public PagingList<MusicRecommend> getMusicList4hots(
-			@QueryParam("categoryId") Integer categoryId,
-			@QueryParam("mediaType") Integer mediaType,
-			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
-			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
 	
 	/**
 	 * 给音乐点赞

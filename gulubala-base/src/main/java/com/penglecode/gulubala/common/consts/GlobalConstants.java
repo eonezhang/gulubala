@@ -53,14 +53,14 @@ public class GlobalConstants extends AbstractConstants {
 	 * 注：各个应用的global.properties中需要加入global.imgserver.domain=xxxx
 	 */
 	@ConstValue("${global.imgserver.domain}")
-	public static final String GLOBAL_IMGSERVER_DOMAIN = valueOf("http://www.gulubala.nat123.net");
+	public static final String GLOBAL_IMGSERVER_DOMAIN = valueOf("http://120.55.116.153/MiManSevice/upload/images/");
 	
 	/**
 	 * 全局媒体文件服务域名
 	 * 注：各个应用的global.properties中需要加入global.fileserver.domain=xxxx
 	 */
 	@ConstValue("${global.fileserver.domain}")
-	public static final String GLOBAL_FILESERVER_DOMAIN = valueOf("http://www.gulubala.nat123.net");
+	public static final String GLOBAL_FILESERVER_DOMAIN = valueOf("http://120.55.116.153/MiManSevice/upload/files/");
 	
 	/**
 	 * 默认的用户头像
@@ -84,8 +84,15 @@ public class GlobalConstants extends AbstractConstants {
 	public static final long DEFAULT_MUSIC_LIST_MAX_SIZE = valueOf(100);
 	
 	/**
-	 * 默认的APP推荐分类ID
+	 * 属于APP客户端推荐分类的ID
 	 */
-	public static final Integer DEFAULT_APP_MEDIA_CATEGORY_ID = valueOf(2);
+	@ConstValue("${global.categoryid.app}")
+	public static final Integer GLOBAL_MEDIA_CATEGORY_ID_APP = valueOf(2);
+	
+	/**
+	 * 首页轮播图所属推荐分类ID
+	 */
+	@ConstValue("${global.categoryid.adv}")
+	public static final Integer GLOBAL_MEDIA_CATEGORY_ID_ADV = valueOf(6);
 	
 }

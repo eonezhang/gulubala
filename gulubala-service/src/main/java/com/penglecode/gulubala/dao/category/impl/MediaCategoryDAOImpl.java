@@ -20,7 +20,7 @@ public class MediaCategoryDAOImpl extends BaseMybatisDAO implements MediaCategor
 
 	public List<MediaCategory> getCategoryList(Integer categoryType) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("appParentId", GlobalConstants.DEFAULT_APP_MEDIA_CATEGORY_ID);
+		paramMap.put("appParentId", GlobalConstants.GLOBAL_MEDIA_CATEGORY_ID_APP);
 		paramMap.put("categoryType", categoryType);
 		return getSqlSessionTemplate().selectList(getMapperKey("getCategoryList"), paramMap);
 	}
