@@ -35,7 +35,14 @@ public class MusicRecommendServiceImpl implements MusicRecommendService {
 	
 	public List<MusicRecommend> getIndexAdvList(Integer categoryId) {
 		if(categoryId == null){
-			categoryId = GlobalConstants.GLOBAL_MEDIA_CATEGORY_ID_ADV;
+			categoryId = GlobalConstants.GLOBAL_MEDIA_CATEGORY_ID_INDEX_ADV;
+		}
+		return getRecommendList(categoryId, null, null);
+	}
+	
+	public List<MusicRecommend> getGuideAdvList(Integer categoryId) {
+		if(categoryId == null){
+			categoryId = GlobalConstants.GLOBAL_MEDIA_CATEGORY_ID_GUIDE_ADV;
 		}
 		return getRecommendList(categoryId, null, null);
 	}

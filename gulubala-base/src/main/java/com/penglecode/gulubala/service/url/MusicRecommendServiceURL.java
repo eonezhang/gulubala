@@ -17,4 +17,7 @@ public interface MusicRecommendServiceURL {
 	/** 获取首页轮播图列表 */
 	String URL_INDEX_ADV_LIST = "index/adv/list";
 	
+	/** 获取引导页广告列表 */
+	String URL_GUIDE_ADV_LIST = "guide/adv/list";
+	
 }

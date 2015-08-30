@@ -99,7 +99,13 @@ public class GlobalConstants extends AbstractConstants {
 	/**
 	 * 首页轮播图所属推荐分类ID
 	 */
-	@ConstValue("${global.categoryid.adv}")
-	public static final Integer GLOBAL_MEDIA_CATEGORY_ID_ADV = valueOf(6);
+	@ConstValue("${global.categoryid.indexadv}")
+	public static final Integer GLOBAL_MEDIA_CATEGORY_ID_INDEX_ADV = valueOf(6);
+	
+	/**
+	 * 引导页轮播图所属推荐分类ID
+	 */
+	@ConstValue("${global.categoryid.guideadv}")
+	public static final Integer GLOBAL_MEDIA_CATEGORY_ID_GUIDE_ADV = valueOf(5);
 	
 }

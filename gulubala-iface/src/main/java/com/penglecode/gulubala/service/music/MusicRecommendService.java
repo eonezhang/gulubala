@@ -60,8 +60,6 @@ public interface MusicRecommendService {
 	/**
 	 * 获取首页轮播广告列表
 	 * @param categoryId
-	 * @param currentPage
-	 * @param pageSize
 	 * @return
 	 */
 	@GET
@@ -69,5 +67,14 @@ public interface MusicRecommendService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public List<MusicRecommend> getIndexAdvList(@QueryParam("categoryId") Integer categoryId);
 	
+	/**
+	 * 获取引导页广告列表
+	 * @param categoryId
+	 * @return
+	 */
+	@GET
+	@Path(MusicRecommendServiceURL.URL_GUIDE_ADV_LIST)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public List<MusicRecommend> getGuideAdvList(@QueryParam("categoryId") Integer categoryId);
 	
 }
