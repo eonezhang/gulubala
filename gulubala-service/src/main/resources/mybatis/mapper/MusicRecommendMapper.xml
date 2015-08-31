@@ -9,7 +9,8 @@
 			   a.url			url,
 			   a.imgUrl			imgUrl,
 			   a.orderNum		orderNum,
-			   a.recommendType	mediaType
+			   a.recommendType	mediaType,
+			   a.songId			songId
 		  FROM recommend a
 		 WHERE 1=1
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryId)">

@@ -32,6 +32,9 @@ public class MusicRecommend implements Serializable {
 	
 	/** 媒体类型#MediaTypeEnum */
 	private Integer mediaType;
+	
+	/** 关联的歌曲ID */
+	private Long songId;
 
 	public Long getId() {
 		return id;
@@ -87,6 +90,14 @@ public class MusicRecommend implements Serializable {
 
 	public void setMediaType(Integer mediaType) {
 		this.mediaType = mediaType;
+	}
+
+	public Long getSongId() {
+		return songId;
+	}
+
+	public void setSongId(Long songId) {
+		this.songId = songId;
 	}
 	
 }
