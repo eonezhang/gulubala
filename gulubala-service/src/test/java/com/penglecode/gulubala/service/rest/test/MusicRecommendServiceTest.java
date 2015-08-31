@@ -31,7 +31,7 @@ public class MusicRecommendServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
-	public static void testGetAdvList4index() {
+	public static void testGetIndexAdvList4index() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		//paramMap.put("categoryId", 6);
 		//paramMap.put("mediaType", 1);
@@ -39,10 +39,19 @@ public class MusicRecommendServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
+	public static void testGetGuideAdvList4index() {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		//paramMap.put("categoryId", 6);
+		//paramMap.put("mediaType", 1);
+		Result<List<MusicRecommend>> result = RestServiceUtils.get(MusicRecommendServiceURL.URL_GUIDE_ADV_LIST, paramMap, new GenericType<Result<List<MusicRecommend>>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) throws Exception {
 		//testGetMusicList4index();
 		//testGetMusicList4hots();
-		testGetAdvList4index();
+		//testGetIndexAdvList4index();
+		testGetGuideAdvList4index();
 	}
 
 }
