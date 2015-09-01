@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.ws.rs.core.GenericType;
 
+import com.penglecode.gulubala.common.consts.em.UserRegisterTypeEnum;
 import com.penglecode.gulubala.common.support.Result;
 import com.penglecode.gulubala.common.util.JsonUtils;
 import com.penglecode.gulubala.common.util.RestServiceUtils;
@@ -21,8 +22,17 @@ public class UserServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
+	public static void testThirdUserLogin(){
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("thirdAccountName", "303836018");
+		paramMap.put("registerType", UserRegisterTypeEnum.USER_REG_TYPE_THIRD_QQ.getTypeCode());
+		Result<Object> result = RestServiceUtils.post(UserServiceURL.URL_THIRD_USER_LOGIN_APP, paramMap, new GenericType<Result<Object>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) {
-		testRestUserPassword();
+		//testRestUserPassword();
+		testThirdUserLogin();
 	}
 
 }
