@@ -27,6 +27,9 @@ public class User implements Serializable {
 	/** 邮箱(唯一) */
 	private String email;
 	
+	/** 第三方账户名 */
+	private String thirdAccountName;
+	
 	/** 注册方式 @{link #UserRegisterTypeEnum} */
 	private Integer registerType;
 	
@@ -123,6 +126,14 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getThirdAccountName() {
+		return thirdAccountName;
+	}
+
+	public void setThirdAccountName(String thirdAccountName) {
+		this.thirdAccountName = thirdAccountName;
 	}
 
 	public Integer getRegisterType() {

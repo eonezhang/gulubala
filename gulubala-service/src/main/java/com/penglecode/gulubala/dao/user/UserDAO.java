@@ -78,6 +78,14 @@ public interface UserDAO {
 	public User getUserByEmail(String email);
 	
 	/**
+	 * 根据第三方账户获取用户信息
+	 * @param thirdAccountName
+	 * @param registerType
+	 * @return
+	 */
+	public User getUserBythirdAccount(String thirdAccountName, Integer registerType);
+	
+	/**
 	 * 判断手机号是否存在
 	 * @param mobilePhone
 	 * @return

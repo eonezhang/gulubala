@@ -11,6 +11,9 @@ public interface UserServiceURL {
 	/** APP端用户登录 */
 	String URL_USER_LOGIN_APP = "app/user/login";
 	
+	/** APP端用户登录(第三方) */
+	String URL_THIRD_USER_LOGIN_APP = "app/thirduser/login";
+	
 	/** APP端用户注册 */
 	String URL_USER_REGISTER_APP = "app/user/register";
 	

@@ -96,6 +96,26 @@ public class UserServiceImpl implements UserService {
 		userDAO.updateUser4Login(puser.getUserId(), DateTimeUtils.formatNow());
 		return puser;
 	}
+	
+	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
+	public User thirdUserLogin4App(User user) {
+		ValidationAssert.notNull(user, "请求参数不能为空!");
+		ValidationAssert.notEmpty(user.getThirdAccountName(), "第三方账号不能为空!");
+		ValidationAssert.notEmpty(user.getRegisterType(), "第三方账号类型不能为空!");
+		String nowTime = DateTimeUtils.formatNow();
+		User puser = userDAO.getUserBythirdAccount(user.getThirdAccountName(), user.getRegisterType());
+		if(puser == null){ //首次使用第三方账号登录
+			user.setCreateTime(nowTime);
+			user.setVip(Boolean.FALSE);
+			user.setStatus(UserStatusEnum.USER_STATUS_ENABLED.getStatusCode());
+			user.setLastLoginTime(nowTime);
+			user.setIconUrl(StringUtils.defaultIfEmpty(user.getIconUrl(), GlobalConstants.DEFAULT_USER_ICON));
+			userDAO.insertUser(user);
+			puser = userDAO.getUserById(user.getUserId());
+		}
+		userDAO.updateUser4Login(puser.getUserId(), nowTime);
+		return puser;
+	}
 
 	public User getUserById(Long userId) {
 		return userDAO.getUserById(userId);

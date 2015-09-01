@@ -8,6 +8,7 @@
 			phone,
 			email,
 			password,
+			thirdAccountName,
 			registerType,
 			status,
 			lastLoginAt,
@@ -17,6 +18,7 @@
 			#{mobilePhone, jdbcType=VARCHAR},
 			#{email, jdbcType=VARCHAR},
 			#{encryptedPassword, jdbcType=VARCHAR},
+			#{thirdAccountName, jdbcType=VARCHAR},
 			#{registerType, jdbcType=INTEGER},
 			#{status, jdbcType=INTEGER},
 			#{lastLoginTime, jdbcType=VARCHAR},
@@ -80,6 +82,7 @@
 			   a.nickname			nickName,
 			   a.phone				mobilePhone,
 			   a.email				email,
+			   a.thirdAccountName	thirdAccountName,
 			   a.password			encryptedPassword,
 			   a.registerType		registerType,
 			   a.vip				vip,
@@ -107,6 +110,7 @@
 			   a.phone				mobilePhone,
 			   a.email				email,
 			   a.password			encryptedPassword,
+			   a.thirdAccountName	thirdAccountName,
 			   a.registerType		registerType,
 			   a.gurz				authenticated,
 			   a.status				status,
@@ -121,6 +125,7 @@
 			   a.phone				mobilePhone,
 			   a.email				email,
 			   a.password			encryptedPassword,
+			   a.thirdAccountName	thirdAccountName,
 			   a.registerType		registerType,
 			   a.gurz				authenticated,
 			   a.status				status,
@@ -135,6 +140,7 @@
 			   a.phone				mobilePhone,
 			   a.email				email,
 			   a.password			encryptedPassword,
+			   a.thirdAccountName	thirdAccountName,
 			   a.registerType		registerType,
 			   a.gurz				authenticated,
 			   a.status				status,
@@ -149,6 +155,7 @@
 			   a.phone				mobilePhone,
 			   a.email				email,
 			   a.password			encryptedPassword,
+			   a.thirdAccountName	thirdAccountName,
 			   a.registerType		registerType,
 			   a.vip				vip,
 			   a.gurz				authenticated,
@@ -174,6 +181,7 @@
 			   a.phone				mobilePhone,
 			   a.email				email,
 			   a.password			encryptedPassword,
+			   a.thirdAccountName	thirdAccountName,
 			   a.registerType		registerType,
 			   a.vip				vip,
 			   a.gurz				authenticated,
@@ -191,6 +199,33 @@
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
 		  FROM users a
 		 WHERE a.phone = #{mobilePhone, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getUserBythirdAccount" parameterType="java.util.Map" statementType="PREPARED" resultType="User">
+		SELECT a.id					userId,
+			   a.nickname			nickName,
+			   a.phone				mobilePhone,
+			   a.email				email,
+			   a.password			encryptedPassword,
+			   a.thirdAccountName	thirdAccountName,
+			   a.registerType		registerType,
+			   a.vip				vip,
+			   a.gurz				authenticated,
+			   a.score				score,
+			   a.loginTimes			loginTimes,
+			   a.remark				remark,
+			   a.iconUrl			iconUrl,
+			   a.follows			follows,
+			   a.hots				hots,
+			   a.praises			praises,
+			   a.sex				sex,
+			   a.birthday			birthday,
+			   a.status				status,
+			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+		  FROM users a
+		 WHERE a.registerType = #{registerType, jdbcType=INTEGER}
+		   AND a.thirdAccountName = #{thirdAccountName, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="isMobilePhoneExists" parameterType="java.lang.String" statementType="PREPARED" resultType="java.lang.Boolean">

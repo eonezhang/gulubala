@@ -46,6 +46,16 @@ public interface UserService {
 	public User userLogin4App(User user);
 	
 	/**
+	 * APP端用户登录(第三方登录)
+	 * @param user
+	 */
+	@POST
+	@Path(UserServiceURL.URL_THIRD_USER_LOGIN_APP)
+	@Consumes({ContentType.APPLICATION_JSON_UTF_8})
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public User thirdUserLogin4App(User user);
+	
+	/**
 	 * 根据用户id获取用户详情信息
 	 * @param userId
 	 * @return

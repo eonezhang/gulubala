@@ -8,7 +8,7 @@ package com.penglecode.gulubala.common.consts.em;
  */
 public enum UserRegisterTypeEnum {
 
-	USER_REG_TYPE_MOBILE(1, "使用手机号码注册"), USER_REG_TYPE_EMAIL(2, "使用邮箱注册");
+	USER_REG_TYPE_MOBILE(1, "使用手机号码注册"), USER_REG_TYPE_EMAIL(2, "使用邮箱注册"), USER_REG_TYPE_THIRD_QQ(3, "使用QQ账号注册"), USER_REG_TYPE_THIRD_WEIXIN(4, "使用微信账号注册"), USER_REG_TYPE_THIRD_SINA(5, "使用新浪账号注册");
 	
 	private Integer typeCode;
 	

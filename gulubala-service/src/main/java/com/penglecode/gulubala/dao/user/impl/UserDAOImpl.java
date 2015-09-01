@@ -59,6 +59,13 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 		return getSqlSessionTemplate().selectOne(getMapperKey("getUserByEmail"), email, new UserEscapeFilter());
 	}
 
+	public User getUserBythirdAccount(String thirdAccountName, Integer registerType) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("thirdAccountName", thirdAccountName);
+		paramMap.put("registerType", registerType);
+		return getSqlSessionTemplate().selectOne(getMapperKey("getUserBythirdAccount"), paramMap, new UserEscapeFilter());
+	}
+
 	public boolean isMobilePhoneExists(String mobilePhone) {
 		return getSqlSessionTemplate().selectOne(getMapperKey("isMobilePhoneExists"), mobilePhone);
 	}
