@@ -8,10 +8,10 @@ package com.penglecode.gulubala.service.url;
  */
 public interface MediaCategoryServiceURL {
 
-	/** 根据条件查询媒体通用分类 */
-	String URL_MEDIA_CATEGORY_LIST = "mcategory/list";
+	/** 根据父标签的ID获取媒体通用分类列表 */
+	String URL_MEDIA_CATEGORY_LIST_PARENT = "mcategory/list/parent/{parentId}";
 	
-	/** 查询媒体通用分类(首页接口) */
+	/** 根据标签类型查询媒体通用分类 */
 	String URL_MEDIA_CATEGORY_LIST_INDEX = "mcategory/list/index/{category}";
 	
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.model.MediaCategory;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
 import com.penglecode.gulubala.dao.category.MediaCategoryDAO;
@@ -18,9 +17,9 @@ public class MediaCategoryDAOImpl extends BaseMybatisDAO implements MediaCategor
 		getSqlSessionTemplate().insert(getMapperKey("insertCategory"), category);
 	}
 
-	public List<MediaCategory> getCategoryList(Integer categoryType) {
+	public List<MediaCategory> getCategoryList(Integer parentId, Integer categoryType) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("appParentId", GlobalConstants.GLOBAL_MEDIA_CATEGORY_ID_APP);
+		paramMap.put("parentId", parentId);
 		paramMap.put("categoryType", categoryType);
 		return getSqlSessionTemplate().selectList(getMapperKey("getCategoryList"), paramMap);
 	}

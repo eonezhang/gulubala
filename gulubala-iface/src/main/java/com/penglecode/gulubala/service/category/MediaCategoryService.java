@@ -22,13 +22,23 @@ import com.penglecode.gulubala.service.url.MediaCategoryServiceURL;
 public interface MediaCategoryService {
 
 	/**
-	 * 获取媒体通用分类列表(首页接口)
+	 * 根据标签类型查询媒体通用分类
 	 * @param category {@link #MediaCategoryEnum}
 	 * @return
 	 */
 	@GET
 	@Path(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_LIST_INDEX)
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
-	public List<MediaCategory> getCategoryList4index(@PathParam("category") Integer category);
+	public List<MediaCategory> getCategoryListByType(@PathParam("category") Integer category);
+	
+	/**
+	 * 根据父标签的ID获取媒体通用分类列表
+	 * @param parentId
+	 * @return
+	 */
+	@GET
+	@Path(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_LIST_PARENT)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public List<MediaCategory> getCategoryListByParentId(@PathParam("parentId") Integer parentId);
 	
 }

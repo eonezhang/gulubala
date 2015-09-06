@@ -21,9 +21,10 @@ public interface MediaCategoryDAO {
 
 	/**
 	 * 根据条件获取媒体通用分类列表
+	 * @param parentId			- 父分类的ID
 	 * @param categoryType		- 如果不为空则获取该父分类下的子分类,否则获取所有分类列表
 	 * @return
 	 */
-	public List<MediaCategory> getCategoryList(Integer categoryType);
+	public List<MediaCategory> getCategoryList(Integer parentId, Integer categoryType);
 	
 }

@@ -8,7 +8,7 @@
 			   a.parentId	parentCategoryId,
 			   a.type		categoryType
 		  FROM recommendcategory a
-		 WHERE a.parentId = #{appParentId, jdbcType=INTEGER}
+		 WHERE a.parentId = #{parentId, jdbcType=INTEGER}
 		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(categoryType)">
 		   AND a.type = #{categoryType, jdbcType=INTEGER}
 		</if>
