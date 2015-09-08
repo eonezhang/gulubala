@@ -292,8 +292,8 @@ public class MusicServiceTest {
 		//testCreateMusic();
 		//testGetMusicById();
 		//testGetMusicList4search();
-		//testPlayMusic();
-		testGetMusicList4userUpload();
+		testPlayMusic();
+		//testGetMusicList4userUpload();
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.penglecode.gulubala.common.model;
 
 import java.io.Serializable;
-import java.util.List;
+
 /**
  * 音乐播放历史
  * 
@@ -20,15 +20,9 @@ public class MusicPlayHistory implements Serializable {
 	private Long userId;
 	
 	/** 音乐Ids(逗号隔开) */
-	private String musicIds;
+	private Long musicId;
 	
 	private String createTime;
-	
-	private String updateTime;
-	
-	//以下属于辅助字段
-	
-	private List<Music> musicList;
 
 	public Long getId() {
 		return id;
@@ -46,12 +40,12 @@ public class MusicPlayHistory implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getMusicIds() {
-		return musicIds;
+	public Long getMusicId() {
+		return musicId;
 	}
 
-	public void setMusicIds(String musicIds) {
-		this.musicIds = musicIds;
+	public void setMusicId(Long musicId) {
+		this.musicId = musicId;
 	}
 
 	public String getCreateTime() {
@@ -60,22 +54,6 @@ public class MusicPlayHistory implements Serializable {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-
-	public String getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	public List<Music> getMusicList() {
-		return musicList;
-	}
-
-	public void setMusicList(List<Music> musicList) {
-		this.musicList = musicList;
 	}
 	
 }

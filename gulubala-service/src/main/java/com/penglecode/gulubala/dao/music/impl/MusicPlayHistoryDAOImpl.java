@@ -1,12 +1,15 @@
 package com.penglecode.gulubala.dao.music.impl;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.penglecode.gulubala.common.model.MusicPlayHistory;
-import com.penglecode.gulubala.common.util.DateTimeUtils;
+import com.penglecode.gulubala.common.mybatis.EscapeFilter;
+import com.penglecode.gulubala.common.support.Pager;
+import com.penglecode.gulubala.common.util.AppResourceUtils;
+import com.penglecode.gulubala.common.util.StringUtils;
 import com.penglecode.gulubala.dao.BaseMybatisDAO;
 import com.penglecode.gulubala.dao.music.MusicPlayHistoryDAO;
 
@@ -17,20 +20,20 @@ public class MusicPlayHistoryDAOImpl extends BaseMybatisDAO implements MusicPlay
 		getSqlSessionTemplate().insert(getMapperKey("insertMusicPlayHistory"), history);
 	}
 
-	public void updateMusicIds(Long userId, String musicIds) {
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("userId", userId);
-		paramMap.put("musicIds", musicIds);
-		paramMap.put("updateTime", DateTimeUtils.formatNow());
-		getSqlSessionTemplate().update(getMapperKey("updateMusicIds"), paramMap);
-	}
-
 	public void deleteMusicPlayHistoryByUserId(Long userId) {
 		getSqlSessionTemplate().delete(getMapperKey("deleteMusicPlayHistoryByUserId"), userId);
 	}
 
-	public MusicPlayHistory getMusicPlayHistoryByUserId(Long userId) {
-		return getSqlSessionTemplate().selectOne(getMapperKey("getMusicPlayHistoryByUserId"), userId);
+	public List<Map<String, Object>> getMusicPlayHistoryByUserId(Long userId, Pager pager) {
+	    return getSqlSessionTemplate().selectList(getMapperKey("getMusicPlayHistoryByUserId"), userId, new MusicPlayHistoryEscapeFilter(), pager);
+	}
+
+	public static class MusicPlayHistoryEscapeFilter implements EscapeFilter<Map<String, Object>> {
+	    public void doEscapeFilter(Map<String, Object> element) {
+	    	if (element.get("smallPictureUrl") != null && !StringUtils.isEmpty(element.get("smallPictureUrl").toString())) {
+	    		element.put("fullSmallPictureUrl", AppResourceUtils.getFullPictureUrl(element.get("smallPictureUrl").toString()));
+	    	}
+	    }
 	}
 
 	protected Class<?> getBoundModelClass() {

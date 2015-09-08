@@ -1,6 +1,10 @@
 package com.penglecode.gulubala.dao.music;
 
+import java.util.List;
+import java.util.Map;
+
 import com.penglecode.gulubala.common.model.MusicPlayHistory;
+import com.penglecode.gulubala.common.support.Pager;
 
 /**
  * 用户音乐播放记录DAO
@@ -18,23 +22,17 @@ public interface MusicPlayHistoryDAO {
 	public void insertMusicPlayHistory(MusicPlayHistory history);
 	
 	/**
-	 * 更新播放记录
-	 * @param userId
-	 * @param musicIds
-	 */
-	public void updateMusicIds(Long userId, String musicIds);
-	
-	/**
 	 * 清空用户的播放历史
 	 * @param userId
 	 */
 	public void deleteMusicPlayHistoryByUserId(Long userId);
 	
 	/**
-	 * 获取用户的播放历史
+	 * 获取用户的播放历史(分页)
 	 * @param userId
+	 * @param pager
 	 * @return
 	 */
-	public MusicPlayHistory getMusicPlayHistoryByUserId(Long userId);
+	public List<Map<String,Object>> getMusicPlayHistoryByUserId(Long userId, Pager pager);
 	
 }

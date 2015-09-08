@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.ws.rs.core.GenericType;
 
-import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.Result;
 import com.penglecode.gulubala.common.util.JsonUtils;
@@ -23,10 +22,10 @@ public class MusicPlayHistoryServiceTest {
 	
 	public static void testGetMusicPlayHistoryByUserId() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("userId", 3);
+		paramMap.put("userId", 2);
 		paramMap.put("currentPage", 1);
 		paramMap.put("pageSize", 10);
-		Result<PagingList<Music>> result = RestServiceUtils.get(MusicPlayHistoryServiceURL.URL_MUSIC_PLAY_HISTORY_LIST, paramMap, new GenericType<Result<PagingList<Music>>>(){});
+		Result<PagingList<Map<String,Object>>> result = RestServiceUtils.get(MusicPlayHistoryServiceURL.URL_MUSIC_PLAY_HISTORY_LIST, paramMap, new GenericType<Result<PagingList<Map<String,Object>>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	

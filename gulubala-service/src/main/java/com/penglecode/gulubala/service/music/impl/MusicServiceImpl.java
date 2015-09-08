@@ -1,9 +1,6 @@
 package com.penglecode.gulubala.service.music.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.consts.em.UserUploadMusicCheckStatus;
 import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.model.MusicPlayHistory;
@@ -20,7 +16,6 @@ import com.penglecode.gulubala.common.support.Pager;
 import com.penglecode.gulubala.common.support.PagingList;
 import com.penglecode.gulubala.common.support.ValidationAssert;
 import com.penglecode.gulubala.common.util.DateTimeUtils;
-import com.penglecode.gulubala.common.util.StringUtils;
 import com.penglecode.gulubala.dao.music.MusicAlbumDAO;
 import com.penglecode.gulubala.dao.music.MusicDAO;
 import com.penglecode.gulubala.dao.music.MusicListDAO;
@@ -89,27 +84,11 @@ public class MusicServiceImpl implements MusicService {
 	}
 	
 	protected void addMusicPlayHistory(Long musicId, Long userId) {
-		MusicPlayHistory phistory = musicPlayHistoryDAO.getMusicPlayHistoryByUserId(userId);
-		if(phistory != null){//修改
-			String musicIds = StringUtils.defaultIfEmpty(phistory.getMusicIds(), "");
-			musicIds = StringUtils.strip(musicIds, ",");
-			List<String> musicIdList = new ArrayList<String>(Arrays.asList(musicIds.split(",")));
-			if(!musicIdList.contains(musicId.toString())){ //防止重复记录
-				musicIdList.add(0, musicId.toString()); //最近播放的放在前面
-				long length = Math.min(musicIdList.size(), GlobalConstants.DEFAULT_MUSIC_PLAY_HISTORY_MAX_SIZE);
-				StringBuilder sb = new StringBuilder();
-				for(int i = 0; i < length; i++){
-					sb.append(musicIdList.get(i) + ",");
-				}
-				musicPlayHistoryDAO.updateMusicIds(userId, StringUtils.strip(sb.toString(), ","));
-			}
-		}else{//新增
-			MusicPlayHistory history = new MusicPlayHistory();
-			history.setUserId(userId);
-			history.setMusicIds(musicId.toString());
-			history.setCreateTime(DateTimeUtils.formatNow());
-			musicPlayHistoryDAO.insertMusicPlayHistory(history);
-		}
+		MusicPlayHistory history = new MusicPlayHistory();
+		history.setUserId(userId);
+		history.setMusicId(musicId);
+		history.setCreateTime(DateTimeUtils.formatNow());
+		musicPlayHistoryDAO.insertMusicPlayHistory(history);
 	}
 	
 	public PagingList<Music> getMusicList4search(String musicName,

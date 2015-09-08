@@ -3,39 +3,58 @@
 <mapper namespace="com.penglecode.gulubala.common.model.MusicPlayHistoryMapper">
 	
 	<insert id="insertMusicPlayHistory" parameterType="MusicPlayHistory" statementType="PREPARED" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO playlists(
+		INSERT INTO playhis(
 			id,
 			userId,
-			songIds,
+			songId,
 			createdAt
 		) VALUES (
 			#{id, jdbcType=BIGINT},
 			#{userId, jdbcType=BIGINT},
-			#{musicIds, jdbcType=VARCHAR},
+			#{musicId, jdbcType=BIGINT},
 			#{createTime, jdbcType=VARCHAR}
 		)
 	</insert>
 	
-	<update id="updateMusicIds" parameterType="java.util.Map" statementType="PREPARED">
-		UPDATE playlists a
-		   SET a.songIds 	= #{musicIds, jdbcType=VARCHAR},
-		       a.updatedAt	= #{updateTime, jdbcType=VARCHAR}
-		 WHERE a.userId = #{userId, jdbcType=BIGINT}
-	</update>
-	
 	<delete id="deleteMusicPlayHistoryByUserId" parameterType="java.lang.Long" statementType="PREPARED">
-		DELETE a FROM playlists a WHERE a.userId = #{userId, jdbcType=BIGINT}
+		DELETE a FROM playhis a WHERE a.userId = #{userId, jdbcType=BIGINT}
 	</delete>
 	
-	<select id="getMusicPlayHistoryByUserId" parameterType="java.lang.Long" statementType="PREPARED" resultType="MusicPlayHistory">
+	<resultMap id="UserMusicPlayHistory" type="java.util.Map">
+		<id property="id" column="id" javaType="java.lang.Long"/>
+		<result property="userId" column="userId" javaType="java.lang.Long"/>
+		<result property="musicId" column="musicId" javaType="java.lang.Long"/>
+		<result property="musicName" column="musicName" javaType="java.lang.String"/>
+		<result property="zuoqu" column="zuoqu" javaType="java.lang.String"/>
+		<result property="zuoci" column="zuoci" javaType="java.lang.String"/>
+		<result property="bianqu" column="bianqu" javaType="java.lang.String"/>
+		<result property="singerId" column="singerId" javaType="java.lang.String"/>
+		<result property="smallPictureUrl" column="smallPictureUrl" javaType="java.lang.String"/>
+		<result property="mv" column="mv" javaType="java.lang.Boolean"/>
+		<result property="description" column="description" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="getMusicPlayHistoryByUserId" parameterType="java.lang.Long" statementType="PREPARED" resultMap="UserMusicPlayHistory">
 		SELECT a.id 				id,
 			   a.userId				userId,
-			   a.songIds			musicIds,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
-			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
-		  FROM playlists a
+			   a.songId				musicId,
+			   b.name				musicName,
+			   b.zuoqu				zuoqu,
+			   b.zuoci				zuoci,
+			   b.bianqu				bianqu,
+			   b.singerId			singerId,
+			   b.smallPicUrl		smallPictureUrl,
+			   b.mv					mv,
+			   b.description		description
+		  FROM playhis a LEFT JOIN songs b ON(a.songId = b.id)
 		 WHERE a.userId = #{userId, jdbcType=BIGINT}
 		 ORDER BY a.id DESC
+	</select>
+	
+	<select id="getMusicPlayHistoryByUserId_count" parameterType="java.lang.Long" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM playhis a
+		 WHERE a.userId = #{userId, jdbcType=BIGINT}
 	</select>
 	
 </mapper>
