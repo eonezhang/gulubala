@@ -34,6 +34,7 @@
         <typeAlias alias="MusicRecommend" type="com.penglecode.gulubala.common.model.MusicRecommend"/>
         
         <typeAlias alias="SlideAdv" type="com.penglecode.gulubala.common.model.SlideAdv"/>
+        <typeAlias alias="Notice" type="com.penglecode.gulubala.common.model.Notice"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.penglecode.gulubala.common.mybatis.PaginationInterceptor"/>
@@ -58,5 +59,6 @@
     	<mapper resource="mybatis/mapper/MusicRecommendMapper.xml"/>
     	
     	<mapper resource="mybatis/mapper/SlideAdvMapper.xml"/>
+    	<mapper resource="mybatis/mapper/NoticeMapper.xml"/>
     </mappers>
 </configuration>

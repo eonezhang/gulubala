@@ -30,9 +30,17 @@ public class UserServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
+	public static void testGetUserById(){
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", 2L);
+		Result<Object> result = RestServiceUtils.get(UserServiceURL.URL_USER_DETAIL_USERID, paramMap, new GenericType<Result<Object>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) {
 		//testRestUserPassword();
-		testThirdUserLogin();
+		//testThirdUserLogin();
+		testGetUserById();
 	}
 
 }

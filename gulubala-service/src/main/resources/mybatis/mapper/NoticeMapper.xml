@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.penglecode.gulubala.common.model.NoticeMapper">
+	
+	<update id="incrNoticeReadCount" parameterType="java.lang.Long" statementType="PREPARED">
+		UPDATE information a
+		   SET a.readCount = a.readCount + 1
+		 WHERE a.id = #{id, jdbcType=BIGINT}
+	</update>
+	
+	<select id="getNoticeById" parameterType="java.lang.Long" statementType="PREPARED" resultType="Notice">
+		SELECT a.id 		id,
+			   a.title		title,
+			   a.content	content,
+			   a.publisher	publisher,
+			   a.status		status,
+			   a.readCount	readCount,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
+		  FROM information a
+		 WHERE a.id = #{id, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getNoticeList" parameterType="java.util.Map" statementType="PREPARED" resultType="Notice">
+		SELECT a.id 		id,
+			   a.title		title,
+			   a.publisher	publisher,
+			   a.status		status,
+			   a.readCount	readCount,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')	updateTime
+		  FROM information a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(status)">
+		   AND a.status = #{status, jdbcType=INTEGER}
+		</if>
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(title)">
+		   AND a.title like CONCAT('%', #{title, jdbcType=VARCHAR}, '%')
+		</if>
+		 ORDER BY a.id DESC
+	</select>
+	
+	<select id="getNoticeList_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM information a
+		 WHERE 1=1
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(status)">
+		   AND a.status = #{status, jdbcType=INTEGER}
+		</if>
+		<if test="@com.penglecode.gulubala.common.mybatis.MybatisUtils@isNotEmpty(title)">
+		   AND a.title like CONCAT('%', #{title, jdbcType=VARCHAR}, '%')
+		</if>
+	</select>
+	
+</mapper>

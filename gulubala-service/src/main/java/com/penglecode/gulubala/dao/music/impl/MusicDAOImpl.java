@@ -67,6 +67,10 @@ public class MusicDAOImpl extends BaseMybatisDAO implements MusicDAO {
 		return getSqlSessionTemplate().selectList(getMapperKey("getMusicList4search"), paramMap, new MusicEscapeFilter(), pager);
 	}
 	
+	public List<Music> getMusicList4userUpload(Map<String, Object> paramMap, Pager pager) {
+		return getSqlSessionTemplate().selectList(getMapperKey("getMusicList4userUpload"), paramMap, new MusicEscapeFilter(), pager);
+	}
+
 	public List<Music> getMusicListByMediaType(Map<String,Object> paramMap, Pager pager) {
 		return getSqlSessionTemplate().selectList(getMapperKey("getMusicListByMediaType"), paramMap, new MusicEscapeFilter(), pager);
 	}

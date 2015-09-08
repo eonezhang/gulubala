@@ -108,6 +108,12 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 			if(!StringUtils.isEmpty(element.getIconUrl())){
 				element.setFullIconUrl(AppResourceUtils.getFullPictureUrl(element.getIconUrl()));
 			}
+			if(!StringUtils.isEmpty(element.getIdCardFrontUrl())){
+				element.setIdCardFrontUrl(AppResourceUtils.getFullPictureUrl(element.getIdCardFrontUrl()));
+			}
+			if(!StringUtils.isEmpty(element.getIdCardBackUrl())){
+				element.setIdCardBackUrl(AppResourceUtils.getFullPictureUrl(element.getIdCardBackUrl()));
+			}
 		}
 		
 	}

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.penglecode.gulubala.common.consts.GlobalConstants;
+import com.penglecode.gulubala.common.consts.em.UserUploadMusicCheckStatus;
 import com.penglecode.gulubala.common.model.Music;
 import com.penglecode.gulubala.common.model.MusicPlayHistory;
 import com.penglecode.gulubala.common.support.Pager;
@@ -128,6 +129,14 @@ public class MusicServiceImpl implements MusicService {
 		Music music = musicDAO.getThinMusicById(musicId);
 		ValidationAssert.notNull(music, "该音乐已不存在了!(musicId=" + musicId + ")");
 		return music.getPraises();
+	}
+
+	public PagingList<Music> getMusicList4userUpload(Long userId, Integer currentPage, Integer pageSize) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", userId);
+		paramMap.put("status", UserUploadMusicCheckStatus.CHECK_STATUS_APPROVED.getStatusCode());
+		Pager pager = new Pager(currentPage, pageSize);
+		return new PagingList<Music>(musicDAO.getMusicList4userUpload(paramMap, pager), pager);
 	}
 
 }

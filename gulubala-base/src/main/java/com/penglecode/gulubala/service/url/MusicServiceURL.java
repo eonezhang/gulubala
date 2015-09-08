@@ -23,4 +23,7 @@ public interface MusicServiceURL {
 	/** 给音乐点赞 */
 	String URL_MUSIC_PRAISE = "music/praise/{musicId}";
 	
+	/** 获取某个用户上传的歌曲列表 */
+	String URL_MUSIC_LIST_USER_UPLOAD = "music/list/user/{userId}";
+	
 }

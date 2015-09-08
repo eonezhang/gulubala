@@ -90,4 +90,19 @@ public interface MusicService {
 	@Produces({ContentType.APPLICATION_JSON_UTF_8})
 	public Integer praiseMusic(@PathParam("musicId") Long musicId);
 	
+	/**
+	 * 获取某个用户上传的歌曲列表
+	 * @param userId
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	@GET
+	@Path(MusicServiceURL.URL_MUSIC_LIST_USER_UPLOAD)
+	@Produces({ContentType.APPLICATION_JSON_UTF_8})
+	public PagingList<Music> getMusicList4userUpload(
+			@PathParam("userId") Long userId,
+			@DefaultValue("1")@QueryParam("currentPage") Integer currentPage,
+			@DefaultValue("10")@QueryParam("pageSize") Integer pageSize);
+	
 }

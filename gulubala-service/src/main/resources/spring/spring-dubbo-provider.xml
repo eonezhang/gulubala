@@ -40,4 +40,5 @@
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicPlayHistoryService" ref="musicPlayHistoryService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.user.UserFollowService" ref="userFollowService" protocol="dubbo,rest"/>
 	<dubbo:service interface="com.penglecode.gulubala.service.music.MusicRecommendService" ref="musicRecommendService" protocol="dubbo,rest"/>
+	<dubbo:service interface="com.penglecode.gulubala.service.notice.NoticeService" ref="noticeService" protocol="dubbo,rest"/>
 </beans>

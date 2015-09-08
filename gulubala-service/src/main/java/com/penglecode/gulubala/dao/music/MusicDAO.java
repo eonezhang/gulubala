@@ -76,6 +76,14 @@ public interface MusicDAO {
 	public List<Music> getMusicList4search(Map<String,Object> paramMap, Pager pager);
 	
 	/**
+	 * 获取用户上传的歌曲列表[分页]
+	 * @param paramMap
+	 * @param pager
+	 * @return
+	 */
+	public List<Music> getMusicList4userUpload(Map<String,Object> paramMap, Pager pager);
+	
+	/**
 	 * 根据获取音乐列表(首页接口)[分页、排序]
 	 * @param categoryId
 	 * @param pager

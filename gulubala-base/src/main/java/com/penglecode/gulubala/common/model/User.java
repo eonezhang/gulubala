@@ -51,6 +51,9 @@ public class User implements Serializable {
 	/** 被关注数 */
 	private Integer follows;
 	
+	/** 粉丝数 */
+	private Integer fas;
+	
 	/** 人气数 */
 	private Integer hots;
 	
@@ -77,6 +80,24 @@ public class User implements Serializable {
 	
 	/** 更新时间 */
 	private String updateTime;
+	
+	/** QQ号码 */
+	private String qq;
+	
+	/** 微博账号 */
+	private String weibo;
+	
+	/** 真实姓名 */
+	private String realName;
+	
+	/** 身份证号码 */
+	private String idCard;
+	
+	/** 身份证正面照片路径 */
+	private String idCardFrontUrl;
+	
+	/** 身份证反面照片路径 */
+	private String idCardBackUrl;
 	
 	//以下属于辅助字段
 	
@@ -192,6 +213,14 @@ public class User implements Serializable {
 		this.follows = follows;
 	}
 
+	public Integer getFas() {
+		return fas;
+	}
+
+	public void setFas(Integer fas) {
+		this.fas = fas;
+	}
+
 	public Integer getHots() {
 		return hots;
 	}
@@ -262,6 +291,54 @@ public class User implements Serializable {
 
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getWeibo() {
+		return weibo;
+	}
+
+	public void setWeibo(String weibo) {
+		this.weibo = weibo;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getIdCard() {
+		return idCard;
+	}
+
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
+
+	public String getIdCardFrontUrl() {
+		return idCardFrontUrl;
+	}
+
+	public void setIdCardFrontUrl(String idCardFrontUrl) {
+		this.idCardFrontUrl = idCardFrontUrl;
+	}
+
+	public String getIdCardBackUrl() {
+		return idCardBackUrl;
+	}
+
+	public void setIdCardBackUrl(String idCardBackUrl) {
+		this.idCardBackUrl = idCardBackUrl;
 	}
 
 	public String getFullIconUrl() {

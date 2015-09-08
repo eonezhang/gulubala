@@ -204,4 +204,31 @@
 		 WHERE a.name like CONCAT('%', #{musicName, jdbcType=VARCHAR}, '%')
 	</select>
 	
+	<select id="getMusicList4userUpload" parameterType="java.util.Map" statementType="PREPARED" resultType="Music">
+		SELECT a.id 				musicId,
+			   a.name				musicName,
+			   a.singerId			singerId,
+			   a.albumId			albumId,
+			   a.mv					mv,
+			   a.hot				hots,
+			   a.playCount			plays,
+			   a.zan				praises,
+			   a.shoucang			collects,
+			   a.smallPicUrl		smallPictureUrl,
+			   a.songUrl			musicUrl,
+			   a.description		description,
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	createTime
+		  FROM songs a
+		 WHERE a.tgId = #{userId, jdbcType=BIGINT}
+		   AND a.tgStatus = #{status, jdbcType=INTEGER}
+		 ORDER BY a.id DESC
+	</select>
+	
+	<select id="getMusicList4userUpload_count" parameterType="java.util.Map" statementType="PREPARED" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM songs a
+		 WHERE a.tgId = #{userId, jdbcType=BIGINT}
+		   AND a.tgStatus = #{status, jdbcType=INTEGER}
+	</select>
+	
 </mapper>

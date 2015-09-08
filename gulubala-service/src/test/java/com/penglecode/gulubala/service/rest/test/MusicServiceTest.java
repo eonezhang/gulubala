@@ -281,11 +281,19 @@ public class MusicServiceTest {
 		System.out.println(JsonUtils.object2Json(result));
 	}
 	
+	public static void testGetMusicList4userUpload() {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", 2L);
+		Result<PagingList<Music>> result = RestServiceUtils.get(MusicServiceURL.URL_MUSIC_LIST_USER_UPLOAD, paramMap, new GenericType<Result<PagingList<Music>>>(){});
+		System.out.println(JsonUtils.object2Json(result));
+	}
+	
 	public static void main(String[] args) throws Exception {
 		//testCreateMusic();
 		//testGetMusicById();
 		//testGetMusicList4search();
 		//testPlayMusic();
+		testGetMusicList4userUpload();
 	}
 
 }
