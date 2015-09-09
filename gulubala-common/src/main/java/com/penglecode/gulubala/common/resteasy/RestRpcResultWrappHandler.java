@@ -1,4 +1,4 @@
-package com.penglecode.gulubala.common.dubbo.filter;
+package com.penglecode.gulubala.common.resteasy;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -17,7 +17,7 @@ import javax.ws.rs.ext.RuntimeDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
+import com.penglecode.gulubala.common.consts.ContentType;
 import com.penglecode.gulubala.common.consts.GlobalConstants;
 import com.penglecode.gulubala.common.exception.SystemException;
 import com.penglecode.gulubala.common.support.Result;

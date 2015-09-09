@@ -39,8 +39,8 @@ public class UserServiceTest {
 	
 	public static void main(String[] args) {
 		//testRestUserPassword();
-		testThirdUserLogin();
-		//testGetUserById();
+		//testThirdUserLogin();
+		testGetUserById();
 	}
 
 }

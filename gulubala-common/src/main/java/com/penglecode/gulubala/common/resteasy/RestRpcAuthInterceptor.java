@@ -1,4 +1,4 @@
-package com.penglecode.gulubala.common.dubbo.filter;
+package com.penglecode.gulubala.common.resteasy;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,6 +11,7 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,6 +92,7 @@ public class RestRpcAuthInterceptor implements ContainerRequestFilter {
 		String path = requestContext.getUriInfo().getPath();
 		path = path.replace(getContextPath(), "");
 		logger.info("Do rest rpc auth validation for current request : {}", path);
+		path = StringUtils.stripStart(path, "/");
 		BusinessAssert.isTrue(ALLOWED_HTTP_METHODS.contains(requestContext.getMethod()), String.valueOf(Response.Status.METHOD_NOT_ALLOWED), "不允许的请求方法(" + requestContext.getMethod() + ")!");
 		
 		if(!CollectionUtils.isEmpty(noAuthUrls)){

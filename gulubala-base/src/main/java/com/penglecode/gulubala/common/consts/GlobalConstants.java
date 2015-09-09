@@ -53,27 +53,27 @@ public class GlobalConstants extends AbstractConstants {
 	 * 注：各个应用的global.properties中需要加入global.imgserver.domain=xxxx
 	 */
 	@ConstValue("${global.imgserver.domain}")
-	public static final String GLOBAL_IMGSERVER_DOMAIN = valueOf("http://120.55.116.153/MiManSevice/upload/images/");
+	public static final String GLOBAL_IMGSERVER_DOMAIN = valueOf(null);
 	
 	/**
 	 * 全局媒体文件服务域名(外部)
 	 * 注：各个应用的global.properties中需要加入global.fileserver.external.domain=xxxx
 	 */
 	@ConstValue("${global.fileserver.external.domain}")
-	public static final String GLOBAL_FILESERVER_EXTERNAL_DOMAIN = valueOf("http://5734.long-vod.cdn.aodianyun.com/u/5734/");
+	public static final String GLOBAL_FILESERVER_EXTERNAL_DOMAIN = valueOf(null);
 	
 	/**
 	 * 全局媒体文件服务域名(内部)
 	 * 注：各个应用的global.properties中需要加入global.fileserver.internal.domain=xxxx
 	 */
 	@ConstValue("${global.fileserver.internal.domain}")
-	public static final String GLOBAL_FILESERVER_INTERNAL_DOMAIN = valueOf("/http://120.55.116.153/MiManSevice/upload/files/");
+	public static final String GLOBAL_FILESERVER_INTERNAL_DOMAIN = valueOf(null);
 	
 	/**
 	 * 默认的用户头像
 	 */
 	@ConstValue("${global.usericon.default}")
-	public static final String DEFAULT_USER_ICON = valueOf("/img/user/default_user_icon.png");
+	public static final String DEFAULT_USER_ICON = valueOf(null);
 	
 	/**
 	 * 默认的音乐评论ROOT节点ID

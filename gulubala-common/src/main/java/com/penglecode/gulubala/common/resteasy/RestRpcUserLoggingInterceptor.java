@@ -1,4 +1,4 @@
-package com.penglecode.gulubala.common.dubbo.filter;
+package com.penglecode.gulubala.common.resteasy;
 
 import java.io.IOException;
 import java.io.InputStream;

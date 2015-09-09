@@ -1,0 +1,6 @@
+2015-09-09 12:38:58,133 [main] DEBUG org.jboss.resteasy.plugins.providers.DocumentProvider#62 - Unable to retrieve config: expandEntityReferences defaults to false
+2015-09-09 12:38:58,137 [main] DEBUG org.jboss.resteasy.plugins.providers.DocumentProvider#62 - Unable to retrieve config: enableSecureProcessingFeature defaults to true
+2015-09-09 12:38:58,137 [main] DEBUG org.jboss.resteasy.plugins.providers.DocumentProvider#62 - Unable to retrieve config: disableDTDs defaults to true
+2015-09-09 12:38:58,144 [main] DEBUG org.jboss.resteasy.plugins.providers.DocumentProvider#62 - Unable to retrieve config: expandEntityReferences defaults to false
+2015-09-09 12:38:58,144 [main] DEBUG org.jboss.resteasy.plugins.providers.DocumentProvider#62 - Unable to retrieve config: enableSecureProcessingFeature defaults to true
+2015-09-09 12:38:58,144 [main] DEBUG org.jboss.resteasy.plugins.providers.DocumentProvider#62 - Unable to retrieve config: disableDTDs defaults to true

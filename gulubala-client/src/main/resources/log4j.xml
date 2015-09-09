@@ -8,15 +8,7 @@
 		</layout>
 	</appender>
 	<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${catalina.home}/logs/dubboxdemo_service"/>
-        <param name="DatePattern" value="'_'yyyy-MM-dd'.log'"/>
-        <layout class="org.apache.log4j.PatternLayout">
-         	<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p] [%l] %m%n"/>
-        </layout>
-    </appender>
-    
-    <appender name="DUBBO" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${catalina.home}/logs/dubboxdemo_service_dubbo"/>
+        <param name="File" value="${catalina.home}/logs/gulubala-client"/>
         <param name="DatePattern" value="'_'yyyy-MM-dd'.log'"/>
         <layout class="org.apache.log4j.PatternLayout">
          	<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p] [%l] %m%n"/>
@@ -46,18 +38,7 @@
     	<level value="INFO"/>
     </logger>
     
-    <logger name="com.alibaba.dubbo" additivity="false">
-    	<level value="DEBUG"/>
-    	<appender-ref ref="DUBBO"/>
-    </logger>
-    <logger name="com.alibaba.dubbo.common.extension.ExtensionLoader">
-    	<level value="INFO"/>
-    </logger>
-    <logger name="com.alibaba.dubbo.rpc.protocol.rest.support" additivity="false">
-    	<appender-ref ref="CONSOLE"/>
-    </logger>
-    
-    <logger name="com.penglecode.dubboxdemo">
+    <logger name="com.penglecode.gulubala">
     	<level value="DEBUG"/>
     </logger>
     

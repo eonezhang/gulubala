@@ -1,8 +1,11 @@
 package com.penglecode.gulubala.common.util;
 
+import java.lang.annotation.Annotation;
 import java.util.Map;
 
-import com.penglecode.gulubala.common.consts.ServletAppConstants;
+import org.springframework.context.ApplicationContext;
+
+import com.penglecode.gulubala.common.consts.ApplicationConstants;
 
 /**
  * Spring Bean工具类
@@ -15,19 +18,27 @@ import com.penglecode.gulubala.common.consts.ServletAppConstants;
 public class SpringUtils {
 
 	public static <T> T getBean(Class<T> requiredType) {
-		return ServletAppConstants.APPLICATION_CONTEXT.getBean(requiredType);
+		return getApplicationContext().getBean(requiredType);
 	}
 	
 	public static <T> T getBean(String name, Class<T> requiredType) {
-		return ServletAppConstants.APPLICATION_CONTEXT.getBean(name, requiredType);
+		return getApplicationContext().getBean(name, requiredType);
 	}
 	
 	public static <T> T getBean(String name) {
-		return (T) ServletAppConstants.APPLICATION_CONTEXT.getBean(name);
+		return (T) getApplicationContext().getBean(name);
 	}
 	
 	public static <T> Map<String,T> getBeansOfType(Class<T> type) {
-		return ServletAppConstants.APPLICATION_CONTEXT.getBeansOfType(type);
+		return getApplicationContext().getBeansOfType(type);
+	}
+	
+	public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annotationType) {
+		return getApplicationContext().getBeansWithAnnotation(annotationType);
+	}
+	
+	protected static ApplicationContext getApplicationContext(){
+		return ApplicationConstants.APPLICATION_CONTEXT;
 	}
 	
 }

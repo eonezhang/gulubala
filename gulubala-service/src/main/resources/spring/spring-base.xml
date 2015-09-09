@@ -7,7 +7,7 @@
 						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 	
 	<!-- 全局类型转换器工厂Bean -->
-	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"></bean>
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
 
 	<!-- 全局properties属性源 -->
     <bean id="globalPropertySources" class="com.penglecode.gulubala.common.support.GlobalPropertySources">
@@ -16,7 +16,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:jdbc.properties</value>
-				<value>classpath:dubbo.properties</value>
 				<value>classpath:global.properties</value>
 				<value>classpath:redis.properties</value>
 				<value>classpath:url.properties</value>
@@ -65,7 +64,7 @@
 	</bean>
 
     <!-- Spring ApplicationContext启动监听器 -->
-    <bean class="com.penglecode.gulubala.common.listener.ApplicationContextListener">
+    <bean class="com.penglecode.gulubala.common.listener.ApplicationInitializeListener">
     	<property name="applicationInitializers">
     		<list>
     			<ref bean="applicationBootingInitializer"/>

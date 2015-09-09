@@ -217,12 +217,7 @@
 			<artifactId>spring-data-redis</artifactId>
 		</dependency>
 		
-		<!-- dubbox -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-		</dependency>
-		
+		<!-- resteasy -->
 		<dependency>
 		    <groupId>org.jboss.resteasy</groupId>
 		    <artifactId>resteasy-jaxrs</artifactId>
@@ -242,6 +237,10 @@
 		<dependency>
            	<groupId>org.jboss.resteasy</groupId>
    			<artifactId>jaxrs-api</artifactId>
+        </dependency>
+        <dependency>
+           	<groupId>org.jboss.resteasy</groupId>
+   			<artifactId>resteasy-spring</artifactId>
         </dependency>
 		
 		<!-- j2ee web spec -->

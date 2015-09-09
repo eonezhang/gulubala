@@ -42,11 +42,7 @@
 		<jedis.version>2.6.2</jedis.version>
 		<spring-data-redis.version>1.4.2.RELEASE</spring-data-redis.version>
 		
-		<dubbo.version>2.8.4</dubbo.version>
-		<netty.version>3.7.0.Final</netty.version>
-		<curator.version>2.8.0</curator.version>
-		<zookeeper.version>3.4.6</zookeeper.version>
-		<resteasy.version>3.0.11.Final</resteasy.version>
+		<resteasy.version>3.0.12.Final</resteasy.version>
 		
 		<servlet-api.version>3.1.0</servlet-api.version>
 		<jstl.version>1.2</jstl.version>
@@ -357,119 +353,7 @@
 				</exclusions>
 			</dependency>
 			
-			<!-- dubbox -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>dubbo</artifactId>
-				<version>${dubbo.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.jboss.resteasy</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.codehaus.jackson</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.jboss.xnio</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.tomcat.embed</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.github.sgroschupf</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.google.guava</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>io.undertow</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.objenesis</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.sun.xml.fastinfoset</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.jboss.spec.javax.servlet</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.jboss.spec.javax.annotation</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>net.jcip</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>commons-pool</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>de.javakaffee</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.esotericsoftware.kryo</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.esotericsoftware.minlog</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>de.ruedigermoeller</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.jboss.netty</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>javax.xml.bind</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.sun.xml.bind</groupId>
-						<artifactId>*</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			
-			<dependency>
-				<groupId>io.netty</groupId>
-				<artifactId>netty</artifactId>
-				<version>${netty.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.apache.curator</groupId>
-				<artifactId>curator-framework</artifactId>
-				<version>${curator.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.apache.curator</groupId>
-				<artifactId>curator-client</artifactId>
-				<version>${curator.version}</version>
-			</dependency>
-		    
-		    <dependency>
-				<groupId>org.apache.zookeeper</groupId>
-				<artifactId>zookeeper</artifactId>
-				<version>${zookeeper.version}</version>
-			</dependency>
-			
+			<!-- resteasy -->
 			<dependency>
 			    <groupId>org.jboss.resteasy</groupId>
 			    <artifactId>resteasy-jaxrs</artifactId>
@@ -495,7 +379,11 @@
     			<artifactId>jaxrs-api</artifactId>
 	            <version>${resteasy.version}</version>
 	        </dependency>
-			
+			<dependency>
+	           	<groupId>org.jboss.resteasy</groupId>
+    			<artifactId>resteasy-spring</artifactId>
+	            <version>${resteasy.version}</version>
+	        </dependency>
 			
 			<!-- j2ee web spec -->
 			<dependency>

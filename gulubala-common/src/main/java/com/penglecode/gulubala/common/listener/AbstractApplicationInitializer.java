@@ -14,16 +14,6 @@ import com.penglecode.gulubala.common.util.ReflectionUtils;
  */
 public abstract class AbstractApplicationInitializer implements ApplicationInitializer {
 
-	private volatile boolean initialized = false;
-	
-	public boolean isInitialized() {
-		return initialized;
-	}
-
-	protected void setInitialized(boolean initialized) {
-		this.initialized = initialized;
-	}
-
 	protected void setFinalFieldValue(Field field, Object value) {
 		if(field != null){
 			FinalFieldUtils.setFinalFieldValue(null, field, value);
@@ -35,10 +25,6 @@ public abstract class AbstractApplicationInitializer implements ApplicationIniti
 		if(field != null){
 			FinalFieldUtils.setFinalFieldValue(null, field, value);
 		}
-	}
-	
-	public boolean supportMultipleInitialize() {
-		return false;
 	}
 	
 }

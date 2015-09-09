@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractMessageSource;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.penglecode.gulubala.common.consts.ServletAppConstants;
+import com.penglecode.gulubala.common.consts.ApplicationConstants;
 import com.penglecode.gulubala.common.support.Messages;
 
 /**
@@ -27,7 +27,7 @@ public class ApplicationBootingInitializer extends AbstractApplicationInitialize
     		rootApplicationContext = applicationContext.getParent();
     	}
     	
-    	setFinalFieldValue(ServletAppConstants.class, "APPLICATION_CONTEXT", rootApplicationContext);
+    	setFinalFieldValue(ApplicationConstants.class, "APPLICATION_CONTEXT", rootApplicationContext);
     	
     	try {
 			Messages.setMessageSource(rootApplicationContext.getBean(AbstractMessageSource.class));

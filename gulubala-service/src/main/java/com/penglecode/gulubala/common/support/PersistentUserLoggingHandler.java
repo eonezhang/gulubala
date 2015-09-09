@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.penglecode.gulubala.common.dubbo.filter.AbstractUserLoggingHandler;
+import com.penglecode.gulubala.common.resteasy.AbstractUserLoggingHandler;
 import com.penglecode.gulubala.common.model.UserLog;
 import com.penglecode.gulubala.common.util.JsonUtils;
 import com.penglecode.gulubala.service.user.UserLogService;

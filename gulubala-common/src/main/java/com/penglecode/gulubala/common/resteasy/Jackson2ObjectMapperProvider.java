@@ -1,4 +1,4 @@
-package com.penglecode.gulubala.common.dubbo.resteasy;
+package com.penglecode.gulubala.common.resteasy;
 
 import java.text.SimpleDateFormat;
 
