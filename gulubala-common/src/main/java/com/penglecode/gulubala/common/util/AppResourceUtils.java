@@ -12,12 +12,16 @@ import com.penglecode.gulubala.common.consts.em.MediaSource;
  */
 public class AppResourceUtils {
 
+	public static final String PROTOCOL_HTTP = "http://";
+	
 	public static String getFullPictureUrl(String pictureUrl) {
 		if(!StringUtils.isEmpty(pictureUrl)){
-			if(pictureUrl.startsWith("http://")){
+			if(pictureUrl.startsWith(PROTOCOL_HTTP)){
 				return pictureUrl;
 			}else{
-				return GlobalConstants.GLOBAL_IMGSERVER_DOMAIN + pictureUrl;
+				String fullUrl = GlobalConstants.GLOBAL_IMGSERVER_DOMAIN + pictureUrl;
+				fullUrl = fullUrl.replace(PROTOCOL_HTTP, "");
+				return PROTOCOL_HTTP + FileUtils.formatFilePath(fullUrl);
 			}
 		}
 		return null;
@@ -25,10 +29,12 @@ public class AppResourceUtils {
 	
 	public static String getFullFileUrl(String fileUrl, MediaSource mediaSource) {
 		if(!StringUtils.isEmpty(fileUrl)){
-			if(fileUrl.startsWith("http://")){
+			if(fileUrl.startsWith(PROTOCOL_HTTP)){
 				return fileUrl;
 			}else{
-				return mediaSource.getDomainUrl() + fileUrl;
+				String fullUrl = mediaSource.getDomainUrl() + fileUrl;
+				fullUrl = fullUrl.replace(PROTOCOL_HTTP, "");
+				return PROTOCOL_HTTP + FileUtils.formatFilePath(fullUrl);
 			}
 		}
 		return null;
