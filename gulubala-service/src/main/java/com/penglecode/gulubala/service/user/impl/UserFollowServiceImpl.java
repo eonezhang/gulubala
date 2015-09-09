@@ -35,7 +35,8 @@ public class UserFollowServiceImpl implements UserFollowService {
 		userFollow.setCreateTime(DateTimeUtils.formatNow());
 		try {
 			userFollowDAO.insertUserFollow(userFollow);
-			userDAO.incrUserFollows(userFollow.getFollowId());
+			userDAO.incrUserFollows(userFollow.getUserId()); //增加当前用户的关注他人数
+			userDAO.incrUserFas(userFollow.getFollowId()); //增加被关注用户的被关注数
 		} catch (DuplicateKeyException e) {
 			BusinessAssert.isTrue(!e.getCause().getMessage().toLowerCase().contains("uk_user_follows"), "亲，该用户您已经关注过了!");
 			throw e;
@@ -49,7 +50,8 @@ public class UserFollowServiceImpl implements UserFollowService {
 		UserFollow userFollow = userFollowDAO.getUserFollowById(id);
 		if(userFollow != null){
 			userFollowDAO.deleteUserFollowById(id);
-			userDAO.decrUserFollows(userFollow.getFollowId());
+			userDAO.decrUserFollows(userFollow.getUserId()); //减少当前用户的关注他人数
+			userDAO.decrUserFas(userFollow.getFollowId()); //减少被关注用户的被关注数
 		}
 	}
 

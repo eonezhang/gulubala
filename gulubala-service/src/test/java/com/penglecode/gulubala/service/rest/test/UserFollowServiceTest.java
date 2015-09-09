@@ -15,23 +15,16 @@ import com.penglecode.gulubala.service.url.UserFollowServiceURL;
 public class UserFollowServiceTest {
 
 	public static void testAddUserFollow() {
-		Long[] userIds = new Long[]{2L,3L,4L,5L,6L,7L,9L,10L};
-		for(Long userId : userIds){
-			for(Long followId : userIds){
-				if(!userId.equals(followId)){
-					UserFollow userFollow = new UserFollow();
-					userFollow.setUserId(userId);
-					userFollow.setFollowId(followId);
-					Result<Object> result = RestServiceUtils.post(UserFollowServiceURL.URL_USER_FOLLOW_ADD, userFollow, new GenericType<Result<Object>>(){});
-					System.out.println(JsonUtils.object2Json(result));
-				}
-			}
-		}
+		UserFollow userFollow = new UserFollow();
+		userFollow.setUserId(2L);
+		userFollow.setFollowId(3L);
+		Result<Object> result = RestServiceUtils.post(UserFollowServiceURL.URL_USER_FOLLOW_ADD, userFollow, new GenericType<Result<Object>>(){});
+		System.out.println(JsonUtils.object2Json(result));
 	}
 	
 	public static void testCancelUserFollow() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("id", 4);
+		paramMap.put("id", 84);
 		Result<Object> result = RestServiceUtils.get(UserFollowServiceURL.URL_USER_FOLLOW_CANCEL, paramMap, new GenericType<Result<Object>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
@@ -45,8 +38,8 @@ public class UserFollowServiceTest {
 	
 	public static void main(String[] args) {
 		//testAddUserFollow();
-		//testCancelUserFollow();
-		testGetUserFollowListByUserId();
+		testCancelUserFollow();
+		//testGetUserFollowListByUserId();
 	}
 	
 }

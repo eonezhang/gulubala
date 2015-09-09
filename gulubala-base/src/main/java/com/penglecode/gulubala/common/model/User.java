@@ -48,10 +48,10 @@ public class User implements Serializable {
 	/** 用户头像地址 */
 	private String iconUrl;
 	
-	/** 被关注数 */
+	/** 关注数他人数 */
 	private Integer follows;
 	
-	/** 粉丝数 */
+	/** 粉丝数(被关注数) */
 	private Integer fas;
 	
 	/** 人气数 */
@@ -109,6 +109,9 @@ public class User implements Serializable {
 
 	private String statusName;
 
+	/** 投稿数(上传歌曲数) */
+	private Integer tgCount;
+	
 	public Long getUserId() {
 		return userId;
 	}
@@ -371,6 +374,14 @@ public class User implements Serializable {
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+
+	public Integer getTgCount() {
+		return tgCount;
+	}
+
+	public void setTgCount(Integer tgCount) {
+		this.tgCount = tgCount;
 	}
 
 }

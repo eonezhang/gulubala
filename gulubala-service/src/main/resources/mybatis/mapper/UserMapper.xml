@@ -56,9 +56,23 @@
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</update>
 	
+	<update id="incrUserFas" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.fas 			= a.fas + 1,
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
 	<update id="decrUserFollows" parameterType="java.util.Map" statementType="PREPARED">
 		UPDATE users a
 		   SET a.follows 		= IF(a.follows > 0, a.follows - 1, 0),
+		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
+		 WHERE a.id = #{userId, jdbcType=BIGINT}
+	</update>
+	
+	<update id="decrUserFas" parameterType="java.util.Map" statementType="PREPARED">
+		UPDATE users a
+		   SET a.fas 			= IF(a.fas > 0, a.fas - 1, 0),
 		   	   a.updatedAt		= #{updateTime, jdbcType=VARCHAR}
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</update>
@@ -77,7 +91,7 @@
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</update>
 	
-	<select id="getUserById" parameterType="java.lang.Long" statementType="PREPARED" resultType="User">
+	<select id="getUserById" parameterType="java.util.Map" statementType="PREPARED" resultType="User">
 		SELECT a.id					userId,
 			   a.nickname			nickName,
 			   a.phone				mobilePhone,
@@ -106,7 +120,8 @@
 			   a.idCardBack			idCardBackUrl,
 			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime,
-			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')		updateTime
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')		updateTime,
+			   (SELECT COUNT(*) FROM songs b WHERE a.id = b.tgId AND b.tgStatus = #{tgStatus, jdbcType=INTEGER}) tgCount
 		  FROM users a
 		 WHERE a.id = #{userId, jdbcType=BIGINT}
 	</select>
@@ -156,13 +171,13 @@
 		 WHERE a.email = #{email, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="getUserByEmail" parameterType="java.lang.String" statementType="PREPARED" resultType="User">
+	<select id="getUserByEmail" parameterType="java.util.Map" statementType="PREPARED" resultType="User">
 		SELECT a.id					userId,
 			   a.nickname			nickName,
 			   a.phone				mobilePhone,
 			   a.email				email,
-			   a.password			encryptedPassword,
 			   a.thirdAccountName	thirdAccountName,
+			   a.password			encryptedPassword,
 			   a.registerType		registerType,
 			   a.vip				vip,
 			   a.gurz				authenticated,
@@ -171,24 +186,33 @@
 			   a.remark				remark,
 			   a.iconUrl			iconUrl,
 			   a.follows			follows,
+			   a.fas				fas,
 			   a.hots				hots,
 			   a.praises			praises,
 			   a.sex				sex,
 			   a.birthday			birthday,
 			   a.status				status,
+			   a.qq					qq,
+			   a.weibo				weibo,
+			   a.realName			realName,
+			   a.idCard				idCard,
+			   a.idCardFront		idCardFrontUrl,
+			   a.idCardBack			idCardBackUrl,
 			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')		updateTime,
+			   (SELECT COUNT(*) FROM songs b WHERE a.id = b.tgId AND b.tgStatus = #{tgStatus, jdbcType=INTEGER}) tgCount
 		  FROM users a
 		 WHERE a.email = #{email, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="getUserByMobile" parameterType="java.lang.String" statementType="PREPARED" resultType="User">
+	<select id="getUserByMobile" parameterType="java.util.Map" statementType="PREPARED" resultType="User">
 		SELECT a.id					userId,
 			   a.nickname			nickName,
 			   a.phone				mobilePhone,
 			   a.email				email,
-			   a.password			encryptedPassword,
 			   a.thirdAccountName	thirdAccountName,
+			   a.password			encryptedPassword,
 			   a.registerType		registerType,
 			   a.vip				vip,
 			   a.gurz				authenticated,
@@ -197,13 +221,22 @@
 			   a.remark				remark,
 			   a.iconUrl			iconUrl,
 			   a.follows			follows,
+			   a.fas				fas,
 			   a.hots				hots,
 			   a.praises			praises,
 			   a.sex				sex,
 			   a.birthday			birthday,
 			   a.status				status,
+			   a.qq					qq,
+			   a.weibo				weibo,
+			   a.realName			realName,
+			   a.idCard				idCard,
+			   a.idCardFront		idCardFrontUrl,
+			   a.idCardBack			idCardBackUrl,
 			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')		updateTime,
+			   (SELECT COUNT(*) FROM songs b WHERE a.id = b.tgId AND b.tgStatus = #{tgStatus, jdbcType=INTEGER}) tgCount
 		  FROM users a
 		 WHERE a.phone = #{mobilePhone, jdbcType=VARCHAR}
 	</select>
@@ -213,8 +246,8 @@
 			   a.nickname			nickName,
 			   a.phone				mobilePhone,
 			   a.email				email,
-			   a.password			encryptedPassword,
 			   a.thirdAccountName	thirdAccountName,
+			   a.password			encryptedPassword,
 			   a.registerType		registerType,
 			   a.vip				vip,
 			   a.gurz				authenticated,
@@ -223,13 +256,22 @@
 			   a.remark				remark,
 			   a.iconUrl			iconUrl,
 			   a.follows			follows,
+			   a.fas				fas,
 			   a.hots				hots,
 			   a.praises			praises,
 			   a.sex				sex,
 			   a.birthday			birthday,
 			   a.status				status,
+			   a.qq					qq,
+			   a.weibo				weibo,
+			   a.realName			realName,
+			   a.idCard				idCard,
+			   a.idCardFront		idCardFrontUrl,
+			   a.idCardBack			idCardBackUrl,
 			   DATE_FORMAT(a.lastLoginAt, '%Y-%m-%d %T')	lastLoginTime,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')		createTime,
+			   DATE_FORMAT(a.updatedAt, '%Y-%m-%d %T')		updateTime,
+			   (SELECT COUNT(*) FROM songs b WHERE a.id = b.tgId AND b.tgStatus = #{tgStatus, jdbcType=INTEGER}) tgCount
 		  FROM users a
 		 WHERE a.registerType = #{registerType, jdbcType=INTEGER}
 		   AND a.thirdAccountName = #{thirdAccountName, jdbcType=VARCHAR}

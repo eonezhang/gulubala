@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.penglecode.gulubala.common.consts.em.UserUploadMusicCheckStatus;
 import com.penglecode.gulubala.common.model.User;
 import com.penglecode.gulubala.common.mybatis.EscapeFilter;
 import com.penglecode.gulubala.common.util.AppResourceUtils;
@@ -36,7 +37,10 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 	}
 
 	public User getUserById(Long userId) {
-		return getSqlSessionTemplate().selectOne(getMapperKey("getUserById"), userId, new UserEscapeFilter());
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", userId);
+		paramMap.put("tgStatus", UserUploadMusicCheckStatus.CHECK_STATUS_APPROVED.getStatusCode());
+		return getSqlSessionTemplate().selectOne(getMapperKey("getUserById"), paramMap, new UserEscapeFilter());
 	}
 	
 	public User getThinUserById(Long userId) {
@@ -52,17 +56,24 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 	}
 
 	public User getUserByMobile(String mobilePhone) {
-		return getSqlSessionTemplate().selectOne(getMapperKey("getUserByMobile"), mobilePhone, new UserEscapeFilter());
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("mobilePhone", mobilePhone);
+		paramMap.put("tgStatus", UserUploadMusicCheckStatus.CHECK_STATUS_APPROVED.getStatusCode());
+		return getSqlSessionTemplate().selectOne(getMapperKey("getUserByMobile"), paramMap, new UserEscapeFilter());
 	}
 	
 	public User getUserByEmail(String email) {
-		return getSqlSessionTemplate().selectOne(getMapperKey("getUserByEmail"), email, new UserEscapeFilter());
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("email", email);
+		paramMap.put("tgStatus", UserUploadMusicCheckStatus.CHECK_STATUS_APPROVED.getStatusCode());
+		return getSqlSessionTemplate().selectOne(getMapperKey("getUserByEmail"), paramMap, new UserEscapeFilter());
 	}
 
 	public User getUserBythirdAccount(String thirdAccountName, Integer registerType) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("thirdAccountName", thirdAccountName);
 		paramMap.put("registerType", registerType);
+		paramMap.put("tgStatus", UserUploadMusicCheckStatus.CHECK_STATUS_APPROVED.getStatusCode());
 		return getSqlSessionTemplate().selectOne(getMapperKey("getUserBythirdAccount"), paramMap, new UserEscapeFilter());
 	}
 
@@ -81,6 +92,13 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 		getSqlSessionTemplate().update(getMapperKey("incrUserFollows"), paramMap);
 	}
 	
+	public void incrUserFas(Long userId) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", userId);
+		paramMap.put("updateTime", DateTimeUtils.formatNow());
+		getSqlSessionTemplate().update(getMapperKey("incrUserFas"), paramMap);
+	}
+
 	public void decrUserFollows(Long userId) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", userId);
@@ -88,6 +106,13 @@ public class UserDAOImpl extends BaseMybatisDAO implements UserDAO {
 		getSqlSessionTemplate().update(getMapperKey("decrUserFollows"), paramMap);
 	}
 
+	public void decrUserFas(Long userId) {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("userId", userId);
+		paramMap.put("updateTime", DateTimeUtils.formatNow());
+		getSqlSessionTemplate().update(getMapperKey("decrUserFas"), paramMap);
+	}
+	
 	public void incrUserHots(Long userId) {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("userId", userId);
