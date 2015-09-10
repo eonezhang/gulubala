@@ -17,8 +17,8 @@ public class MusicRecommendServiceTest {
 
 	public static void testGetMusicList4index() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("categoryId", 9);
-		paramMap.put("mediaType", 1);
+		paramMap.put("categoryId", 28);
+		//paramMap.put("mediaType", 1);
 		Result<PagingList<MusicRecommend>> result = RestServiceUtils.get(MusicRecommendServiceURL.URL_MUSIC_LIST_INDEX, paramMap, new GenericType<Result<PagingList<MusicRecommend>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
@@ -48,10 +48,10 @@ public class MusicRecommendServiceTest {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		//testGetMusicList4index();
+		testGetMusicList4index();
 		//testGetMusicList4hots();
 		//testGetIndexAdvList4index();
-		testGetGuideAdvList4index();
+		//testGetGuideAdvList4index();
 	}
 
 }

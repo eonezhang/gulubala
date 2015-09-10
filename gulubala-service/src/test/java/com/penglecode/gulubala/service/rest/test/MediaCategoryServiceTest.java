@@ -23,7 +23,7 @@ public class MediaCategoryServiceTest {
 	
 	public static void testGetCategoryListByParentId() {
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("parentId", 7);
+		paramMap.put("parentId", 9);
 		Result<List<MediaCategory>> result = RestServiceUtils.get(MediaCategoryServiceURL.URL_MEDIA_CATEGORY_LIST_PARENT, paramMap, new GenericType<Result<List<MediaCategory>>>(){});
 		System.out.println(JsonUtils.object2Json(result));
 	}
