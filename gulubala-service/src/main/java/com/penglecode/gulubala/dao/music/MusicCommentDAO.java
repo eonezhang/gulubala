@@ -57,8 +57,8 @@ public interface MusicCommentDAO {
 	
 	/**
 	 * 根据用户ID获取用户的评论列表
-	 * @param userId			- 必填
-	 * @param commentType		- 必填
+	 * @param commentType		- 必填(评论对象类型： 1-歌曲，2-歌单)
+	 * @param commentId			- 必填(当commentType=1时为歌曲的ID，当commentType=2时为歌单的ID)
 	 * @param pager				- 分页
 	 * @return
 	 */

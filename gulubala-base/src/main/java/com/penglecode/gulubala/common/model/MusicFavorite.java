@@ -36,6 +36,9 @@ public class MusicFavorite implements Serializable {
 	
 	/** 用户昵称 */
 	private String nickName;
+	
+	/** 收藏对象的图片URL */
+	private String favoriteImgUrl;
 
 	public Long getId() {
 		return id;
@@ -99,6 +102,14 @@ public class MusicFavorite implements Serializable {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+
+	public String getFavoriteImgUrl() {
+		return favoriteImgUrl;
+	}
+
+	public void setFavoriteImgUrl(String favoriteImgUrl) {
+		this.favoriteImgUrl = favoriteImgUrl;
 	}
 	
 }

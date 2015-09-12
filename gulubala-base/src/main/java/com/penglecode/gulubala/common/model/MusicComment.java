@@ -41,6 +41,9 @@ public class MusicComment implements Serializable {
 	/** 评论对象的名称 */
 	private String commentName;
 	
+	/** 评论用户的头像URL */
+	private String userIconUrl;
+	
 	public Long getId() {
 		return id;
 	}
@@ -111,6 +114,14 @@ public class MusicComment implements Serializable {
 
 	public void setCommentName(String commentName) {
 		this.commentName = commentName;
+	}
+
+	public String getUserIconUrl() {
+		return userIconUrl;
+	}
+
+	public void setUserIconUrl(String userIconUrl) {
+		this.userIconUrl = userIconUrl;
 	}
 	
 }

@@ -47,8 +47,9 @@
 			   a.commentType		commentType,
 			   a.commentId			commentId,
 			   a.content			content,
-			   a.commentPraises		commentPraises
-		  FROM songcomments a
+			   a.commentPraises		commentPraises,
+			   u.iconUrl			userIconUrl
+		  FROM songcomments a LEFT JOIN users u ON(a.userId = u.id)
 		 WHERE a.id = #{id, jdbcType=BIGINT}
 	</select>
 	
@@ -61,8 +62,9 @@
 			   a.content			content,
 			   a.commentPraises		commentPraises,
 			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	commentTime,
-			   b.name commentName
-		  FROM songcomments a
+			   b.name 				commentName,
+			   u.iconUrl			userIconUrl
+		  FROM songcomments a LEFT JOIN users u ON(a.userId = u.id)
 		<if test="commentType == 0 or commentType == 1">
 			,songs b
 		</if>
@@ -109,8 +111,9 @@
 			   a.commentId			commentId,
 			   a.content			content,
 			   a.commentPraises		commentPraises,
-			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	commentTime
-		  FROM songcomments a
+			   DATE_FORMAT(a.createdAt, '%Y-%m-%d %T')	commentTime,
+			   u.iconUrl			userIconUrl
+		  FROM songcomments a LEFT JOIN users u ON(a.userId = u.id)
 		 WHERE a.commentType = #{commentType, jdbcType=INTEGER}
 		   AND a.commentId = #{commentId, jdbcType=BIGINT}
 		 ORDER BY a.createdAt DESC
