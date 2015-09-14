@@ -30,6 +30,7 @@
 		<result property="bianqu" column="bianqu" javaType="java.lang.String"/>
 		<result property="singerId" column="singerId" javaType="java.lang.String"/>
 		<result property="smallPictureUrl" column="smallPictureUrl" javaType="java.lang.String"/>
+		<result property="musicUrl" column="musicUrl" javaType="java.lang.String"/>
 		<result property="mv" column="mv" javaType="java.lang.Boolean"/>
 		<result property="description" column="description" javaType="java.lang.String"/>
 	</resultMap>
@@ -44,6 +45,7 @@
 			   b.bianqu				bianqu,
 			   b.singerId			singerId,
 			   b.smallPicUrl		smallPictureUrl,
+			   b.songUrl			musicUrl,
 			   b.mv					mv,
 			   b.description		description
 		  FROM playhis a LEFT JOIN songs b ON(a.songId = b.id)
