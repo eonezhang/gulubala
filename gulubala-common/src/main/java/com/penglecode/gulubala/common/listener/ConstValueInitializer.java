@@ -3,6 +3,9 @@ package com.penglecode.gulubala.common.listener;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.AbstractPropertyResolver;
 
 import com.penglecode.gulubala.common.support.ConstValue;
+import com.penglecode.gulubala.common.support.NamedThreadFactory;
 import com.penglecode.gulubala.common.util.ClassScanningUtils;
 import com.penglecode.gulubala.common.util.ClassUtils;
 import com.penglecode.gulubala.common.util.CollectionUtils;
@@ -74,7 +78,14 @@ public class ConstValueInitializer extends AbstractApplicationInitializer {
 
 	private static final Logger logger = LoggerFactory.getLogger(ConstValueInitializer.class);
 
+	private ScheduledExecutorService constValueScanScheduler = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors(), new NamedThreadFactory("CONST-VALUE-SCANNER"));
+	
 	private String basePackage;
+	
+	/**
+	 * 定时扫描间隔,单位秒
+	 */
+	private int scanInterval = 0;
 	
 	/**
 	 * 找不到属性会报错 ? false - 会, true - 不会
@@ -83,24 +94,66 @@ public class ConstValueInitializer extends AbstractApplicationInitializer {
 	
 	private AbstractPropertyResolver globalPropertyResolver;
 	
+	protected ScheduledExecutorService getConstValueScanScheduler() {
+		return constValueScanScheduler;
+	}
+
+	public void setConstValueScanScheduler(
+			ScheduledExecutorService constValueScanScheduler) {
+		this.constValueScanScheduler = constValueScanScheduler;
+	}
+
+	protected String getBasePackage() {
+		return basePackage;
+	}
+
 	public void setBasePackage(String basePackage) {
 		this.basePackage = basePackage;
 	}
 
-	public void setIgnoreUnresolvablePlaceholders(boolean ignoreUnresolvablePlaceholders) {
+	protected int getScanInterval() {
+		return scanInterval;
+	}
+
+	public void setScanInterval(int scanInterval) {
+		this.scanInterval = scanInterval;
+	}
+
+	protected boolean isIgnoreUnresolvablePlaceholders() {
+		return ignoreUnresolvablePlaceholders;
+	}
+
+	public void setIgnoreUnresolvablePlaceholders(
+			boolean ignoreUnresolvablePlaceholders) {
 		this.ignoreUnresolvablePlaceholders = ignoreUnresolvablePlaceholders;
 	}
 
-	public void setGlobalPropertyResolver(AbstractPropertyResolver globalPropertyResolver) {
+	protected AbstractPropertyResolver getGlobalPropertyResolver() {
+		return globalPropertyResolver;
+	}
+
+	public void setGlobalPropertyResolver(
+			AbstractPropertyResolver globalPropertyResolver) {
 		this.globalPropertyResolver = globalPropertyResolver;
 	}
 
 	public void initialize(ApplicationContext applicationContext) throws Exception {
-		logger.info(">>> 初始化被@ConstValue注解的常量字段值(值来自properties配置文件)!");
 		processInject();
+		if(scanInterval > 0){
+			getConstValueScanScheduler().scheduleWithFixedDelay(new Runnable(){
+				public void run() {
+					try {
+						processInject();
+					} catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				}
+			}, scanInterval, scanInterval, TimeUnit.SECONDS);
+		}
 	}
 	
 	protected void processInject() throws Exception {
+		logger.info(">>> 初始化被@ConstValue注解的常量字段值(值来自properties配置文件)!");
 		Assert.hasLength(basePackage, "Property 'basePackage' must be specified!");
 		Assert.notNull(globalPropertyResolver, "Property 'globalPropertyResolver' must be specified!");
 		List<String> classNameList = ClassScanningUtils.scanPackages(basePackage);
@@ -134,8 +187,4 @@ public class ConstValueInitializer extends AbstractApplicationInitializer {
 		return Modifier.isFinal(mod) && Modifier.isStatic(mod);
 	}
 
-	public boolean supportMultipleInitialize() {
-		return true;
-	}
-	
 }
